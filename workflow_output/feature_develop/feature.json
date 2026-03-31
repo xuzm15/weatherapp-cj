@@ -377,14 +377,20 @@
         "base_branch": "main",
         "base_branch_merged": true
       }
+    },
+    "settings_fragment": {
+      "status": "review_pending",
+      "started_at": "2026-03-31T17:23:59",
+      "claim_id": "591b773b-4608-4b1b-9845-608bbfac83d4",
+      "review_requested_at": "2026-03-31T17:26:59"
     }
   },
   "stats": {
     "total": 30,
     "completed": 11,
     "in_progress": 0,
-    "pending": 19,
-    "review_pending": 0,
+    "pending": 18,
+    "review_pending": 1,
     "failed": 0
   }
 }
