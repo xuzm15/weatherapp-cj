@@ -214,24 +214,42 @@
   "dag_ref": "dag/dag_final.json",
   "feature_states": {
     "location_provider": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T16:33:44",
-      "claim_id": "8e1e4da9-0648-432e-b79c-8266c7b6032f",
-      "review_requested_at": "2026-03-31T16:44:26"
+      "review_requested_at": "2026-03-31T16:44:26",
+      "completed_at": "2026-03-31T16:46:57",
+      "merge_evidence": {
+        "worker_branch": "feature/location_provider",
+        "worker_commit": "14539e1780ac3a1ed0419f0c7ac62877c9596f40",
+        "integration_branch": "integrate/location-batch-1",
+        "integration_merge_commit": "83b84cec2b01690382afccfd7b751228ef704a4a",
+        "output_merge_commit": "dc928fa54575a1ed6ef9b23709e9253f50fc54ab",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     },
     "place_info": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T16:33:44",
-      "claim_id": "64a6110b-c7f4-45c7-a13f-f1cfa9b6abf1",
-      "review_requested_at": "2026-03-31T16:44:27"
+      "review_requested_at": "2026-03-31T16:44:27",
+      "completed_at": "2026-03-31T16:46:58",
+      "merge_evidence": {
+        "worker_branch": "feature/place_info",
+        "worker_commit": "ead0748dd399d8b5e165f2cf905f4c709c2b092e",
+        "integration_branch": "integrate/location-batch-1",
+        "integration_merge_commit": "91469fcd5e8dce9c5acea59a2f272168beb24f67",
+        "output_merge_commit": "dc928fa54575a1ed6ef9b23709e9253f50fc54ab",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     }
   },
   "stats": {
     "total": 30,
-    "completed": 0,
+    "completed": 2,
     "in_progress": 0,
     "pending": 28,
-    "review_pending": 2,
+    "review_pending": 0,
     "failed": 0
   }
 }
