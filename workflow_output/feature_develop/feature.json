@@ -334,24 +334,42 @@
       }
     },
     "custom_search_view": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T17:12:32",
-      "claim_id": "0243ee11-a2cd-4b3a-974d-c31f3ffa78f5",
-      "review_requested_at": "2026-03-31T17:15:26"
+      "review_requested_at": "2026-03-31T17:15:26",
+      "completed_at": "2026-03-31T17:16:56",
+      "merge_evidence": {
+        "worker_branch": "feature/custom_search_view",
+        "worker_commit": "8e3949644595f7c2af4a8adb5566909601e8cae5",
+        "integration_branch": "integrate/search-batch-1",
+        "integration_merge_commit": "3d120664c2ef78e5bfd8ee5010af2346bbd58603",
+        "output_merge_commit": "ce190f3b8c40998a6518a8c5df3d9a0b1b4cd7fc",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     },
     "search_menu_adapter": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T17:12:32",
-      "claim_id": "36d7cab2-fb04-47fb-9d4e-41943c159e5e",
-      "review_requested_at": "2026-03-31T17:15:26"
+      "review_requested_at": "2026-03-31T17:15:26",
+      "completed_at": "2026-03-31T17:16:56",
+      "merge_evidence": {
+        "worker_branch": "feature/search_menu_adapter",
+        "worker_commit": "b3754ed955cd745809e694db7375f72ea7b47a03",
+        "integration_branch": "integrate/search-batch-1",
+        "integration_merge_commit": "95f4e7496dee9374b33f6e06fa7a2b53236d9d99",
+        "output_merge_commit": "ce190f3b8c40998a6518a8c5df3d9a0b1b4cd7fc",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     }
   },
   "stats": {
     "total": 30,
-    "completed": 8,
+    "completed": 10,
     "in_progress": 0,
     "pending": 20,
-    "review_pending": 2,
+    "review_pending": 0,
     "failed": 0
   }
 }

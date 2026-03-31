@@ -55,15 +55,25 @@
     "reviewed_at": "2026-03-31T17:16:30.000000",
     "automated_result": {
       "feature_id": "custom_search_view",
-      "files_checked": ["components/CustomSearchView.cj"],
-      "passed_checks": ["feature_contract", "empty_callbacks", "import_completeness", "task_conversion_contract"],
+      "files_checked": [
+        "components/CustomSearchView.cj"
+      ],
+      "passed_checks": [
+        "feature_contract",
+        "empty_callbacks",
+        "import_completeness",
+        "task_conversion_contract"
+      ],
       "failed_checks": [
         {
           "check": "residual_keywords",
           "note": "False positive: keyword matches ArkUI Search `placeholder` / `placeholderColor` API names, not stub markers"
         }
       ],
-      "warnings": ["api_verification", "feature_contract_warnings"]
+      "warnings": [
+        "api_verification",
+        "feature_contract_warnings"
+      ]
     },
     "llm_notes": "逻辑正确性: pass — ArkUI Search 承载查询与提交，emitSubmit 做空串校验与 Toast，emitClose 清空 query 并回调 onClose，与 SearchView 语义一致。\n边界处理: pass — 空查询提示、trim 后提交、默认可替换 onSubmitQuery/onClose。\n语义验收: 核心实现非 mock；onClick/onSubmit/onChange 均有实际逻辑；无 TODO/FIXME 残留；`placeholder` 为组件 API 命名非占位符残留；对照源文件 Search 能力覆盖合理。\n真实调用链完整性: pass — implementation_kind 为 local_state，组件内 @State、回调与 UI 上下文（Toast）闭环，不要求 MTProto。\n分层规范: pass — 组件层仅 ArkUI 与日志，未越层写网络。",
     "issues": [],
@@ -84,7 +94,7 @@
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.630166",
     "started_at": "2026-03-31T17:12:32.000000",
-    "completed_at": "2026-03-31T17:15:00.000000",
+    "completed_at": "2026-03-31T17:16:56",
     "review_requested_at": "2026-03-31T17:15:26"
   }
 }
