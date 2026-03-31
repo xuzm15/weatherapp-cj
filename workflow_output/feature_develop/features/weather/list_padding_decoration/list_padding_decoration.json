@@ -50,9 +50,73 @@
   ],
   "api_backfill": [],
   "review": {
+    "status": "approved",
+    "batch_id": "weather-batch-6",
+    "round": 1,
+    "checker": "review_check.py",
+    "automated_result": {
+      "feature_id": "list_padding_decoration",
+      "passed_checks": [
+        "feature_contract",
+        "residual_keywords",
+        "empty_callbacks",
+        "task_conversion_contract"
+      ],
+      "failed_checks": [],
+      "warnings": [
+        {
+          "check": "api_verification",
+          "message": "No MTProto/API calls detected; expected for local_state when real local/lifecycle/entry wiring exists"
+        },
+        {
+          "check": "import_completeness",
+          "issues": [
+            {
+              "type": "possible_missing_import",
+              "file": "models/ListPaddingDecoration.cj",
+              "hint": "Uses pattern matching kit.ArkUI"
+            }
+          ]
+        },
+        {
+          "check": "feature_contract_warnings",
+          "issues": [
+            {
+              "code": "empty_gap_analysis",
+              "message": "gap_analysis.related_file_list is empty"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.current_state is too short",
+              "field": "current_state"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.problem is too short",
+              "field": "problem"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.target is too short",
+              "field": "target"
+            }
+          ]
+        }
+      ]
+    },
+    "llm_notes": "逻辑正确性: pass — ListPaddingDecoration 保存 paddingVp 与方向枚举，getSpacingVp 供 List space 使用，对齐 ArkUI 无 ItemDecoration 的替代方案。\n边界处理: N/A — 纯数据模型无 IO。\n语义验收: 非 mock；无回调；无 TODO；与 Android RecyclerView decoration 语义在 ArkUI 映射合理。\n真实调用链完整性: pass — implementation_kind=local_state，模型供 List 间距使用，符合占位/适配层定位。\n分层规范: pass — 仅 models 层。",
     "issues": [],
-    "passed_checks": [],
-    "reviewed_at": null
+    "deferred_items": [],
+    "deferred_count": 0,
+    "merge_evidence": {
+      "worker_branch": "feature/list_padding_decoration",
+      "worker_commit": "7f9df9dc3e5f9fddbed242a36fd1f23c43e8259e",
+      "integration_branch": "integrate/weather-batch-6",
+      "integration_merge_commit": "396cd5df0b3f94539efcb7c0b6f1531c5a534536",
+      "output_merge_commit": null,
+      "base_branch": "main",
+      "base_branch_merged": false
+    }
   },
   "human_issues": [],
   "status": "completed",
