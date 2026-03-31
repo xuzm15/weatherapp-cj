@@ -54,23 +54,53 @@
     "checker": "review_check.py",
     "automated_result": {
       "feature_id": "network_checker",
-      "files_checked": ["services/NetworkChecker.cj"],
-      "passed_checks": ["residual_keywords", "empty_callbacks", "import_completeness", "task_conversion_contract"],
+      "files_checked": [
+        "services/NetworkChecker.cj"
+      ],
+      "passed_checks": [
+        "residual_keywords",
+        "empty_callbacks",
+        "import_completeness",
+        "task_conversion_contract"
+      ],
       "failed_checks": [
         {
           "check": "feature_contract",
-          "issues": [{"code": "missing_api_task", "message": "Network feature must include at least one api task"}]
+          "issues": [
+            {
+              "code": "missing_api_task",
+              "message": "Network feature must include at least one api task"
+            }
+          ]
         }
       ],
       "warnings": [
-        {"check": "api_verification", "message": "No MTProto/API calls detected for network feature"},
+        {
+          "check": "api_verification",
+          "message": "No MTProto/API calls detected for network feature"
+        },
         {
           "check": "feature_contract_warnings",
           "issues": [
-            {"code": "empty_gap_analysis", "message": "gap_analysis.related_file_list is empty"},
-            {"code": "thin_context", "message": "context.current_state is too short", "field": "current_state"},
-            {"code": "thin_context", "message": "context.problem is too short", "field": "problem"},
-            {"code": "thin_context", "message": "context.target is too short", "field": "target"}
+            {
+              "code": "empty_gap_analysis",
+              "message": "gap_analysis.related_file_list is empty"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.current_state is too short",
+              "field": "current_state"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.problem is too short",
+              "field": "problem"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.target is too short",
+              "field": "target"
+            }
           ]
         }
       ]
@@ -99,7 +129,7 @@
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.670927",
     "started_at": "2026-03-31T17:45:00.000000",
-    "completed_at": "2026-03-31T17:47:00.000000",
+    "completed_at": "2026-03-31T17:49:09",
     "review_requested_at": "2026-03-31T17:47:40"
   }
 }

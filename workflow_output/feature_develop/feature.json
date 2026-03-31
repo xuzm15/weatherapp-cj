@@ -469,24 +469,42 @@
       }
     },
     "network_checker": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T17:45:13",
-      "claim_id": "4ae66edf-d5f8-48aa-ba5a-5825b826ab10",
-      "review_requested_at": "2026-03-31T17:47:40"
+      "review_requested_at": "2026-03-31T17:47:40",
+      "completed_at": "2026-03-31T17:49:09",
+      "merge_evidence": {
+        "worker_branch": "feature/network_checker",
+        "worker_commit": "99a110cdcf07e5b308cfb02081a48665d86d6bf0",
+        "integration_branch": "integrate/weather-batch-3",
+        "integration_merge_commit": "dd81c5670f9ce6674eee4de711119d472dd9ffd4",
+        "output_merge_commit": "6b21c8dc50568f183ad5ecbd5606bde89933d627",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     },
     "proto_data_store_repository": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T17:45:13",
-      "claim_id": "dd00eb3e-0704-4a8e-acd9-29a6a3038770",
-      "review_requested_at": "2026-03-31T17:47:40"
+      "review_requested_at": "2026-03-31T17:47:40",
+      "completed_at": "2026-03-31T17:49:09",
+      "merge_evidence": {
+        "worker_branch": "feature/proto_data_store_repository",
+        "worker_commit": "5158f3fc31e80aa9b73e836825df34030482242a",
+        "integration_branch": "integrate/weather-batch-3",
+        "integration_merge_commit": "5c0e1e2c28857c545e2705bb9b9b254bdecff253",
+        "output_merge_commit": "6b21c8dc50568f183ad5ecbd5606bde89933d627",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     }
   },
   "stats": {
     "total": 30,
-    "completed": 17,
+    "completed": 19,
     "in_progress": 0,
     "pending": 11,
-    "review_pending": 2,
+    "review_pending": 0,
     "failed": 0
   }
 }
