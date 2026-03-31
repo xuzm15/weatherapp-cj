@@ -274,18 +274,27 @@
       }
     },
     "geo_names_client": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T16:55:54",
-      "claim_id": "8c40a018-ccae-432a-be80-a53b2b5dab94",
-      "review_requested_at": "2026-03-31T16:58:12"
+      "review_requested_at": "2026-03-31T16:58:12",
+      "completed_at": "2026-03-31T16:59:32",
+      "merge_evidence": {
+        "worker_branch": "feature/geo_names_client",
+        "worker_commit": "7800dcc8c736665181ded8430466398c19da8f35",
+        "integration_branch": "integrate/location-batch-3",
+        "integration_merge_commit": "1a45254ef6a7d3a2162175c778e5f52c9895b9c6",
+        "output_merge_commit": "f8afda86a766212451842895357a96de5e31449b",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     }
   },
   "stats": {
     "total": 30,
-    "completed": 4,
+    "completed": 5,
     "in_progress": 0,
     "pending": 25,
-    "review_pending": 1,
+    "review_pending": 0,
     "failed": 0
   }
 }
