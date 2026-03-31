@@ -42,6 +42,12 @@
 - **修复方式**: 改写为不含 `*/` 的表述（如「models 目录」）
 - **发现于**: main_activity, 2026-03-31
 
+## `.translate` 中整型与 Float64 混用导致 Length 推断失败
+- **触发条件**: 使用 `(0 - this.someVp).vp`，其中 `0` 为整型字面量、`someVp` 为 `Float64`（如 `@State` 动画偏移）
+- **错误信息**: 类型不匹配或无法为 `translate` 推断合法 `Length`
+- **修复方式**: 统一为浮点运算与字面量，例如 `x: 0.0.vp`、`y: (0.0 - this.headerCollapsedVp).vp`
+- **发现于**: main_fragment, 2026-03-31
+
 ## 字符串下标 `body[pos]` 为 UInt8，不可与字符字面量直接比较
 - **触发条件**: `body[pos] == ']'`、`c == '{'` 等写法（`body[pos]` 类型为 `UInt8`）
 - **错误信息**: `invalid binary operator '==' on type 'UInt8' and 'Struct-String'`

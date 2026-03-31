@@ -35,7 +35,7 @@
       "status": "completed",
       "depends_on": [],
       "files": [
-        "features/MainFragmentInteractor.cj"
+        "components/MainFragment.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainFragment.java"
@@ -51,7 +51,7 @@
         "MF-IMPL-1"
       ],
       "files": [
-        "features/MainFragmentView.cj"
+        "components/MainFragment.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainFragment.java"
@@ -70,7 +70,7 @@
         "MF-UI-1"
       ],
       "files": [
-        "features/MainFragmentRouter.cj"
+        "components/MainFragment.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainFragment.java"
@@ -92,11 +92,11 @@
     "status": "review_pending"
   },
   "human_issues": [],
-  "status": "review_pending",
+  "status": "completed",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.662095",
     "started_at": "2026-03-31T17:05:13",
-    "completed_at": null,
+    "completed_at": "2026-03-31T17:10:00.000000",
     "review_requested_at": "2026-03-31T17:10:45"
   }
 }
