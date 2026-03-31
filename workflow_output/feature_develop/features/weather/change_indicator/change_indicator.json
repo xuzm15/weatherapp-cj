@@ -48,10 +48,60 @@
   ],
   "api_backfill": [],
   "review": {
+    "status": "approved",
+    "batch_id": "weather-batch-1",
+    "round": 1,
+    "checker": "review_check.py",
+    "automated_result": {
+      "feature_id": "change_indicator",
+      "files_checked": ["models/ChangeIndicator.cj"],
+      "passed_checks": [
+        "feature_contract",
+        "residual_keywords",
+        "empty_callbacks",
+        "task_conversion_contract"
+      ],
+      "failed_checks": [],
+      "warnings": [
+        {
+          "check": "api_verification",
+          "message": "No MTProto/API calls detected; expected for local_state when real local/lifecycle/entry wiring exists"
+        },
+        {
+          "check": "import_completeness",
+          "issues": [
+            {
+              "type": "possible_missing_import",
+              "file": "models/ChangeIndicator.cj",
+              "hint": "Uses pattern matching kit.ArkUI"
+            }
+          ]
+        },
+        {
+          "check": "feature_contract_warnings",
+          "issues": [
+            {"code": "empty_gap_analysis", "message": "gap_analysis.related_file_list is empty"},
+            {"code": "thin_context", "message": "context.current_state is too short", "field": "current_state"},
+            {"code": "thin_context", "message": "context.problem is too short", "field": "problem"},
+            {"code": "thin_context", "message": "context.target is too short", "field": "target"}
+          ]
+        }
+      ]
+    },
+    "llm_notes": "逻辑正确性: pass — 枚举 UP/DOWN/UNCHANGED 与 Android 一致；`getIndicatorIcon` 按差值符号映射资源名，语义等价于 Java `getIndicatorValue`（由 drawable id 改为 Harmony 资源名字符串）。\n边界处理: pass — 零值归入 UNCHANGED，与源实现一致；无非预期分支。\n语义验收: 「核心实现层真实逻辑」— pass（非 mock）；「回调」— N/A（无 UI 回调）；「无 TODO 等残留」— pass；「覆盖率 >=80%」— pass（枚举与静态方法覆盖源文件核心 API）。\n真实调用链完整性: N/A — implementation_kind 为 local_state，本 feature 为纯模型枚举，无独立状态机/存储接线要求；与契约一致。\n分层规范: pass — 仅 models 层枚举，无越层。",
     "issues": [],
-    "passed_checks": [],
-    "reviewed_at": null,
-    "status": "review_pending"
+    "deferred_items": [],
+    "deferred_count": 0,
+    "merge_evidence": {
+      "worker_branch": "feature/change_indicator",
+      "worker_commit": "8147f93841604dec4dd1c96514cd109f4dc49bd5",
+      "integration_branch": "integrate/weather-batch-1",
+      "integration_merge_commit": "c0b68f35d0d75d3a4774cab725691e0dd53af4f6",
+      "output_merge_commit": null,
+      "base_branch": "main",
+      "base_branch_merged": false
+    },
+    "reviewed_at": "2026-03-31T17:37:00.000000"
   },
   "human_issues": [],
   "status": "completed",
