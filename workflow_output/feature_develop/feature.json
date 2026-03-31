@@ -535,18 +535,27 @@
       "review_requested_at": "2026-03-31T17:54:31"
     },
     "weather_code": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T17:52:24",
-      "claim_id": "ea1da364-699a-479e-a9e9-9db570f818a1",
-      "review_requested_at": "2026-03-31T17:54:31"
+      "review_requested_at": "2026-03-31T17:54:31",
+      "completed_at": "2026-03-31T17:56:29",
+      "merge_evidence": {
+        "worker_branch": "feature/weather_code",
+        "worker_commit": "e6bb626918e81a0474d8daacc1248eb6db812353",
+        "integration_branch": "integrate/weather-batch-5",
+        "integration_merge_commit": "3237108d098d7d8e31d9d584d010d7454151fdfd",
+        "output_merge_commit": "2ba52a928d872da3d7ab05bb28e14a56ef63b012",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     }
   },
   "stats": {
     "total": 30,
-    "completed": 21,
+    "completed": 22,
     "in_progress": 0,
     "pending": 7,
-    "review_pending": 2,
+    "review_pending": 1,
     "failed": 0
   }
 }
