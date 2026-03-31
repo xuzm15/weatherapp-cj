@@ -15,6 +15,24 @@ public class DataModule {
     private static var locationProviderOpt: Option<FusedLocationProviderService> = None
     private static var networkCheckerOpt: Option<ConnectionNetworkProvider> = None
     private static var repositoryOpt: Option<WeatherForecastRepository> = None
+    private static var mainViewModelOpt: Option<MainViewModel> = None
+
+    /** 进程内单例 `MainViewModel`（对齐 Activity 级 ViewModel）。 */
+    public static func provideMainViewModel(): MainViewModel {
+        lock.lock()
+        match (mainViewModelOpt) {
+            case Some(m) =>
+                lock.unlock()
+                m
+            case None =>
+                let r = repositoryLocked()
+                let n = networkCheckerLocked()
+                let vm = MainViewModel(r, n)
+                mainViewModelOpt = Some(vm)
+                lock.unlock()
+                vm
+        }
+    }
 
     /** 对应 `provideWeatherClient()` → `OpenMeteoClient`。 */
     public static func provideWeatherClient(): WeatherClient {

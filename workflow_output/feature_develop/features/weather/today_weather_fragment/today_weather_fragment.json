@@ -8,9 +8,9 @@
     "mode": "llm-only"
   },
   "context": {
-    "current_state": "unknown",
+    "current_state": "implemented",
     "problem": "",
-    "target": "",
+    "target": "今日天气主内容由 components/TodayWeatherFragment.cj 呈现，数据经 MainViewModel → WeatherForecastRepository 拉取；IR 管线未使用（源路径按任务跳过）。",
     "source_reference": {
       "source_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/fragment/TodayWeatherFragment.java"
@@ -35,11 +35,12 @@
       "id": "TWF-IMPL-1",
       "name": "Today Weather Fragment 核心逻辑",
       "type": "implementation",
-      "description": "实现 TodayWeatherFragment 的业务逻辑（Interactor、Model、数据处理）",
+      "description": "业务状态与拉取链路由既有 MainViewModel + WeatherForecastRepository 承担（对齐 Android ViewModel/Repository），无单独 Interactor 文件。",
       "status": "completed",
       "depends_on": [],
       "files": [
-        "features/TodayWeatherFragmentInteractor.cj"
+        "services/MainViewModel.cj",
+        "services/DataModule.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/fragment/TodayWeatherFragment.java"
@@ -49,13 +50,13 @@
       "id": "TWF-UI-1",
       "name": "Today Weather Fragment UI",
       "type": "ui",
-      "description": "实现 TodayWeatherFragment 的 UI 页面（View + ViewModel）",
+      "description": "ArkUI @Component：Scroll + Column；四宫格详情、日出日落、小时列表、Canvas 折线图、降水列表；订阅 MainViewModel.onDaysForecastChanged。",
       "status": "completed",
       "depends_on": [
         "TWF-IMPL-1"
       ],
       "files": [
-        "features/TodayWeatherFragmentView.cj"
+        "components/TodayWeatherFragment.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/fragment/TodayWeatherFragment.java"
@@ -68,13 +69,13 @@
       "id": "TWF-INT-1",
       "name": "Today Weather Fragment 集成与路由",
       "type": "integration",
-      "description": "实现 TodayWeatherFragment 的路由注册与 DI 装配",
+      "description": "MainFragment 嵌入 TodayWeatherFragment，Refresh 下拉调用 MainViewModel.fetchCurrentWeatherAndPlace；地名行仍由 MainFragment 订阅 onPlaceNameChanged。",
       "status": "completed",
       "depends_on": [
         "TWF-UI-1"
       ],
       "files": [
-        "features/TodayWeatherFragmentRouter.cj"
+        "components/MainFragment.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/fragment/TodayWeatherFragment.java"
@@ -88,7 +89,18 @@
     "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
     "对照源文件中的核心功能，实现覆盖率 >= 80%"
   ],
-  "api_backfill": [],
+  "api_backfill": [
+    {
+      "method": "DataModule.provideMainViewModel()",
+      "reason": "主页与 TodayWeatherFragment 共享单例 MainViewModel，避免重复仓库与定位状态。",
+      "added_at": "2026-03-31T18:20:00Z"
+    },
+    {
+      "method": "MainViewModel.onForecastNotifyComplete",
+      "reason": "下拉刷新结束后复位 Refresh 组件 refreshing 状态。",
+      "added_at": "2026-03-31T18:20:00Z"
+    }
+  ],
   "review": {
     "issues": [],
     "passed_checks": [],
@@ -96,11 +108,11 @@
     "status": "review_pending"
   },
   "human_issues": [],
-  "status": "review_pending",
+  "status": "completed",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.696989",
-    "started_at": "2026-03-31T18:12:51",
-    "completed_at": null,
+    "started_at": "2026-03-31T18:12:00.000000",
+    "completed_at": "2026-03-31T18:25:00.000000",
     "review_requested_at": "2026-03-31T18:16:06"
   }
 }
