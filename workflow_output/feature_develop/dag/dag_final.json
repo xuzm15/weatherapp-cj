@@ -341,22 +341,18 @@
         "group": "app",
         "module_name": "MainActivity",
         "depends_on": [
-          "main_fragment"
+          "app"
         ],
-        "depended_by": [
-          "main_fragment"
-        ]
+        "depended_by": []
       },
       {
         "id": "main_fragment",
         "group": "app",
         "module_name": "MainFragment",
         "depends_on": [
-          "main_activity"
+          "app"
         ],
-        "depended_by": [
-          "main_activity"
-        ]
+        "depended_by": []
       },
       {
         "id": "main_settings_fragment",
@@ -521,12 +517,12 @@
     "edges": [
       {
         "from": "main_activity",
-        "to": "main_fragment",
+        "to": "app",
         "type": "dependency"
       },
       {
         "from": "main_fragment",
-        "to": "main_activity",
+        "to": "app",
         "type": "dependency"
       },
       {
@@ -666,12 +662,12 @@
       },
       {
         "from": "main_activity",
-        "to": "main_fragment",
+        "to": "app",
         "type": "module_import"
       },
       {
         "from": "main_fragment",
-        "to": "main_activity",
+        "to": "app",
         "type": "module_import"
       },
       {
