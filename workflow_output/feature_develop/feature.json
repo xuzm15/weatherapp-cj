@@ -214,38 +214,24 @@
   "dag_ref": "dag/dag_final.json",
   "feature_states": {
     "location_provider": {
-      "status": "in_progress",
+      "status": "review_pending",
       "started_at": "2026-03-31T16:33:44",
-      "lease": {
-        "worker_id": "worker-20260331163344-01",
-        "claim_id": "8e1e4da9-0648-432e-b79c-8266c7b6032f",
-        "claimed_at": "2026-03-31T16:33:44",
-        "lease_seconds": 1800,
-        "expires_at": "2026-03-31T17:03:44"
-      },
-      "current_worker": "worker-20260331163344-01",
-      "claim_id": "8e1e4da9-0648-432e-b79c-8266c7b6032f"
+      "claim_id": "8e1e4da9-0648-432e-b79c-8266c7b6032f",
+      "review_requested_at": "2026-03-31T16:44:26"
     },
     "place_info": {
-      "status": "in_progress",
+      "status": "review_pending",
       "started_at": "2026-03-31T16:33:44",
-      "lease": {
-        "worker_id": "worker-20260331163344-02",
-        "claim_id": "64a6110b-c7f4-45c7-a13f-f1cfa9b6abf1",
-        "claimed_at": "2026-03-31T16:33:44",
-        "lease_seconds": 1800,
-        "expires_at": "2026-03-31T17:03:44"
-      },
-      "current_worker": "worker-20260331163344-02",
-      "claim_id": "64a6110b-c7f4-45c7-a13f-f1cfa9b6abf1"
+      "claim_id": "64a6110b-c7f4-45c7-a13f-f1cfa9b6abf1",
+      "review_requested_at": "2026-03-31T16:44:27"
     }
   },
   "stats": {
     "total": 30,
     "completed": 0,
-    "in_progress": 2,
+    "in_progress": 0,
     "pending": 28,
-    "review_pending": 0,
+    "review_pending": 2,
     "failed": 0
   }
 }

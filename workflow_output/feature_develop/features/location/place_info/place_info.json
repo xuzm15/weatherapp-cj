@@ -30,10 +30,10 @@
       "name": "Place Info 服务实现",
       "type": "implementation",
       "description": "实现 PlaceInfo 的核心服务逻辑",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [],
       "files": [
-        "services/PlaceInfoService.cj"
+        "models/PlaceInfo.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/data/model/PlaceInfo.java"
@@ -50,20 +50,15 @@
   "review": {
     "issues": [],
     "passed_checks": [],
-    "reviewed_at": null
+    "reviewed_at": null,
+    "status": "review_pending"
   },
   "human_issues": [],
-  "status": "in_progress",
+  "status": "review_pending",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.677636",
     "started_at": "2026-03-31T16:33:44",
-    "completed_at": null
-  },
-  "lease": {
-    "worker_id": "worker-20260331163344-02",
-    "claim_id": "64a6110b-c7f4-45c7-a13f-f1cfa9b6abf1",
-    "claimed_at": "2026-03-31T16:33:44",
-    "lease_seconds": 1800,
-    "expires_at": "2026-03-31T17:03:44"
+    "completed_at": null,
+    "review_requested_at": "2026-03-31T16:44:27"
   }
 }
