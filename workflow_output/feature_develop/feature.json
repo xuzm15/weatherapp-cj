@@ -529,7 +529,10 @@
       }
     },
     "weather_client": {
-      "status": "pending"
+      "status": "review_pending",
+      "started_at": "2026-03-31T17:58:22",
+      "claim_id": "dddbde90-5ac6-4bc0-9f4f-c6fc5f4b15a9",
+      "review_requested_at": "2026-03-31T18:00:53"
     },
     "weather_code": {
       "status": "completed",
@@ -547,38 +550,24 @@
       }
     },
     "connection_network_provider": {
-      "status": "in_progress",
+      "status": "review_pending",
       "started_at": "2026-03-31T17:56:41",
-      "lease": {
-        "worker_id": "worker-20260331175641-01",
-        "claim_id": "6356b11a-e77f-460d-bf5b-3085eab258ec",
-        "claimed_at": "2026-03-31T17:56:41",
-        "lease_seconds": 1800,
-        "expires_at": "2026-03-31T18:26:41"
-      },
-      "current_worker": "worker-20260331175641-01",
-      "claim_id": "6356b11a-e77f-460d-bf5b-3085eab258ec"
+      "claim_id": "6356b11a-e77f-460d-bf5b-3085eab258ec",
+      "review_requested_at": "2026-03-31T18:00:53"
     },
     "list_padding_decoration": {
-      "status": "in_progress",
+      "status": "review_pending",
       "started_at": "2026-03-31T17:57:02",
-      "lease": {
-        "worker_id": "worker-20260331175702-01",
-        "claim_id": "ae1e19a9-3ac1-40c0-9930-8770a659230e",
-        "claimed_at": "2026-03-31T17:57:02",
-        "lease_seconds": 1800,
-        "expires_at": "2026-03-31T18:27:02"
-      },
-      "current_worker": "worker-20260331175702-01",
-      "claim_id": "ae1e19a9-3ac1-40c0-9930-8770a659230e"
+      "claim_id": "ae1e19a9-3ac1-40c0-9930-8770a659230e",
+      "review_requested_at": "2026-03-31T18:00:53"
     }
   },
   "stats": {
     "total": 30,
     "completed": 22,
-    "in_progress": 2,
+    "in_progress": 0,
     "pending": 5,
-    "review_pending": 0,
-    "failed": 1
+    "review_pending": 3,
+    "failed": 0
   }
 }
