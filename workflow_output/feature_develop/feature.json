@@ -617,14 +617,26 @@
         "base_branch": "main",
         "base_branch_merged": true
       }
+    },
+    "data_module": {
+      "status": "review_pending",
+      "started_at": "2026-03-31T18:07:50",
+      "claim_id": "851190e4-b770-4f20-a453-1ba1d4f1310f",
+      "review_requested_at": "2026-03-31T18:11:28"
+    },
+    "main_view_model": {
+      "status": "review_pending",
+      "started_at": "2026-03-31T18:07:50",
+      "claim_id": "b0d49139-d984-48ae-a437-b0f7f3b0a1ac",
+      "review_requested_at": "2026-03-31T18:11:28"
     }
   },
   "stats": {
     "total": 30,
     "completed": 27,
     "in_progress": 0,
-    "pending": 3,
-    "review_pending": 0,
+    "pending": 1,
+    "review_pending": 2,
     "failed": 0
   }
 }
