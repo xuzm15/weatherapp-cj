@@ -649,18 +649,27 @@
       }
     },
     "today_weather_fragment": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T18:12:51",
-      "claim_id": "00421819-2f81-439c-af23-bad3fa5d57c7",
-      "review_requested_at": "2026-03-31T18:16:06"
+      "review_requested_at": "2026-03-31T18:16:06",
+      "completed_at": "2026-03-31T18:17:33",
+      "merge_evidence": {
+        "worker_branch": "feature/today_weather_fragment",
+        "worker_commit": "6efd902923c112f517410559ab3b835dc32d9cab",
+        "integration_branch": "integrate/weather-batch-9",
+        "integration_merge_commit": "0b20dcd0b36b4b65b655423a4079399410b62cce",
+        "output_merge_commit": "f701bd6bdbc3a6a03f4f6f4fbb2131c3173a5685",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     }
   },
   "stats": {
     "total": 30,
-    "completed": 29,
+    "completed": 30,
     "in_progress": 0,
     "pending": 0,
-    "review_pending": 1,
+    "review_pending": 0,
     "failed": 0
   }
 }
