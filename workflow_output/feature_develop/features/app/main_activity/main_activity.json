@@ -8,7 +8,7 @@
     "mode": "llm-only"
   },
   "context": {
-    "current_state": "unknown",
+    "current_state": "MainAbility loads MainPage; immersive layout; MainPageViewModel + padded root Column maps Activity/Fragment",
     "problem": "",
     "target": "",
     "source_reference": {
@@ -32,10 +32,10 @@
       "name": "Main Activity 核心逻辑",
       "type": "implementation",
       "description": "实现 MainActivity 的业务逻辑（Interactor、Model、数据处理）",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [],
       "files": [
-        "features/MainActivityInteractor.cj"
+        "pages/MainPage.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/MainActivity.java"
@@ -46,12 +46,12 @@
       "name": "Main Activity UI",
       "type": "ui",
       "description": "实现 MainActivity 的 UI 页面（View + ViewModel）",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "MA-IMPL-1"
       ],
       "files": [
-        "features/MainActivityView.cj"
+        "pages/MainPage.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/MainActivity.java"
@@ -65,12 +65,12 @@
       "name": "Main Activity 集成与路由",
       "type": "integration",
       "description": "实现 MainActivity 的路由注册与 DI 装配",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "MA-UI-1"
       ],
       "files": [
-        "features/MainActivityRouter.cj"
+        "main_ability.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/MainActivity.java"
@@ -91,10 +91,10 @@
     "reviewed_at": null
   },
   "human_issues": [],
-  "status": "pending",
+  "status": "completed",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.658741",
-    "started_at": null,
-    "completed_at": null
+    "started_at": "2026-03-31T17:05:00.000000",
+    "completed_at": "2026-03-31T17:08:00.000000"
   }
 }
