@@ -106,9 +106,9 @@
       "worker_commit": "b403353354bc11c450c9b8d98a5dd247ec30dce1",
       "integration_branch": "integrate/weather-batch-2",
       "integration_merge_commit": "634f3b1fccdecd57c57d9750f15719d757af4672",
-      "output_merge_commit": null,
+      "output_merge_commit": "d41bb638d7a6a6aa17c5c20e1fd86e238ca24cd2",
       "base_branch": "main",
-      "base_branch_merged": false
+      "base_branch_merged": true
     }
   },
   "human_issues": [],
