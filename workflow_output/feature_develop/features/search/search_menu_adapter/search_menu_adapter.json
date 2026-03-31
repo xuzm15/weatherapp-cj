@@ -48,10 +48,31 @@
   ],
   "api_backfill": [],
   "review": {
+    "status": "approved",
+    "batch_id": "search-batch-1",
+    "round": 1,
+    "checker": "review_check.py",
+    "reviewed_at": "2026-03-31T17:16:30.000000",
+    "automated_result": {
+      "feature_id": "search_menu_adapter",
+      "files_checked": ["components/SearchMenuAdapter.cj"],
+      "passed_checks": ["feature_contract", "residual_keywords", "empty_callbacks", "import_completeness", "task_conversion_contract"],
+      "failed_checks": [],
+      "warnings": ["api_verification", "feature_contract_warnings"]
+    },
+    "llm_notes": "逻辑正确性: pass — ForEach 渲染 PlaceInfo 列表，placeDisplayLine 从 toString 解析展示字段，点击回调索引正确。\n边界处理: pass — 空 parts 返回空串；解析失败得到空子串时列表项可能为空 Text，可接受。\n语义验收: 核心实现非 mock；onClick 非空；无 TODO/FIXME；与 RecyclerView 列表展示语义对应。\n真实调用链完整性: pass — local_state 组件，@Prop places 与 onItemClick 由宿主注入，符合分层。\n分层规范: pass — UI 列表组件，未下沉网络逻辑。",
     "issues": [],
-    "passed_checks": [],
-    "reviewed_at": null,
-    "status": "review_pending"
+    "deferred_items": [],
+    "deferred_count": 0,
+    "merge_evidence": {
+      "worker_branch": "feature/search_menu_adapter",
+      "worker_commit": "b3754ed955cd745809e694db7375f72ea7b47a03",
+      "integration_branch": "integrate/search-batch-1",
+      "integration_merge_commit": "95f4e7496dee9374b33f6e06fa7a2b53236d9d99",
+      "output_merge_commit": null,
+      "base_branch": "main",
+      "base_branch_merged": false
+    }
   },
   "human_issues": [],
   "status": "completed",
