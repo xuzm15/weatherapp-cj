@@ -302,13 +302,39 @@
         "base_branch": "main",
         "base_branch_merged": true
       }
+    },
+    "main_activity": {
+      "status": "in_progress",
+      "started_at": "2026-03-31T17:05:13",
+      "lease": {
+        "worker_id": "worker-20260331170513-01",
+        "claim_id": "d6cd2f0f-d13a-42bd-b91d-d81bfc90ae13",
+        "claimed_at": "2026-03-31T17:05:13",
+        "lease_seconds": 1800,
+        "expires_at": "2026-03-31T17:35:13"
+      },
+      "current_worker": "worker-20260331170513-01",
+      "claim_id": "d6cd2f0f-d13a-42bd-b91d-d81bfc90ae13"
+    },
+    "main_fragment": {
+      "status": "in_progress",
+      "started_at": "2026-03-31T17:05:13",
+      "lease": {
+        "worker_id": "worker-20260331170513-02",
+        "claim_id": "cddf662e-5460-4cb2-bc4b-1b5fcb067d43",
+        "claimed_at": "2026-03-31T17:05:13",
+        "lease_seconds": 1800,
+        "expires_at": "2026-03-31T17:35:13"
+      },
+      "current_worker": "worker-20260331170513-02",
+      "claim_id": "cddf662e-5460-4cb2-bc4b-1b5fcb067d43"
     }
   },
   "stats": {
     "total": 30,
     "completed": 6,
-    "in_progress": 0,
-    "pending": 24,
+    "in_progress": 2,
+    "pending": 22,
     "review_pending": 0,
     "failed": 0
   }
