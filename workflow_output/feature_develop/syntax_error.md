@@ -54,6 +54,18 @@
 - **修复方式**: 改写为不含 `*/` 的表述（如「models 目录」）
 - **发现于**: main_activity, 2026-03-31
 
+## `@Component` 的 `build()` 根节点不可为自定义 `@Builder` 调用
+- **触发条件**: `build()` 内仅写 `this.someBuilderRoot()`，由 `@Builder` 返回 `List`/`Column` 等作为整棵 UI 根
+- **错误信息**: `The build method can only have one root node and can only be a container component and cannot be a custom component`
+- **修复方式**: 在 `build()` 中直接以容器组件（如 `List { ... }`）为根，可将子块拆成 `@Builder` 仅作子树，或全部内联
+- **发现于**: hourly_temp_forecast_adapter, 2026-03-31
+
+## `ForEach`/`@Builder` 闭包内访问数据模型 `let` 主构造字段失败
+- **触发条件**: 模型类用主构造 `let field` 声明字段，在 `ForEach` 的 `ListItem` 内或嵌套 `@Builder` 中写 `item.field`
+- **错误信息**: `can not access field 'field'`（宏展开后 `item` 与 `ObservedProperty` 包装相关）
+- **修复方式**: 模型改为 `public var` + 显式 `init`（与 `LocationCoord` 一致），或仅通过无捕获歧义的 `private func` 从 `item` 取值再传入 `Text(...)`
+- **发现于**: hourly_temp_forecast_adapter, 2026-03-31
+
 ## `.translate` 中整型与 Float64 混用导致 Length 推断失败
 - **触发条件**: 使用 `(0 - this.someVp).vp`，其中 `0` 为整型字面量、`someVp` 为 `Float64`（如 `@State` 动画偏移）
 - **错误信息**: 类型不匹配或无法为 `translate` 推断合法 `Length`
