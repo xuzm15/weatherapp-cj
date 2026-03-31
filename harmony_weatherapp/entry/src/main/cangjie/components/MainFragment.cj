@@ -282,9 +282,7 @@ public class MainFragment {
     @State
     var showSettingsOverlay: Bool = false
     @State
-    var searchQuery: String = ""
-    @State
-    var searchLines: Array<String> = Array<String>()
+    var searchPlaceResults: Array<PlaceInfo> = Array<PlaceInfo>()
     @State
     var motionSwipeEnabled: Bool = true
     @State
@@ -390,34 +388,21 @@ public class MainFragment {
         }
     }
 
-    private func performSearch(): Unit {
-        let q = this.searchQuery.trimAscii()
-        if (q.isEmpty()) {
+    private func runSearchMenuQuery(q: String): Unit {
+        let t = q.trimAscii()
+        if (t.isEmpty()) {
             this.toast("请输入城市或地址")
             return
         }
-        let single = this.geo.searchLocation(q)
+        let single = this.geo.searchLocation(t)
         let arr = single.get()
-        let lines = ArrayList<String>()
-        var i: Int64 = 0
-        while (i < arr.size) {
-            let pi = arr[i]
-            lines.add(placeLineFromPlaceInfoModel(pi))
-            i += 1
-        }
-        this.searchLines = lines.toArray()
-        if (this.searchLines.size == 0) {
+        this.searchPlaceResults = arr
+        if (arr.size == 0) {
             this.toast("未找到结果")
         }
     }
 
-    private func applySearchPick(index: Int64): Unit {
-        let single = this.geo.searchLocation(this.searchQuery.trimAscii())
-        let arr = single.get()
-        if (index < 0 || index >= arr.size) {
-            return
-        }
-        let pi = arr[index]
+    private func applyPlaceFromSearch(pi: PlaceInfo): Unit {
         let (latS, lonS) = latLonStringsFromPlaceInfoModel(pi)
         match (parseFloat64Loose(latS)) {
             case Some(lat) =>
@@ -430,6 +415,7 @@ public class MainFragment {
                         this.placeLine = placeLineFromPlaceInfoModel(pi)
                         this.fetchOpenMeteo(lat, lon)
                         this.showSearchOverlay = false
+                        this.searchPlaceResults = Array<PlaceInfo>()
                         this.toast("已切换位置")
                     case None => this.toast("坐标无效")
                 }
@@ -509,6 +495,7 @@ public class MainFragment {
         Row(space: 12) {
             Button("搜索")
                 .onClick({ _ =>
+                    this.searchPlaceResults = Array<PlaceInfo>()
                     this.showSearchOverlay = true
                 })
             Button("设置")
@@ -523,44 +510,13 @@ public class MainFragment {
 
     @Builder
     func uiSearchOverlay(): Unit {
-        if (this.showSearchOverlay) {
-            Column(space: 8) {
-                Row(space: 8) {
-                    TextInput(placeholder: Some("搜索城市或地址"), text: Some(this.searchQuery))
-                        .layoutWeight(1)
-                        .onChange({ v: String =>
-                            this.searchQuery = v
-                        })
-                    Button("搜索")
-                        .onClick({ _ =>
-                            this.performSearch()
-                        })
-                    Button("关闭")
-                        .onClick({ _ =>
-                            this.showSearchOverlay = false
-                        })
-                }.width(100.percent)
-                Scroll() {
-                    Column(space: 4) {
-                        ForEach(
-                            this.searchLines,
-                            itemGeneratorFunc: {
-                                item: String, idx: Int64 =>
-                                Button(item)
-                                    .onClick({ _ =>
-                                        this.applySearchPick(idx)
-                                    })
-                            }
-                        )
-                    }.width(100.percent)
-                }
-                .height(200.vp)
-            }
-            .width(100.percent)
-            .height(100.percent)
-            .backgroundColor(0xEEFFFFFF)
-            .padding(12)
-        }
+        SearchMenuFragment(
+            visible: this.showSearchOverlay,
+            searchResults: this.searchPlaceResults,
+            onSearch: { q: String => this.runSearchMenuQuery(q) },
+            onPlaceSelected: { pi: PlaceInfo => this.applyPlaceFromSearch(pi) },
+            onDismiss: { => this.showSearchOverlay = false }
+        )
     }
 
     @Builder
