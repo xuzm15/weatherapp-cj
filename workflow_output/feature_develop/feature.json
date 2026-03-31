@@ -647,14 +647,20 @@
         "base_branch": "main",
         "base_branch_merged": true
       }
+    },
+    "today_weather_fragment": {
+      "status": "review_pending",
+      "started_at": "2026-03-31T18:12:51",
+      "claim_id": "00421819-2f81-439c-af23-bad3fa5d57c7",
+      "review_requested_at": "2026-03-31T18:16:06"
     }
   },
   "stats": {
     "total": 30,
     "completed": 29,
     "in_progress": 0,
-    "pending": 1,
-    "review_pending": 0,
+    "pending": 0,
+    "review_pending": 1,
     "failed": 0
   }
 }
