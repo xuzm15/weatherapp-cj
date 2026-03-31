@@ -619,24 +619,42 @@
       }
     },
     "data_module": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T18:07:50",
-      "claim_id": "851190e4-b770-4f20-a453-1ba1d4f1310f",
-      "review_requested_at": "2026-03-31T18:11:28"
+      "review_requested_at": "2026-03-31T18:11:28",
+      "completed_at": "2026-03-31T18:12:46",
+      "merge_evidence": {
+        "worker_branch": "feature/data_module",
+        "worker_commit": "53ecb1ccc845c8f99c28611d0c3383abb80e3e8e",
+        "integration_branch": "integrate/weather-batch-8",
+        "integration_merge_commit": "c4f72b7e8c53d2955f3ba8f443d2bb9774d3b2ed",
+        "output_merge_commit": "49c4667c193535fabe33db81530958c9e63902b4",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     },
     "main_view_model": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T18:07:50",
-      "claim_id": "b0d49139-d984-48ae-a437-b0f7f3b0a1ac",
-      "review_requested_at": "2026-03-31T18:11:28"
+      "review_requested_at": "2026-03-31T18:11:28",
+      "completed_at": "2026-03-31T18:12:46",
+      "merge_evidence": {
+        "worker_branch": "feature/main_view_model",
+        "worker_commit": "306e9944eec7ec9384b2483be835142779199726",
+        "integration_branch": "integrate/weather-batch-8",
+        "integration_merge_commit": "f535d684b54e6194c604c3535d0d1f01c81b6682",
+        "output_merge_commit": "49c4667c193535fabe33db81530958c9e63902b4",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     }
   },
   "stats": {
     "total": 30,
-    "completed": 27,
+    "completed": 29,
     "in_progress": 0,
     "pending": 1,
-    "review_pending": 2,
+    "review_pending": 0,
     "failed": 0
   }
 }
