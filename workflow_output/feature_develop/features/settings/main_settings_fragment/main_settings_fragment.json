@@ -150,9 +150,9 @@
       "worker_commit": "0420c8b3e75509e9c24d9c30d6671465ecc00351",
       "integration_branch": "integrate/settings-batch-2",
       "integration_merge_commit": "abff6b831b5676b4453c18ba35f976661963e43f",
-      "output_merge_commit": null,
+      "output_merge_commit": "4a340c49fc24f44cfe8fdd712b53323a311d7490",
       "base_branch": "main",
-      "base_branch_merged": false
+      "base_branch_merged": true
     }
   },
   "human_issues": [],
