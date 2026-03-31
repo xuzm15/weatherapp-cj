@@ -114,9 +114,9 @@
       "worker_commit": "c0c7507c034654be8c83abdc22d16818257ae687",
       "integration_branch": "integrate/app-batch-2",
       "integration_merge_commit": "f9654c70a1588da47a2057e3d9cb1f5ed65a90f8",
-      "output_merge_commit": null,
+      "output_merge_commit": "d31f2a12211fc557ed1b7eb8dfa74c03a56ca4e2",
       "base_branch": "main",
-      "base_branch_merged": false
+      "base_branch_merged": true
     }
   },
   "human_issues": [],
