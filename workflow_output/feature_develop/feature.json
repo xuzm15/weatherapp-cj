@@ -334,38 +334,24 @@
       }
     },
     "custom_search_view": {
-      "status": "in_progress",
+      "status": "review_pending",
       "started_at": "2026-03-31T17:12:32",
-      "lease": {
-        "worker_id": "worker-20260331171232-01",
-        "claim_id": "0243ee11-a2cd-4b3a-974d-c31f3ffa78f5",
-        "claimed_at": "2026-03-31T17:12:32",
-        "lease_seconds": 1800,
-        "expires_at": "2026-03-31T17:42:32"
-      },
-      "current_worker": "worker-20260331171232-01",
-      "claim_id": "0243ee11-a2cd-4b3a-974d-c31f3ffa78f5"
+      "claim_id": "0243ee11-a2cd-4b3a-974d-c31f3ffa78f5",
+      "review_requested_at": "2026-03-31T17:15:26"
     },
     "search_menu_adapter": {
-      "status": "in_progress",
+      "status": "review_pending",
       "started_at": "2026-03-31T17:12:32",
-      "lease": {
-        "worker_id": "worker-20260331171232-02",
-        "claim_id": "36d7cab2-fb04-47fb-9d4e-41943c159e5e",
-        "claimed_at": "2026-03-31T17:12:32",
-        "lease_seconds": 1800,
-        "expires_at": "2026-03-31T17:42:32"
-      },
-      "current_worker": "worker-20260331171232-02",
-      "claim_id": "36d7cab2-fb04-47fb-9d4e-41943c159e5e"
+      "claim_id": "36d7cab2-fb04-47fb-9d4e-41943c159e5e",
+      "review_requested_at": "2026-03-31T17:15:26"
     }
   },
   "stats": {
     "total": 30,
     "completed": 8,
-    "in_progress": 2,
+    "in_progress": 0,
     "pending": 20,
-    "review_pending": 0,
+    "review_pending": 2,
     "failed": 0
   }
 }
