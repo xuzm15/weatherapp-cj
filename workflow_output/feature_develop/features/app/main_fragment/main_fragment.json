@@ -92,21 +92,62 @@
     "checker": "review_check.py",
     "automated_result": {
       "feature_id": "main_fragment",
-      "files_checked": ["components/MainFragment.cj"],
-      "passed_checks": ["empty_callbacks", "import_completeness", "task_conversion_contract"],
+      "files_checked": [
+        "components/MainFragment.cj"
+      ],
+      "passed_checks": [
+        "empty_callbacks",
+        "import_completeness",
+        "task_conversion_contract"
+      ],
       "failed_checks": [
         {
           "check": "feature_contract",
-          "issues": [{"code": "missing_entry_target", "message": "entry_wiring feature must touch entry/page/host/router files"}]
+          "issues": [
+            {
+              "code": "missing_entry_target",
+              "message": "entry_wiring feature must touch entry/page/host/router files"
+            }
+          ]
         },
         {
           "check": "residual_keywords",
-          "issues": [{"type": "residual_keyword", "keyword": "placeholder", "file": "components/MainFragment.cj", "line": 529, "snippet": "placeholder: Some(\"搜索城市或地址\"), text: Some(this.searc"}]
+          "issues": [
+            {
+              "type": "residual_keyword",
+              "keyword": "placeholder",
+              "file": "components/MainFragment.cj",
+              "line": 529,
+              "snippet": "placeholder: Some(\"搜索城市或地址\"), text: Some(this.searc"
+            }
+          ]
         }
       ],
       "warnings": [
-        {"check": "api_verification", "message": "No MTProto/API calls detected; expected for entry_wiring when real local/lifecycle/entry wiring exists"},
-        {"check": "feature_contract_warnings", "issues": [{"code": "empty_gap_analysis"}, {"code": "thin_context", "field": "current_state"}, {"code": "thin_context", "field": "problem"}, {"code": "thin_context", "field": "target"}]}
+        {
+          "check": "api_verification",
+          "message": "No MTProto/API calls detected; expected for entry_wiring when real local/lifecycle/entry wiring exists"
+        },
+        {
+          "check": "feature_contract_warnings",
+          "issues": [
+            {
+              "code": "empty_gap_analysis"
+            },
+            {
+              "code": "thin_context",
+              "field": "current_state"
+            },
+            {
+              "code": "thin_context",
+              "field": "problem"
+            },
+            {
+              "code": "thin_context",
+              "field": "target"
+            }
+          ]
+        }
       ]
     },
     "llm_notes": "逻辑正确性: pass — MainFragment 组件内聚合搜索、列表与详情状态，与 Android Fragment 职责一致。\n边界处理: pass — 搜索与列表空态、加载态在组件内有分支；与当前 weather 范围一致。\n语义验收: 「核心逻辑」pass；「UI 经业务层」pass（状态在 @Component 内）；「回调非空」pass；「无 stub 残留」pass — Search 的 `placeholder` 为 ArkUI API 参数名非待办桩；「覆盖率」在 llm-only 下与参考 MainFragment 对齐为合理范围。\n真实调用链完整性: pass — 与 main_activity 的 MainPage 嵌入衔接，宿主/页面由同 batch 的 main_activity 承担，本 feature 完成组件级 entry_wiring。\n分层规范: pass — UI 组件未直接写网络底层。",
@@ -128,7 +169,7 @@
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.662095",
     "started_at": "2026-03-31T17:05:13",
-    "completed_at": "2026-03-31T17:10:00.000000",
+    "completed_at": "2026-03-31T17:12:19",
     "review_requested_at": "2026-03-31T17:10:45"
   }
 }

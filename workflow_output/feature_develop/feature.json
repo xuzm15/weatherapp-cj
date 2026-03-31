@@ -304,24 +304,42 @@
       }
     },
     "main_activity": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T17:05:13",
-      "claim_id": "d6cd2f0f-d13a-42bd-b91d-d81bfc90ae13",
-      "review_requested_at": "2026-03-31T17:10:45"
+      "review_requested_at": "2026-03-31T17:10:45",
+      "completed_at": "2026-03-31T17:12:19",
+      "merge_evidence": {
+        "worker_branch": "feature/main_activity",
+        "worker_commit": "c0c7507c034654be8c83abdc22d16818257ae687",
+        "integration_branch": "integrate/app-batch-2",
+        "integration_merge_commit": "f9654c70a1588da47a2057e3d9cb1f5ed65a90f8",
+        "output_merge_commit": "d31f2a12211fc557ed1b7eb8dfa74c03a56ca4e2",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     },
     "main_fragment": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T17:05:13",
-      "claim_id": "cddf662e-5460-4cb2-bc4b-1b5fcb067d43",
-      "review_requested_at": "2026-03-31T17:10:45"
+      "review_requested_at": "2026-03-31T17:10:45",
+      "completed_at": "2026-03-31T17:12:19",
+      "merge_evidence": {
+        "worker_branch": "feature/main_fragment",
+        "worker_commit": "42a28ea5b290626c70bc23d17fb4e56768430a97",
+        "integration_branch": "integrate/app-batch-2",
+        "integration_merge_commit": "77319e8de9918d5463e866f4928de0982ba859ed",
+        "output_merge_commit": "d31f2a12211fc557ed1b7eb8dfa74c03a56ca4e2",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     }
   },
   "stats": {
     "total": 30,
-    "completed": 6,
+    "completed": 8,
     "in_progress": 0,
     "pending": 22,
-    "review_pending": 2,
+    "review_pending": 0,
     "failed": 0
   }
 }
