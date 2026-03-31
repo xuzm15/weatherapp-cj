@@ -1,5 +1,11 @@
 # 仓颉编译陷阱记录
 
+## `Resource` 与 `std.core.Resource` 名称冲突
+- **触发条件**: 在 `services` 等包中使用 `models.Resource<T>` 三态枚举，同时写 `Resource<DaysForecastProto>` 或 `Resource.Loading`
+- **错误信息**: `ambiguous use of 'Resource'`（`std.core` 与 `ohos_app_cangjie_entry.models` 均存在候选）
+- **修复方式**: 使用 `import ohos_app_cangjie_entry.models.Resource as UiResource`（或等价别名），代码中统一用 `UiResource<T>` / `UiResource.Success` 等
+- **发现于**: main_view_model, 2026-03-31
+
 ## `@Builder` 需引入 `state_macro_manage` 通配或 `Builder` 宏
 - **触发条件**: 自定义 `@Component` 内使用 `@Builder`，但仅 `import ohos.arkui.state_macro_manage.Component` / `State` 等单项，未引入 `Builder` 宏
 - **错误信息**: `undeclared identifier 'Builder'`（宏展开后）
