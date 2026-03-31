@@ -48,10 +48,68 @@
   ],
   "api_backfill": [],
   "review": {
+    "status": "approved",
+    "batch_id": "location-batch-1",
+    "round": 1,
+    "checker": "review_check.py",
+    "reviewed_at": "2026-03-31T16:47:00+08:00",
+    "automated_result": {
+      "feature_id": "place_info",
+      "files_checked": [
+        "models/PlaceInfo.cj"
+      ],
+      "passed_checks": [
+        "feature_contract",
+        "residual_keywords",
+        "empty_callbacks",
+        "import_completeness",
+        "task_conversion_contract"
+      ],
+      "failed_checks": [],
+      "warnings": [
+        {
+          "check": "api_verification",
+          "message": "No MTProto/API calls detected; expected for local_state when real local/lifecycle/entry wiring exists"
+        },
+        {
+          "check": "feature_contract_warnings",
+          "issues": [
+            {
+              "code": "empty_gap_analysis",
+              "message": "gap_analysis.related_file_list is empty"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.current_state is too short",
+              "field": "current_state"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.problem is too short",
+              "field": "problem"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.target is too short",
+              "field": "target"
+            }
+          ]
+        }
+      ]
+    },
+    "llm_notes": "逻辑正确性: pass — PlaceInfo 数据类字段与 Java 参考模型对齐，主构造与 toString 行为合理。\n边界处理: N/A — 纯数据模型，无 IO/回调。\n语义验收: 非 mock/stub；无 TODO/FIXME；对照 PlaceInfo.java 核心字段覆盖完整。\n真实调用链完整性: N/A — local_state 数据模型，由上层装配与持久化接线；本文件职责为类型承载。\n分层规范: pass — 模型层无 UI/网络越层。",
     "issues": [],
-    "passed_checks": [],
-    "reviewed_at": null,
-    "status": "review_pending"
+    "deferred_items": [],
+    "deferred_count": 0,
+    "merge_evidence": {
+      "worker_branch": "feature/place_info",
+      "worker_commit": "ead0748dd399d8b5e165f2cf905f4c709c2b092e",
+      "integration_branch": "integrate/location-batch-1",
+      "integration_merge_commit": "91469fcd5e8dce9c5acea59a2f272168beb24f67",
+      "output_merge_commit": null,
+      "base_branch": "main",
+      "base_branch_merged": false
+    }
   },
   "human_issues": [],
   "status": "completed",
