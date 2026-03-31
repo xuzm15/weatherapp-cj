@@ -33,7 +33,7 @@
       "name": "Geo Names Client 服务实现",
       "type": "implementation",
       "description": "实现 GeoNamesClient 的核心服务逻辑",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [],
       "files": [
         "services/GeoNamesClientService.cj"
@@ -53,20 +53,15 @@
   "review": {
     "issues": [],
     "passed_checks": [],
-    "reviewed_at": null
+    "reviewed_at": null,
+    "status": "review_pending"
   },
   "human_issues": [],
-  "status": "in_progress",
+  "status": "review_pending",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.645091",
     "started_at": "2026-03-31T16:55:54",
-    "completed_at": null
-  },
-  "lease": {
-    "worker_id": "worker-20260331165554-01",
-    "claim_id": "8c40a018-ccae-432a-be80-a53b2b5dab94",
-    "claimed_at": "2026-03-31T16:55:54",
-    "lease_seconds": 1800,
-    "expires_at": "2026-03-31T17:25:54"
+    "completed_at": null,
+    "review_requested_at": "2026-03-31T16:58:12"
   }
 }

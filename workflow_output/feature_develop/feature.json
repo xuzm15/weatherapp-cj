@@ -274,25 +274,18 @@
       }
     },
     "geo_names_client": {
-      "status": "in_progress",
+      "status": "review_pending",
       "started_at": "2026-03-31T16:55:54",
-      "lease": {
-        "worker_id": "worker-20260331165554-01",
-        "claim_id": "8c40a018-ccae-432a-be80-a53b2b5dab94",
-        "claimed_at": "2026-03-31T16:55:54",
-        "lease_seconds": 1800,
-        "expires_at": "2026-03-31T17:25:54"
-      },
-      "current_worker": "worker-20260331165554-01",
-      "claim_id": "8c40a018-ccae-432a-be80-a53b2b5dab94"
+      "claim_id": "8c40a018-ccae-432a-be80-a53b2b5dab94",
+      "review_requested_at": "2026-03-31T16:58:12"
     }
   },
   "stats": {
     "total": 30,
     "completed": 4,
-    "in_progress": 1,
+    "in_progress": 0,
     "pending": 25,
-    "review_pending": 0,
+    "review_pending": 1,
     "failed": 0
   }
 }
