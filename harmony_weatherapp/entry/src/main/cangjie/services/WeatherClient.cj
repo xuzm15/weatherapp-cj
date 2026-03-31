@@ -84,6 +84,12 @@ public class OpenMeteoWeatherClient <: WeatherClient {
     }
 }
 
+private let OPEN_METEO_PAST_DAYS: Int64 = 6
+private let OPEN_METEO_FORECAST_DAYS: Int64 = 10
+
+/**
+ * 对齐 Android `OpenMeteoClient` 请求参数（JSON 替代 flatbuffers；含 minutely_15、hourly、daily 全量字段）。
+ */
 private func buildOpenMeteoUrl(
     latitude: Float64,
     longitude: Float64,
@@ -101,10 +107,15 @@ private func buildOpenMeteoUrl(
     }
     let latS = "${latitude}"
     let lonS = "${longitude}"
+    let pd = "${OPEN_METEO_PAST_DAYS}"
+    let fd = "${OPEN_METEO_FORECAST_DAYS}"
     return OPEN_METEO_BASE + "?latitude=" + latS + "&longitude=" + lonS +
-        "&current=temperature_2m,wind_speed_10m,surface_pressure,weather_code" +
-        "&daily=temperature_2m_max,temperature_2m_min&hourly=temperature_2m&forecast_days=7" +
-        "&timezone=auto&temperature_unit=" + tempParam + "&wind_speed_unit=" + windParam
+        "&timezone=auto&temperature_unit=" + tempParam + "&wind_speed_unit=" + windParam +
+        "&past_days=" + pd + "&forecast_days=" + fd +
+        "&current=weather_code,temperature_2m,apparent_temperature,wind_speed_10m,surface_pressure" +
+        "&minutely_15=weather_code,temperature_2m,apparent_temperature,wind_speed_10m" +
+        "&hourly=weather_code,temperature_2m,apparent_temperature,wind_speed_10m,precipitation_probability,uv_index,pressure_msl,is_day" +
+        "&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset"
 }
 
 private class HttpSyncBoxOm {
@@ -429,6 +440,136 @@ private func replaceFirstTWithSpace(s: String): String {
     }
 }
 
+private func parseDatePrefixFromIso(iso: String): String {
+    if (iso.size >= 10) {
+        return substringBytes(iso, 0, 10)
+    }
+    return ""
+}
+
+private func parseHourOfDayFromIso(iso: String): Int64 {
+    match (iso.indexOf("T")) {
+        case Some(ti) =>
+            let start = ti + 1
+            if (start + 2 <= iso.size) {
+                let hh = substringBytes(iso, start, start + 2)
+                return parseInt64Digits(hh)
+            }
+            return 12
+        case None => 12
+    }
+}
+
+private func findIndexInStringArray(arr: Array<String>, needle: String): Int64 {
+    var i: Int64 = 0
+    while (i < arr.size) {
+        if (arr[i] == needle) {
+            return i
+        }
+        i += 1
+    }
+    return -1
+}
+
+private func findLastLexicographicLe(times: Array<String>, needle: String): Int64 {
+    var best: Int64 = -1
+    var i: Int64 = 0
+    while (i < times.size) {
+        if (times[i] <= needle) {
+            best = i
+        }
+        i += 1
+    }
+    if (best >= 0) {
+        return best
+    }
+    if (times.size > 0) {
+        return times.size - 1
+    }
+    return 0
+}
+
+private func abs64(v: Int64): Int64 {
+    if (v < 0) {
+        return -v
+    }
+    v
+}
+
+private func nthFloat(arr: Array<Float64>, n: Int64): Option<Float64> {
+    if (n < 0 || n >= arr.size) {
+        return None
+    }
+    Some(arr[n])
+}
+
+private func roundToInt64(v: Float64): Int64 {
+    Int64(v + (if (v >= 0.0) {
+        0.5
+    } else {
+        -0.5
+    }))
+}
+
+private func computeDayNightHighLow(
+    hourlyTemps: Array<Float64>,
+    isDayFlags: Array<Float64>,
+    hourIdx: Int64,
+    hourOfDay: Int64
+): (Int64, Int64, Bool, Bool) {
+    let inStart = hourIdx - hourOfDay - 1
+    var maxDay: Float64 = -1e9
+    var minNight: Float64 = 1e9
+    var foundDay = false
+    var foundNight = false
+    var i: Int64 = inStart
+    while (i < inStart + 24 && i < hourlyTemps.size && i >= 0) {
+        let tv = hourlyTemps[i]
+        let isDay = if (i < isDayFlags.size) {
+            isDayFlags[i] >= 0.5
+        } else {
+            false
+        }
+        if (isDay) {
+            foundDay = true
+            if (tv > maxDay) {
+                maxDay = tv
+            }
+        } else {
+            foundNight = true
+            if (tv < minNight) {
+                minNight = tv
+            }
+        }
+        i += 1
+    }
+    let dayR = if (foundDay) {
+        roundToInt64(maxDay)
+    } else {
+        0
+    }
+    let nightR = if (foundNight) {
+        roundToInt64(minNight)
+    } else {
+        0
+    }
+    (dayR, nightR, foundDay, foundNight)
+}
+
+private func findDailyIndexForDatePrefix(dailyTimes: Array<String>, datePrefix: String): Int64 {
+    if (datePrefix.isEmpty()) {
+        return OPEN_METEO_PAST_DAYS
+    }
+    var i: Int64 = 0
+    while (i < dailyTimes.size) {
+        if (dailyTimes[i].size >= 10 && substringBytes(dailyTimes[i], 0, 10) == datePrefix) {
+            return i
+        }
+        i += 1
+    }
+    return OPEN_METEO_PAST_DAYS
+}
+
 private func parseOpenMeteoJson(
     body: String,
     tUnit: TemperatureUnit,
@@ -438,10 +579,8 @@ private func parseOpenMeteoJson(
     let currentOpt = extractObjectAfterKey(body, "current")
     let dailyOpt = extractObjectAfterKey(body, "daily")
     let hourlyOpt = extractObjectAfterKey(body, "hourly")
-    match (currentOpt) {
-        case Some(current) => ()
-        case None => return None
-    }
+    let minutelyOpt = extractObjectAfterKey(body, "minutely_15")
+
     let current = match (currentOpt) {
         case Some(c) => c
         case None => ""
@@ -454,28 +593,106 @@ private func parseOpenMeteoJson(
         case Some(h) => h
         case None => ""
     }
+    let minutely = match (minutelyOpt) {
+        case Some(m) => m
+        case None => ""
+    }
+
+    if (current.isEmpty() && hourly.isEmpty()) {
+        return None
+    }
+
+    let hourlyTimeInner = extractArrayInner(hourly, "time")
+    let hTimes = splitJsonQuotedStrings(hourlyTimeInner)
+
+    var timeStr = extractQuotedIn(current, "time")
+    let hourIdx: Int64 = if (!timeStr.isEmpty()) {
+        let ix = findIndexInStringArray(hTimes, timeStr)
+        if (ix >= 0) {
+            ix
+        } else {
+            findLastLexicographicLe(hTimes, timeStr)
+        }
+    } else if (hTimes.size > 0) {
+        let hi = hTimes.size / 2
+        timeStr = hTimes[hi]
+        hi
+    } else {
+        0
+    }
+
+    let datePrefix = parseDatePrefixFromIso(timeStr)
+    let hourOfDay = parseHourOfDayFromIso(timeStr)
+
+    let mTimeInner = extractArrayInner(minutely, "time")
+    let mTimes = splitJsonQuotedStrings(mTimeInner)
+    let minIdx: Int64 = if (!timeStr.isEmpty() && mTimes.size > 0) {
+        let ix = findIndexInStringArray(mTimes, timeStr)
+        if (ix >= 0) {
+            ix
+        } else {
+            findLastLexicographicLe(mTimes, timeStr)
+        }
+    } else {
+        if (mTimes.size > 0) {
+            mTimes.size - 1
+        } else {
+            0
+        }
+    }
 
     let tempStr = extractJsonNumberTokenIn(current, "temperature_2m")
     let windStr = extractJsonNumberTokenIn(current, "wind_speed_10m")
     let pressStr = extractJsonNumberTokenIn(current, "surface_pressure")
+    let apparStr = extractJsonNumberTokenIn(current, "apparent_temperature")
     let wcStr = extractJsonNumberTokenIn(current, "weather_code")
-    let timeStr = extractQuotedIn(current, "time")
 
-    let tempF = match (parseFloat64Loose(tempStr)) {
-        case Some(v) => v
-        case None => 0.0
-    }
-    let windF = match (parseFloat64Loose(windStr)) {
-        case Some(v) => v
-        case None => 0.0
-    }
-    let pressHpaF = match (parseFloat64Loose(pressStr)) {
-        case Some(v) => v
-        case None => 0.0
-    }
-    let wc = parseInt64Digits(wcStr)
+    let mTempInner = extractArrayInner(minutely, "temperature_2m")
+    let mTempArr = splitCsvFloats(mTempInner)
+    let mAppInner = extractArrayInner(minutely, "apparent_temperature")
+    let mAppArr = splitCsvFloats(mAppInner)
+    let mWindInner = extractArrayInner(minutely, "wind_speed_10m")
+    let mWindArr = splitCsvFloats(mWindInner)
+    let mWcInner = extractArrayInner(minutely, "weather_code")
+    let mWcArr = splitCsvFloats(mWcInner)
 
-    let iconOpt = getIconIdByCode(wc, true)
+    let tempF = match (nthFloat(mTempArr, minIdx)) {
+        case Some(v) => v
+        case None => match (parseFloat64Loose(tempStr)) {
+            case Some(v) => v
+            case None => 0.0
+        }
+    }
+
+    let apparentF = match (nthFloat(mAppArr, minIdx)) {
+        case Some(v) => v
+        case None => match (parseFloat64Loose(apparStr)) {
+            case Some(v) => v
+            case None => tempF
+        }
+    }
+
+    let windF = match (nthFloat(mWindArr, minIdx)) {
+        case Some(v) => v
+        case None => match (parseFloat64Loose(windStr)) {
+            case Some(v) => v
+            case None => 0.0
+        }
+    }
+
+    let wc: Int64 = match (nthFloat(mWcArr, minIdx)) {
+        case Some(v) => roundToInt64(v)
+        case None => parseInt64Digits(wcStr)
+    }
+
+    let isDayInner = extractArrayInner(hourly, "is_day")
+    let isDayArr = splitCsvFloats(isDayInner)
+    let isDayForIcon = match (nthFloat(isDayArr, hourIdx)) {
+        case Some(v) => v >= 0.5
+        case None => true
+    }
+
+    let iconOpt = getIconIdByCode(wc, isDayForIcon)
     let iconName = match (iconOpt) {
         case Some(s) => s
         case None => ""
@@ -486,14 +703,11 @@ private func parseOpenMeteoJson(
         case None => ""
     }
 
-    let curRounded: Int64 = Int64(tempF + (if (tempF >= 0.0) {
-        0.5
-    } else {
-        -0.5
-    }))
+    let curRounded = roundToInt64(tempF)
+    let apparentRounded = roundToInt64(apparentF)
 
     let currentTemp = TemperatureProto("", curRounded, iconName, tUnit)
-    let apparentTemp = TemperatureProto("", curRounded, iconName, tUnit)
+    let apparentTemp = TemperatureProto("", apparentRounded, iconName, tUnit)
 
     let dailyMaxInner = extractArrayInner(daily, "temperature_2m_max")
     let dailyMinInner = extractArrayInner(daily, "temperature_2m_min")
@@ -502,80 +716,154 @@ private func parseOpenMeteoJson(
     let minArr = splitCsvFloats(dailyMinInner)
     let dateArr = splitJsonQuotedStrings(dailyTimeInner)
 
-    var dayHigh: Int64 = curRounded
-    var nightLow: Int64 = curRounded
-    if (maxArr.size > 0) {
-        let v = maxArr[0]
-        dayHigh = Int64(v + (if (v >= 0.0) {
-            0.5
-        } else {
-            -0.5
-        }))
+    let hTempInner = extractArrayInner(hourly, "temperature_2m")
+    let hTemps = splitCsvFloats(hTempInner)
+    let (dayHighV, nightLowV, okDay, okNight) = computeDayNightHighLow(hTemps, isDayArr, hourIdx, hourOfDay)
+
+    let dayIdxToday = findDailyIndexForDatePrefix(dateArr, datePrefix)
+
+    var dayHigh: Int64 = dayHighV
+    var nightLow: Int64 = nightLowV
+    if (!okDay && dayIdxToday >= 0 && dayIdxToday < maxArr.size) {
+        dayHigh = roundToInt64(maxArr[dayIdxToday])
     }
-    if (minArr.size > 0) {
-        let v = minArr[0]
-        nightLow = Int64(v + (if (v >= 0.0) {
-            0.5
-        } else {
-            -0.5
-        }))
+    if (!okNight && dayIdxToday >= 0 && dayIdxToday < minArr.size) {
+        nightLow = roundToInt64(minArr[dayIdxToday])
+    }
+    if (dayIdxToday < 0 || dayIdxToday >= maxArr.size || dayIdxToday >= minArr.size) {
+        if (maxArr.size > 0) {
+            dayHigh = roundToInt64(maxArr[0])
+        }
+        if (minArr.size > 0) {
+            nightLow = roundToInt64(minArr[0])
+        }
     }
 
     let dayHighTemp = TemperatureProto("", dayHigh, iconName, tUnit)
     let nightLowTemp = TemperatureProto("", nightLow, iconName, tUnit)
 
+    let pressureInner = extractArrayInner(hourly, "pressure_msl")
+    let pressArr = splitCsvFloats(pressureInner)
+    let pressHpaF = match (nthFloat(pressArr, hourIdx)) {
+        case Some(v) => v
+        case None => match (parseFloat64Loose(pressStr)) {
+            case Some(v) => v
+            case None => 0.0
+        }
+    }
+
     let pressDisplay = convertPressure(pressHpaF, PressureUnit.HPA, pUnit)
-    let pressRounded: Int64 = Int64(pressDisplay + (if (pressDisplay >= 0.0) {
-        0.5
+    let pressRounded = roundToInt64(pressDisplay)
+
+    let prevPressF = match (nthFloat(pressArr, hourIdx - 24)) {
+        case Some(v) => v
+        case None => pressHpaF
+    }
+    let prevPressDisplay = convertPressure(prevPressF, PressureUnit.HPA, pUnit)
+    let diffPress = roundToInt64(pressDisplay) - roundToInt64(prevPressDisplay)
+    let pressInd = ChangeIndicator.getIndicatorIcon(diffPress)
+
+    let windRounded = roundToInt64(windF)
+    let prevWindF = match (nthFloat(mWindArr, minIdx - 24)) {
+        case Some(v) => v
+        case None => windF
+    }
+    let diffWind = windRounded - roundToInt64(prevWindF)
+    let windInd = ChangeIndicator.getIndicatorIcon(diffWind)
+
+    let precipInner = extractArrayInner(hourly, "precipitation_probability")
+    let precipArr = splitCsvFloats(precipInner)
+    let currPrecipF = match (nthFloat(precipArr, hourIdx)) {
+        case Some(v) => v
+        case None => 0.0
+    }
+    let prevPrecipF = match (nthFloat(precipArr, hourIdx - 24)) {
+        case Some(v) => v
+        case None => currPrecipF
+    }
+    let currPrecip = roundToInt64(currPrecipF)
+    let diffPrecip = currPrecip - roundToInt64(prevPrecipF)
+    let precipInd = ChangeIndicator.getIndicatorIcon(diffPrecip)
+
+    let uvInner = extractArrayInner(hourly, "uv_index")
+    let uvArr = splitCsvFloats(uvInner)
+    let uvF = match (nthFloat(uvArr, hourIdx)) {
+        case Some(v) => v
+        case None => 0.0
+    }
+    let uvIdx = roundToInt64(uvF)
+
+    let windProto = WindSpeedProto(windRounded, abs64(diffWind), windInd, sUnit)
+    let pressureProto = PressureProto(pressRounded, abs64(diffPress), pressInd, pUnit)
+    let precipProto = PrecipitationChanceProto("", currPrecip, abs64(diffPrecip), precipInd)
+
+    let sunriseInner = extractArrayInner(daily, "sunrise")
+    let sunsetInner = extractArrayInner(daily, "sunset")
+    let sunriseArr = splitJsonQuotedStrings(sunriseInner)
+    let sunsetArr = splitJsonQuotedStrings(sunsetInner)
+
+    let srIdx = if (dayIdxToday >= 0 && dayIdxToday < sunriseArr.size) {
+        dayIdxToday
     } else {
-        -0.5
-    }))
-
-    let windRounded: Int64 = Int64(windF + (if (windF >= 0.0) {
-        0.5
+        OPEN_METEO_PAST_DAYS
+    }
+    let ssIdx = if (dayIdxToday >= 0 && dayIdxToday < sunsetArr.size) {
+        dayIdxToday
     } else {
-        -0.5
-    }))
+        OPEN_METEO_PAST_DAYS
+    }
 
-    let windInd = ChangeIndicator.getIndicatorIcon(0)
-    let pressInd = ChangeIndicator.getIndicatorIcon(0)
-    let precipInd = ChangeIndicator.getIndicatorIcon(0)
+    let sunrise = if (srIdx >= 0 && srIdx < sunriseArr.size) {
+        SunriseSunsetProto(hourLabelFromIso(sunriseArr[srIdx]), 0, 0, false)
+    } else {
+        SunriseSunsetProto("—", 0, 0, false)
+    }
+    let sunset = if (ssIdx >= 0 && ssIdx < sunsetArr.size) {
+        SunriseSunsetProto(hourLabelFromIso(sunsetArr[ssIdx]), 0, 0, false)
+    } else {
+        SunriseSunsetProto("—", 0, 0, false)
+    }
 
-    let windProto = WindSpeedProto(windRounded, 0, windInd, sUnit)
-    let pressureProto = PressureProto(pressRounded, 0, pressInd, pUnit)
-    let precipProto = PrecipitationChanceProto("", 0, 0, precipInd)
-
-    let sunrise = SunriseSunsetProto("—", 0, 0, false)
-    let sunset = SunriseSunsetProto("—", 0, 0, false)
-
-    let hourlyTempInner = extractArrayInner(hourly, "temperature_2m")
-    let hourlyTimeInner = extractArrayInner(hourly, "time")
-    let hTemps = splitCsvFloats(hourlyTempInner)
-    let hTimes = splitJsonQuotedStrings(hourlyTimeInner)
+    let hourlyWcInner = extractArrayInner(hourly, "weather_code")
+    let hWcArr = splitCsvFloats(hourlyWcInner)
 
     let hourlyList = ArrayList<TemperatureItem>()
-    var hi: Int64 = 0
-    while (hi < 24 && hi < hTemps.size) {
+    var hi: Int64 = hourIdx
+    let hiEnd = hourIdx + 24
+    while (hi < hiEnd && hi < hTemps.size) {
         let tv = hTemps[hi]
-        let tr: Int64 = Int64(tv + (if (tv >= 0.0) {
-            0.5
-        } else {
-            -0.5
-        }))
+        let tr = roundToInt64(tv)
         let lab = if (hi < hTimes.size) {
             hourLabelFromIso(hTimes[hi])
         } else {
             "+${hi}h"
         }
-        hourlyList.add(TemperatureItem(lab, tr, iconName))
+        let wcc = match (nthFloat(hWcArr, hi)) {
+            case Some(v) => roundToInt64(v)
+            case None => wc
+        }
+        let wIsDay = match (nthFloat(isDayArr, hi)) {
+            case Some(v) => v >= 0.5
+            case None => isDayForIcon
+        }
+        let hIcon = match (getIconIdByCode(wcc, wIsDay)) {
+            case Some(s) => s
+            case None => iconName
+        }
+        hourlyList.add(TemperatureItem(lab, tr, hIcon))
         hi += 1
     }
 
     let hourlyPrecipList = ArrayList<PrecipitationChanceProto>()
-    var pi: Int64 = 0
-    while (pi < 24 && pi < hTimes.size) {
+    var pi: Int64 = hourIdx
+    let piEnd = hourIdx + 24
+    while (pi < piEnd && pi < hTimes.size && pi < precipArr.size) {
         let tlab = hourLabelFromIso(hTimes[pi])
-        hourlyPrecipList.add(PrecipitationChanceProto(tlab, 0, 0, precipInd))
+        let pct = roundToInt64(match (nthFloat(precipArr, pi)) {
+            case Some(v) => v
+            case None => 0.0
+        })
+        hourlyPrecipList.add(PrecipitationChanceProto(tlab, pct, 0, precipInd))
         pi += 1
     }
 
@@ -598,27 +886,25 @@ private func parseOpenMeteoJson(
         windProto,
         precipProto,
         pressureProto,
-        0,
+        uvIdx,
         hourlyList.toArray(),
         hourlyPrecipList.toArray()
     )
 
     let outlook = ArrayList<DailyOutlook>()
-    var di: Int64 = 0
-    while (di < dateArr.size && di < maxArr.size && di < minArr.size) {
+    let startO = if (dayIdxToday >= 0) {
+        dayIdxToday
+    } else {
+        0
+    }
+    var di: Int64 = startO
+    let outlookEnd = startO + 7
+    while (di < outlookEnd && di < dateArr.size && di < maxArr.size && di < minArr.size) {
         let dIso = dateArr[di]
         let mx = maxArr[di]
         let mn = minArr[di]
-        let mxR: Int64 = Int64(mx + (if (mx >= 0.0) {
-            0.5
-        } else {
-            -0.5
-        }))
-        let mnR: Int64 = Int64(mn + (if (mn >= 0.0) {
-            0.5
-        } else {
-            -0.5
-        }))
+        let mxR = roundToInt64(mx)
+        let mnR = roundToInt64(mn)
         outlook.add(DailyOutlook(dIso, mxR, mnR))
         di += 1
     }
