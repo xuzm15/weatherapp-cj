@@ -10,6 +10,7 @@ import kit.PerformanceAnalysisKit.Hilog
 import kit.AbilityKit.{AbilityAccessCtrl, BundleManager, BundleFlag, GrantStatus}
 import ohos.business_exception.BusinessException
 import ohos.arkui.state_management.*
+import ohos.arkui.component.common.TouchType
 import ohos.arkui.state_macro_manage.*
 import std.collection.{ArrayList, HashMap}
 import std.core.Option
@@ -196,6 +197,62 @@ private func parseFloat64Loose(s: String): Option<Float64> {
     }
 }
 
+private func splitCsvFloats(inner: String): Array<Float64> {
+    let out = ArrayList<Float64>()
+    var start: Int64 = 0
+    var p: Int64 = 0
+    while (p <= inner.size) {
+        let atEnd: Bool = p == inner.size
+        let bi: Int64 = if (atEnd) {
+            44
+        } else {
+            Int64(inner[p])
+        }
+        if (atEnd || bi == 44) {
+            let token: String = substringBytes(inner, start, p).trimAscii()
+            if (!token.isEmpty()) {
+                match (parseFloat64Loose(token)) {
+                    case Some(v) => out.add(v)
+                    case None => ()
+                }
+            }
+            start = p + 1
+        }
+        p += 1
+    }
+    return out.toArray()
+}
+
+/** 从 Open-Meteo `hourly.temperature_2m` 数组解析小时温度（需 URL 含 hourly=temperature_2m）。 */
+private func extractHourlyTemperatures(body: String): Array<Float64> {
+    match (body.indexOf("\"hourly\"")) {
+        case Some(hi) =>
+            let sub: String = substringBytes(body, hi, body.size)
+            match (sub.indexOf("\"temperature_2m\":[")) {
+                case Some(ti) =>
+                    let start: Int64 = ti + "\"temperature_2m\":[".size
+                    match (sub.indexOf("]", start)) {
+                        case Some(end) =>
+                            let inner: String = substringBytes(sub, start, end)
+                            splitCsvFloats(inner)
+                        case None => Array<Float64>()
+                    }
+                case None => Array<Float64>()
+            }
+        case None => Array<Float64>()
+    }
+}
+
+private func buildForecastLabels(n: Int64): Array<String> {
+    let list = ArrayList<String>()
+    var i: Int64 = 0
+    while (i < n) {
+        list.add("+${i}h")
+        i += 1
+    }
+    return list.toArray()
+}
+
 private func replaceFirstTWithSpace(s: String): String {
     match (s.indexOf("T")) {
         case Some(i) => substringBytes(s, 0, i) + " " + substringBytes(s, i + 1, s.size)
@@ -287,6 +344,10 @@ public class MainFragment {
     var motionSwipeEnabled: Bool = true
     @State
     var headerCollapsedVp: Float64 = 0.0
+    @State
+    var chartHourlyTemps: Array<Float64> = Array<Float64>()
+    @State
+    var chartHourlyLabels: Array<String> = Array<String>()
 
     private var lastLat: Float64 = FusedLocationProviderService.DEFAULT_LAT
     private var lastLon: Float64 = FusedLocationProviderService.DEFAULT_LON
@@ -312,7 +373,7 @@ public class MainFragment {
     private func fetchOpenMeteo(lat: Float64, lon: Float64): Unit {
         let url =
             OPEN_METEO_BASE + "?latitude=" + coordStr(lat) + "&longitude=" + coordStr(lon) +
-                "&current=temperature_2m,apparent_temperature,weather_code,time&daily=temperature_2m_max,temperature_2m_min&timezone=auto"
+                "&current=temperature_2m,apparent_temperature,weather_code,time&daily=temperature_2m_max,temperature_2m_min&hourly=temperature_2m&forecast_hours=24&timezone=auto"
         let (_, body) = httpGetBlocking(url)
         if (body.isEmpty()) {
             this.errorBanner = "天气数据为空"
@@ -341,6 +402,9 @@ public class MainFragment {
         } else {
             this.dayNightText = ""
         }
+        let hourlyTemps: Array<Float64> = extractHourlyTemperatures(body)
+        this.chartHourlyTemps = hourlyTemps
+        this.chartHourlyLabels = buildForecastLabels(hourlyTemps.size)
         this.errorBanner = ""
     }
 
@@ -503,6 +567,7 @@ public class MainFragment {
                 .fontSize(14)
                 .textAlign(TextAlign.Center)
                 .width(100.percent)
+            this.lineChartSection()
             Text(this.lastUpdateText)
                 .fontSize(12)
                 .fontColor(0xFF888888)
@@ -516,6 +581,40 @@ public class MainFragment {
                     .width(100.percent)
             }
         }.width(100.percent).padding(16)
+    }
+
+    @Builder
+    func lineChartSection(): Unit {
+        Stack {
+            Canvas(lineChartCanvasContext())
+                .width(100.percent)
+                .height(180.0.vp)
+                .backgroundColor(0xFFFFFFFF)
+                .id(lineChartChartInstanceId(this.chartHourlyTemps))
+                .onReady({
+                    =>
+                    let ctx: CanvasRenderingContext2D = lineChartCanvasContext()
+                    lineChartPaint(this.chartHourlyTemps, this.chartHourlyLabels, ctx.width, ctx.height)
+                })
+                .onAreaChange({
+                    _: Area, _: Area =>
+                    let ctx: CanvasRenderingContext2D = lineChartCanvasContext()
+                    lineChartPaint(this.chartHourlyTemps, this.chartHourlyLabels, ctx.width, ctx.height)
+                })
+                .onTouch({
+                    evt: TouchEvent =>
+                    if (evt.eventType == TouchType.Down && evt.changedTouches.size > 0) {
+                        let x: Float64 = evt.changedTouches[0].x
+                        lineChartHandleTouchDown(
+                            x,
+                            this.chartHourlyTemps,
+                            this.chartHourlyLabels,
+                            { m: String => this.toast(m) }
+                        )
+                    }
+                })
+        }
+        .width(100.percent)
     }
 
     @Builder
