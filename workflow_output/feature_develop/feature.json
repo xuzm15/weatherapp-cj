@@ -529,11 +529,7 @@
       }
     },
     "weather_client": {
-      "status": "failed",
-      "started_at": "2026-03-31T17:52:24",
-      "claim_id": "53b6ec47-d1e0-4d5b-88ee-0553c438e02f",
-      "review_requested_at": "2026-03-31T17:54:31",
-      "fail_reason": "review rejected: missing HTTP implementation"
+      "status": "pending"
     },
     "weather_code": {
       "status": "completed",
