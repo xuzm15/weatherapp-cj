@@ -50,10 +50,51 @@
   ],
   "api_backfill": [],
   "review": {
+    "status": "approved",
+    "batch_id": "location-batch-2",
+    "round": 1,
+    "checker": "review_check.py",
+    "automated_result": {
+      "feature_id": "geo_location_client",
+      "files_checked": ["services/GeoLocationClientService.cj"],
+      "passed_checks": ["residual_keywords", "empty_callbacks", "import_completeness", "task_conversion_contract"],
+      "failed_checks": [
+        {
+          "check": "feature_contract",
+          "issues": [{"code": "missing_api_task", "message": "Network feature must include at least one api task"}]
+        }
+      ],
+      "warnings": [
+        {"check": "api_verification", "message": "No MTProto/API calls detected for network feature"},
+        {
+          "check": "feature_contract_warnings",
+          "issues": [
+            {"code": "empty_gap_analysis", "message": "gap_analysis.related_file_list is empty"},
+            {"code": "thin_context", "message": "context.current_state is too short", "field": "current_state"},
+            {"code": "thin_context", "message": "context.problem is too short", "field": "problem"},
+            {"code": "thin_context", "message": "context.target is too short", "field": "target"}
+          ]
+        }
+      ]
+    },
+    "llm_notes": "逻辑正确性: pass — GeoLocationClientService 以 Nominatim reverse/search 对齐 Java 侧地理编码；GeoSingle 惰性执行，httpGetBlocking 用 HttpSyncBox+Mutex/Condition 避免 lambda 捕获可变标量；JSON 解析与 split 搜索数组与工程内语法陷阱记录一致。\n边界处理: pass — 空 body、空查询 trim、lat/lon 缺失有日志或空数组；HttpData 非 String 变体落入默认空 body。\n语义验收: 真实 HTTP 与 PlaceInfo 构造；无占位 TODO；核心路径覆盖参考客户端行为。\n真实调用链完整性: pass — 虽无 MTProto，但 network 语义在本特性中为公网 HTTP（NetworkKit），调用链完整至 createHttp/request 与响应处理，符合天气应用 Geo API 域。\n分层规范: pass — 服务层解析与网络隔离，未向 UI 泄漏。",
     "issues": [],
-    "passed_checks": [],
-    "reviewed_at": null,
-    "status": "review_pending"
+    "deferred_items": [
+      {
+        "id": "DF-geo_location_client-meta-001",
+        "reason": "同批次 fused_location：补齐 api 类 task 或调整 implementation_kind/证据字段以满足 validate_feature_contract；充实 context/gap_analysis。"
+      }
+    ],
+    "deferred_count": 1,
+    "merge_evidence": {
+      "worker_branch": "feature/geo_location_client",
+      "worker_commit": "f6ec8e3783cc94b42a090df3f795883cc1d531a2",
+      "integration_branch": "integrate/location-batch-2",
+      "integration_merge_commit": "f2157b2aeb68ab63a753f1b0f40cd019f6f2cc41",
+      "output_merge_commit": null,
+      "base_branch": "main",
+      "base_branch_merged": false
+    }
   },
   "human_issues": [],
   "status": "completed",
