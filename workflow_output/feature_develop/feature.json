@@ -289,25 +289,18 @@
       }
     },
     "app": {
-      "status": "in_progress",
+      "status": "review_pending",
       "started_at": "2026-03-31T16:59:58",
-      "lease": {
-        "worker_id": "worker-20260331165958-01",
-        "claim_id": "817e96c5-983a-4c3e-91bf-83c837f3f658",
-        "claimed_at": "2026-03-31T16:59:58",
-        "lease_seconds": 1800,
-        "expires_at": "2026-03-31T17:29:58"
-      },
-      "current_worker": "worker-20260331165958-01",
-      "claim_id": "817e96c5-983a-4c3e-91bf-83c837f3f658"
+      "claim_id": "817e96c5-983a-4c3e-91bf-83c837f3f658",
+      "review_requested_at": "2026-03-31T17:01:52"
     }
   },
   "stats": {
     "total": 30,
     "completed": 5,
-    "in_progress": 1,
+    "in_progress": 0,
     "pending": 24,
-    "review_pending": 0,
+    "review_pending": 1,
     "failed": 0
   }
 }
