@@ -8,9 +8,9 @@
     "mode": "llm-only"
   },
   "context": {
-    "current_state": "unknown",
+    "current_state": "implemented",
     "problem": "",
-    "target": "",
+    "target": "models/UnitConverter.cj 提供温度、风速、气压单位枚举与转换函数，对齐 Android UnitConverter.java。",
     "source_reference": {
       "source_files": [
         "app/src/main/java/com/wemaka/weatherapp/util/UnitConverter.java"
@@ -30,10 +30,10 @@
       "name": "Unit Converter 服务实现",
       "type": "implementation",
       "description": "实现 UnitConverter 的核心服务逻辑",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [],
       "files": [
-        "services/UnitConverterService.cj"
+        "models/UnitConverter.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/util/UnitConverter.java"
@@ -53,10 +53,10 @@
     "reviewed_at": null
   },
   "human_issues": [],
-  "status": "pending",
+  "status": "completed",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.700669",
-    "started_at": null,
-    "completed_at": null
+    "started_at": "2026-03-31T17:49:15.000000",
+    "completed_at": "2026-03-31T17:50:30.000000"
   }
 }
