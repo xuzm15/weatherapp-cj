@@ -48,17 +48,52 @@
   ],
   "api_backfill": [],
   "review": {
+    "status": "approved",
+    "batch_id": "app-batch-1",
+    "round": 1,
+    "checker": "review_check.py",
+    "reviewed_at": "2026-03-31T17:03:00Z",
+    "automated_result": {
+      "feature_id": "app",
+      "files_checked": ["foundation/AppConfig.cj"],
+      "passed_checks": ["residual_keywords", "empty_callbacks", "import_completeness", "task_conversion_contract"],
+      "failed_checks": [
+        {
+          "check": "feature_contract",
+          "issues": [{"code": "missing_entry_target", "message": "entry_wiring feature must touch entry/page/host/router files"}]
+        }
+      ],
+      "warnings": [
+        {"check": "api_verification", "message": "No MTProto/API calls detected; expected for entry_wiring when real local/lifecycle/entry wiring exists"},
+        {"check": "feature_contract_warnings", "issues": [{"code": "empty_gap_analysis"}, {"code": "thin_context"}]}
+      ],
+      "manual_override_note": "feature_contract 因 tasks[].files 仅含 AppConfig.cj 触发；仓库内 ability_stage.cj / main_ability.cj 已实际调用 AppConfig，调用链完整。"
+    },
+    "llm_notes": "逻辑正确性: pass — AppConfig 以 Preferences 实现与 Android ProtoDataStore/settings.pb 等价的惰性初始化，ensureSettingsStore 在获得 UIAbilityContext 后创建单例，语义与源 App 一致。\n边界处理: pass — match (settingsPreferences) 区分 None/Some；无多余空指针路径。\n语义验收: (1) 真实业务逻辑：Preferences 初始化与 Hilog 为真实 API，非 mock。(2) onClick/onChange：本 feature 无 UI 控件，N/A。(3) 无 TODO/FIXME 等残留。(4) 覆盖率：对应源 App 进程级设置存储初始化，核心路径已覆盖。\n真实调用链完整性: pass — implementation_kind=entry_wiring：MyAbilityStage.onCreate → AppConfig.onAbilityStageCreate；MainAbility.onCreate → AppConfig.ensureSettingsStore(this.context)，已达 AbilityStage 与 UIAbility。\n分层规范: pass — 配置置于 foundation，由 entry 宿主调用，未见 UI 直接写 MTProto 或反向依赖。",
     "issues": [],
-    "passed_checks": [],
-    "reviewed_at": null,
-    "status": "review_pending"
+    "deferred_items": [
+      {
+        "id": "DF-app-manifest-001",
+        "reason": "在 feature 元数据的 tasks[].files 中补充 ability_stage.cj、main_ability.cj，使 review_check 的 feature_contract（missing_entry_target）与仓库真实接线一致。"
+      }
+    ],
+    "deferred_count": 1,
+    "merge_evidence": {
+      "worker_branch": "feature/app",
+      "worker_commit": "4e1762843ead3e0d5c9402037505ba5c1788fc54",
+      "integration_branch": "integrate/app-batch-1",
+      "integration_merge_commit": "a0feea6670c1db5fc9cf6c301a3c16fe9596dba0",
+      "output_merge_commit": null,
+      "base_branch": "main",
+      "base_branch_merged": false
+    }
   },
   "human_issues": [],
-  "status": "review_pending",
+  "status": "completed",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.621600",
-    "started_at": "2026-03-31T16:59:58",
-    "completed_at": null,
+    "started_at": "2026-03-31T17:00:00.000000",
+    "completed_at": "2026-03-31T17:02:00.000000",
     "review_requested_at": "2026-03-31T17:01:52"
   }
 }
