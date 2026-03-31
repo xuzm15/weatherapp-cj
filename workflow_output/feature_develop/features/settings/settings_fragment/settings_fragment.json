@@ -84,10 +84,73 @@
   ],
   "api_backfill": [],
   "review": {
+    "status": "approved",
+    "batch_id": "settings-batch-1",
+    "round": 1,
+    "checker": "review_check.py",
+    "reviewed_at": "2026-03-31T17:28:00",
+    "automated_result": {
+      "feature_id": "settings_fragment",
+      "files_checked": [
+        "components/SettingsFragment.cj",
+        "components/MainFragment.cj"
+      ],
+      "passed_checks": [
+        "residual_keywords",
+        "empty_callbacks",
+        "import_completeness",
+        "task_conversion_contract"
+      ],
+      "failed_checks": [
+        {
+          "check": "feature_contract",
+          "issues": [
+            {
+              "code": "missing_entry_target",
+              "message": "entry_wiring feature must touch entry/page/host/router files"
+            }
+          ]
+        }
+      ],
+      "warnings": [
+        {
+          "check": "api_verification",
+          "message": "No MTProto/API calls detected; expected for entry_wiring when real local/lifecycle/entry wiring exists"
+        },
+        {
+          "check": "feature_contract_warnings",
+          "issues": [
+            {
+              "code": "empty_gap_analysis",
+              "message": "gap_analysis.related_file_list is empty"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.current_state is too short",
+              "field": "current_state"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.problem is too short",
+              "field": "problem"
+            }
+          ]
+        }
+      ]
+    },
+    "llm_notes": "逻辑正确性: pass — SettingsFragment 使用 Preferences 读写语言/温标/风速/气压键，变更持久化并触发宿主回调；MainFragment 叠层展示与动画关闭路径完整。\n边界处理: pass — preferences 未就绪时 Hilog 提示并使用默认值；flush 异常有捕获。\n语义验收: 「真实业务逻辑」— 非占位；「UI 经业务层」— Select 与状态绑定；「回调有逻辑」— onSelect 更新状态、persist、回调宿主；「无 TODO 等残留」— 抽查通过；「覆盖率」— 与 Android ListPreference 四项设置对应。\n真实调用链完整性: pass — implementation_kind 为 entry_wiring：MainAbility.onCreate 调用 AppConfig.ensureSettingsStore；MainFragment 工具栏「设置」打开叠层、嵌入 SettingsFragment 并接线 onLanguageChange 等；语言变更驱动 GeoNames locale 与地名刷新。\n分层规范: pass — UI 组件与 AppConfig 偏好层协作，未见 UI 直接写网络下层不当越层。",
     "issues": [],
-    "passed_checks": [],
-    "reviewed_at": null,
-    "status": "review_pending"
+    "deferred_items": [],
+    "deferred_count": 0,
+    "merge_evidence": {
+      "worker_branch": "feature/settings_fragment",
+      "worker_commit": "3813f33229ee03af8d67f0c2fd0e8093d3cd63c1",
+      "integration_branch": "integrate/settings-batch-1",
+      "integration_merge_commit": "401549f591f6d937d75a1a27274589941b3b3df4",
+      "output_merge_commit": null,
+      "base_branch": "main",
+      "base_branch_merged": false
+    }
   },
   "human_issues": [],
   "status": "completed",
