@@ -64,10 +64,40 @@
     }
   ],
   "review": {
+    "status": "approved",
+    "batch_id": "weather-batch-8",
+    "round": 1,
+    "checker": "review_check.py",
+    "automated_result": {
+      "feature_id": "main_view_model",
+      "files_checked": ["services/MainViewModel.cj"],
+      "passed_checks": [
+        "feature_contract",
+        "residual_keywords",
+        "empty_callbacks",
+        "import_completeness",
+        "task_conversion_contract"
+      ],
+      "failed_checks": [],
+      "warnings": [
+        "api_verification: No MTProto/API calls (expected warning for local_state)",
+        "feature_contract_warnings: empty_gap_analysis, thin_context fields"
+      ]
+    },
+    "llm_notes": "逻辑正确性: pass — `MainViewModel` 对齐 Android：持有 `WeatherForecastRepository` 与 `NetworkChecker`，`initData` 应用单位偏好、恢复坐标与缓存 JSON、`requestLocationAsync` 驱动拉取；`change*Unit` 在 Success 状态下转换展示数据。\n边界处理: pass — `safeFetch*` 与 `searchLocation` 在无网络时返回 `UiResource.Error(ERR_NO_NET)`；缓存 JSON 无法解析时不抛错；地名从 `PlaceInfo.toString()` 解析与现有模式一致。\n语义验收: 核心为真实仓库/网络/持久化交互，非 stub；回调默认 no-op 但对外 API（fetch/search/getSaved*）均有实质逻辑；无 TODO/FIXME 残留；与 `MainViewModel.java` 核心流程（预报/地名/单位/搜索）一致。\n真实调用链完整性: pass — local_state：`repository`、`NetworkChecker`、`ProtoDataStoreRepository.INSTANCE` 与 `parseForecastJson` 补全链路可达真实数据层。\n分层规范: pass — ViewModel 位于 services，无直接 ArkUI 组件。\napi_backfill: `WeatherClient.parseForecastJson` 与 `WeatherForecastRepository.parseForecastJson` 与持久化缓存解析需求一致。",
     "issues": [],
-    "passed_checks": [],
-    "reviewed_at": null,
-    "status": "review_pending"
+    "deferred_items": [],
+    "deferred_count": 0,
+    "merge_evidence": {
+      "worker_branch": "feature/main_view_model",
+      "worker_commit": "306e9944eec7ec9384b2483be835142779199726",
+      "integration_branch": "integrate/weather-batch-8",
+      "integration_merge_commit": "f535d684b54e6194c604c3535d0d1f01c81b6682",
+      "output_merge_commit": null,
+      "base_branch": "main",
+      "base_branch_merged": false
+    },
+    "reviewed_at": "2026-03-31T18:12:30Z"
   },
   "human_issues": [],
   "status": "completed",
