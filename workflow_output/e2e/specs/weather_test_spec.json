@@ -31,7 +31,7 @@
     "services/MainViewModelService.cj",
     "services/NetworkCheckerService.cj",
     "services/OpenMeteoClientService.cj",
-    "services/ProtoDataStoreRepositoryService.cj",
+    "services/ProtoDataStoreRepository.cj",
     "services/ResourceService.cj",
     "features/TodayWeatherFragmentInteractor.cj",
     "features/TodayWeatherFragmentView.cj",
@@ -246,7 +246,7 @@
       "feature_id": "proto_data_store_repository",
       "name": "Proto Data Store Repository",
       "files": [
-        "services/ProtoDataStoreRepositoryService.cj"
+        "services/ProtoDataStoreRepository.cj"
       ],
       "code_acceptance": [
         "核心实现层提供真实的业务逻辑，非 mock/stub",
