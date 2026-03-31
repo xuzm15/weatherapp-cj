@@ -1,5 +1,11 @@
 # 仓颉编译陷阱记录
 
+## `@Component` 中使用 `@Prop` 需显式引入宏
+- **触发条件**: 在自定义组件字段上使用 `@Prop`，但未 `import ohos.arkui.state_macro_manage.Prop`（或工程未启用该宏路径）
+- **错误信息**: `undeclared identifier 'Prop'`（宏展开后）
+- **修复方式**: 补充 `Prop` 的 import；或改为普通 `var`/`public var` 字段（由宿主在创建后赋值），与本工程 `MainFragment` 风格一致
+- **发现于**: custom_search_view, 2026-03-31
+
 ## 子目录 package 名称必须匹配目录路径
 - **触发条件**: 在 `<cangjie_root>/models/` 子目录中的 .cj 文件使用 `package ohos_app_cangjie_entry`（根 package 名）
 - **错误信息**: `Error: the package name in .../models is wrong, the right name should be 'ohos_app_cangjie_entry.models'`
