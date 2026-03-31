@@ -8,7 +8,7 @@
     "mode": "llm-only"
   },
   "context": {
-    "current_state": "unknown",
+    "current_state": "FusedLocationProviderService 已实现：权限、定位开关、双策略 LocatingPriority、缓存/默认回退与 requestLocationAsync",
     "problem": "",
     "target": "",
     "source_reference": {
@@ -50,17 +50,57 @@
   ],
   "api_backfill": [],
   "review": {
+    "status": "approved",
+    "batch_id": "location-batch-2",
+    "round": 1,
+    "checker": "review_check.py",
+    "automated_result": {
+      "feature_id": "fused_location_provider",
+      "files_checked": ["services/FusedLocationProviderService.cj"],
+      "passed_checks": ["residual_keywords", "empty_callbacks", "import_completeness", "task_conversion_contract"],
+      "failed_checks": [
+        {
+          "check": "feature_contract",
+          "issues": [{"code": "missing_api_task", "message": "Network feature must include at least one api task"}]
+        }
+      ],
+      "warnings": [
+        {"check": "api_verification", "message": "No MTProto/API calls detected for network feature"},
+        {
+          "check": "feature_contract_warnings",
+          "issues": [
+            {"code": "empty_gap_analysis", "message": "gap_analysis.related_file_list is empty"},
+            {"code": "thin_context", "message": "context.problem is too short", "field": "problem"},
+            {"code": "thin_context", "message": "context.target is too short", "field": "target"}
+          ]
+        }
+      ]
+    },
+    "llm_notes": "逻辑正确性: pass — FusedLocationProviderService 覆盖权限检查（模糊/精确）、定位开关、主次 LocatingPriority 与双次 getCurrentLocation 回退，最后回退缓存/默认坐标；与 Android 融合定位语义一致。\n边界处理: pass — 无权限、定位关闭、BusinessException 主/次策略失败均有日志与 getLastKnownOrDefault；requestLocationAsync 同步封装后回调交付。\n语义验收: 核心实现层为真实 LocationKit 调用非 stub；无空回调；未见 TODO/FIXME 占位；功能面覆盖 Android 参考的主要路径。\n真实调用链完整性: pass（域内解释）— feature 标记为 network 但业务为系统定位；实际链路为 AbilityAccessCtrl + GeoLocationManager/SingleLocationRequest，非 MTProto；与天气应用定位域一致，不应以缺少 MTProto 否定实现。\n分层规范: pass — 服务层仅依赖 LocationKit/模型，无 UI 越层。",
     "issues": [],
-    "passed_checks": [],
-    "reviewed_at": null,
-    "status": "review_pending"
+    "deferred_items": [
+      {
+        "id": "DF-fused_location_provider-meta-001",
+        "reason": "feature_contract 要求 network 类 feature 在 tasks 中含 api 类型任务；当前仅 implementation。可在后续批次补 metadata 或将 implementation_kind 调整为更贴近平台能力的分类（需与 task_contract 一致）。"
+      }
+    ],
+    "deferred_count": 1,
+    "merge_evidence": {
+      "worker_branch": "feature/fused_location_provider",
+      "worker_commit": "15c9baae31c00a5552cc37eacaacc49b600ce1e1",
+      "integration_branch": "integrate/location-batch-2",
+      "integration_merge_commit": "4a3249796a9759f0d1e611a575032a00338cd4f0",
+      "output_merge_commit": null,
+      "base_branch": "main",
+      "base_branch_merged": false
+    }
   },
   "human_issues": [],
-  "status": "review_pending",
+  "status": "completed",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.639669",
-    "started_at": "2026-03-31T16:47:34",
-    "completed_at": null,
+    "started_at": "2026-03-31T16:47:34.000000",
+    "completed_at": "2026-03-31T16:50:00.000000",
     "review_requested_at": "2026-03-31T16:53:53"
   }
 }

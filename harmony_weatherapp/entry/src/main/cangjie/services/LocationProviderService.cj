@@ -10,14 +10,16 @@ public interface LocationProvider {
     func requestLocation(): LocationCoord
     func getLocation(): LocationCoord
     func setLocation(location: LocationCoord): Unit
+    /** 异步回调：在取得同步结果后交付（与 Java 侧 Single 语义一致，便于 UI 线程解耦调用方） */
+    func requestLocationAsync(onComplete: (LocationCoord) -> Unit): Unit
 }
 
-public class LocationProviderService <: LocationProvider {
+public open class LocationProviderService <: LocationProvider {
     private var cachedLocation: LocationCoord = LocationCoord()
 
     public init() {}
 
-    public func requestLocation(): LocationCoord {
+    public open func requestLocation(): LocationCoord {
         try {
             let enabled = GeoLocationManager.isLocationEnabled()
             if (!enabled) {
@@ -42,5 +44,9 @@ public class LocationProviderService <: LocationProvider {
 
     public func setLocation(location: LocationCoord): Unit {
         this.cachedLocation = location
+    }
+
+    public open func requestLocationAsync(onComplete: (LocationCoord) -> Unit): Unit {
+        onComplete(this.requestLocation())
     }
 }
