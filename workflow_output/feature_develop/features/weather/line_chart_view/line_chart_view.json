@@ -48,10 +48,68 @@
   ],
   "api_backfill": [],
   "review": {
+    "status": "approved",
+    "batch_id": "weather-batch-2",
+    "round": 1,
+    "checker": "review_check.py",
+    "reviewed_at": "2026-03-31T17:45:00Z",
+    "automated_result": {
+      "feature_id": "line_chart_view",
+      "files_checked": [
+        "components/LineChartViewComponent.cj"
+      ],
+      "passed_checks": [
+        "feature_contract",
+        "residual_keywords",
+        "empty_callbacks",
+        "import_completeness",
+        "task_conversion_contract"
+      ],
+      "failed_checks": [],
+      "warnings": [
+        {
+          "check": "api_verification",
+          "message": "No MTProto/API calls detected; expected for local_state when real local/lifecycle/entry wiring exists"
+        },
+        {
+          "check": "feature_contract_warnings",
+          "issues": [
+            {
+              "code": "empty_gap_analysis",
+              "message": "gap_analysis.related_file_list is empty"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.current_state is too short",
+              "field": "current_state"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.problem is too short",
+              "field": "problem"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.target is too short",
+              "field": "target"
+            }
+          ]
+        }
+      ]
+    },
+    "llm_notes": "逻辑正确性: pass — LineChartViewComponent 提供 Canvas 折线绘制（网格、Y 轴刻度、X 轴标签、选点高亮）与 lineChartHandleTouchDown 触摸拾取；MainFragment.lineChartSection 接线 lineChartPaint/lineChartHandleTouchDown，与宿主数据 chartHourlyTemps/Labels 联动。\n边界处理: pass — dataPoints 为空显示「暂无温度曲线数据」；Y 全等时扩展范围；labels 与 n 取较小值避免越界；触摸在 width/height 无效时早退。\n语义验收: 「核心实现层真实业务逻辑」— pass（Canvas 数学映射与 Path2D 绘制）；「onClick/onChange」— 触摸通过 onToast 回调输出实际文案，非空实现；「无 TODO/FIXME」— pass；「对照源文件」— pass（折线、选点、坐标轴语义与 Android LineChartView 一致）。\n真实调用链完整性: pass — local_state 下图表能力在 MainFragment 中完成 Canvas 与触摸接线，非孤立代码。\n分层规范: pass — 绘图与触摸 API 在 components，Toast 由宿主注入，无 UI 层写 MTProto。",
     "issues": [],
-    "passed_checks": [],
-    "reviewed_at": null,
-    "status": "review_pending"
+    "deferred_items": [],
+    "deferred_count": 0,
+    "merge_evidence": {
+      "worker_branch": "feature/line_chart_view",
+      "worker_commit": "b403353354bc11c450c9b8d98a5dd247ec30dce1",
+      "integration_branch": "integrate/weather-batch-2",
+      "integration_merge_commit": "634f3b1fccdecd57c57d9750f15719d757af4672",
+      "output_merge_commit": null,
+      "base_branch": "main",
+      "base_branch_merged": false
+    }
   },
   "human_issues": [],
   "status": "completed",

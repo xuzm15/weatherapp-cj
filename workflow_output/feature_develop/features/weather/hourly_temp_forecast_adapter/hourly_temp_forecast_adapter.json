@@ -49,10 +49,69 @@
   ],
   "api_backfill": [],
   "review": {
+    "status": "approved",
+    "batch_id": "weather-batch-2",
+    "round": 1,
+    "checker": "review_check.py",
+    "reviewed_at": "2026-03-31T17:45:00Z",
+    "automated_result": {
+      "feature_id": "hourly_temp_forecast_adapter",
+      "files_checked": [
+        "models/TemperatureItem.cj",
+        "components/HourlyTempForecastAdapter.cj"
+      ],
+      "passed_checks": [
+        "feature_contract",
+        "residual_keywords",
+        "empty_callbacks",
+        "import_completeness",
+        "task_conversion_contract"
+      ],
+      "failed_checks": [],
+      "warnings": [
+        {
+          "check": "api_verification",
+          "message": "No MTProto/API calls detected; expected for local_state when real local/lifecycle/entry wiring exists"
+        },
+        {
+          "check": "feature_contract_warnings",
+          "issues": [
+            {
+              "code": "empty_gap_analysis",
+              "message": "gap_analysis.related_file_list is empty"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.current_state is too short",
+              "field": "current_state"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.problem is too short",
+              "field": "problem"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.target is too short",
+              "field": "target"
+            }
+          ]
+        }
+      ]
+    },
+    "llm_notes": "逻辑正确性: pass — HourlyTempForecastAdapter 以水平 List+ForEach 展示 TemperatureItem（时间、天气图标、温度），与 Android RecyclerView 适配器职责一致；TemperatureItem 模型字段完整。\n边界处理: pass — weatherIconName 为空时使用 Blank 占位保持布局；温度通过 formatTemperatureDegrees 格式化。\n语义验收: 「核心实现层提供真实业务逻辑」— pass（展示型组件，数据由 @Prop 注入）；「onClick/onChange」— N/A（列表项无交互回调，与纯展示一致）；「无 TODO/FIXME」— pass；「对照源文件核心功能覆盖率」— pass（水平小时条、时间、图标、温度均已实现）。\n真实调用链完整性: pass — local_state 下通过 @Prop items 注入数据，符合展示层契约。\n分层规范: pass — 仅 ArkUI 与 models，无越层直连网络/MTProto。",
     "issues": [],
-    "passed_checks": [],
-    "reviewed_at": null,
-    "status": "review_pending"
+    "deferred_items": [],
+    "deferred_count": 0,
+    "merge_evidence": {
+      "worker_branch": "feature/hourly_temp_forecast_adapter",
+      "worker_commit": "88b666ba6470e91947a2291583e7dd7d8226b13b",
+      "integration_branch": "integrate/weather-batch-2",
+      "integration_merge_commit": "32b9aa480cb00f51f1d18c3aca9c6835275dabae",
+      "output_merge_commit": null,
+      "base_branch": "main",
+      "base_branch_merged": false
+    }
   },
   "human_issues": [],
   "status": "completed",
