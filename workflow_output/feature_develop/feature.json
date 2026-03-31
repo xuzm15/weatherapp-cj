@@ -529,10 +529,11 @@
       }
     },
     "weather_client": {
-      "status": "review_pending",
+      "status": "failed",
       "started_at": "2026-03-31T17:52:24",
       "claim_id": "53b6ec47-d1e0-4d5b-88ee-0553c438e02f",
-      "review_requested_at": "2026-03-31T17:54:31"
+      "review_requested_at": "2026-03-31T17:54:31",
+      "fail_reason": "review rejected: missing HTTP implementation"
     },
     "weather_code": {
       "status": "completed",
@@ -555,7 +556,7 @@
     "completed": 22,
     "in_progress": 0,
     "pending": 7,
-    "review_pending": 1,
-    "failed": 0
+    "review_pending": 0,
+    "failed": 1
   }
 }

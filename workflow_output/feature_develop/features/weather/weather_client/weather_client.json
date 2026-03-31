@@ -55,21 +55,43 @@
     "reviewed_at": "2026-03-31T17:55:00+08:00",
     "automated_result": {
       "feature_id": "weather_client",
-      "files_checked": ["services/WeatherClient.cj"],
-      "passed_checks": ["residual_keywords", "empty_callbacks", "import_completeness", "task_conversion_contract"],
+      "files_checked": [
+        "services/WeatherClient.cj"
+      ],
+      "passed_checks": [
+        "residual_keywords",
+        "empty_callbacks",
+        "import_completeness",
+        "task_conversion_contract"
+      ],
       "failed_checks": [
         {
           "check": "feature_contract",
-          "issues": [{"code": "missing_api_task", "message": "Network feature must include at least one api task"}]
+          "issues": [
+            {
+              "code": "missing_api_task",
+              "message": "Network feature must include at least one api task"
+            }
+          ]
         }
       ],
       "warnings": [
-        {"check": "api_verification", "message": "No MTProto/API calls detected for network feature"},
+        {
+          "check": "api_verification",
+          "message": "No MTProto/API calls detected for network feature"
+        },
         {
           "check": "feature_contract_warnings",
           "issues": [
-            {"code": "empty_gap_analysis", "message": "gap_analysis.related_file_list is empty"},
-            {"code": "thin_context", "message": "context.problem is too short", "field": "problem"}
+            {
+              "code": "empty_gap_analysis",
+              "message": "gap_analysis.related_file_list is empty"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.problem is too short",
+              "field": "problem"
+            }
           ]
         }
       ]
@@ -110,5 +132,6 @@
     "started_at": "2026-03-31T17:52:24",
     "completed_at": null,
     "review_requested_at": "2026-03-31T17:54:31"
-  }
+  },
+  "fail_reason": "review rejected: missing HTTP implementation"
 }
