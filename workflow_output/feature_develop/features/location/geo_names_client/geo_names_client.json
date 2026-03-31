@@ -106,9 +106,9 @@
       "worker_commit": "7800dcc8c736665181ded8430466398c19da8f35",
       "integration_branch": "integrate/location-batch-3",
       "integration_merge_commit": "1a45254ef6a7d3a2162175c778e5f52c9895b9c6",
-      "output_merge_commit": null,
+      "output_merge_commit": "f8afda86a766212451842895357a96de5e31449b",
       "base_branch": "main",
-      "base_branch_merged": false
+      "base_branch_merged": true
     }
   },
   "human_issues": [],
