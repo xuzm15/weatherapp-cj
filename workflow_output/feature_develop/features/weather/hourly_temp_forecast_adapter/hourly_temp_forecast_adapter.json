@@ -30,10 +30,11 @@
       "name": "Hourly Temp Forecast Adapter 组件实现",
       "type": "implementation",
       "description": "实现 HourlyTempForecastAdapter UI 组件",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [],
       "files": [
-        "components/HourlyTempForecastAdapterComponent.cj"
+        "models/TemperatureItem.cj",
+        "components/HourlyTempForecastAdapter.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/adapter/HourlyTempForecastAdapter.java"
@@ -53,10 +54,10 @@
     "reviewed_at": null
   },
   "human_issues": [],
-  "status": "pending",
+  "status": "completed",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.648001",
-    "started_at": null,
-    "completed_at": null
+    "started_at": "2026-03-31T17:37:02.000000",
+    "completed_at": "2026-03-31T17:39:00.000000"
   }
 }
