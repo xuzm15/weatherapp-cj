@@ -8,9 +8,9 @@
     "mode": "llm-only"
   },
   "context": {
-    "current_state": "unknown",
+    "current_state": "implemented",
     "problem": "",
-    "target": "",
+    "target": "泛型三态结果模型 Resource<T>，供上层异步与 UI 使用",
     "source_reference": {
       "source_files": [
         "app/src/main/java/com/wemaka/weatherapp/util/Resource.java"
@@ -27,13 +27,13 @@
   "tasks": [
     {
       "id": "RESO-IMPL-1",
-      "name": "Resource 服务实现",
+      "name": "Resource 模型实现",
       "type": "implementation",
-      "description": "实现 Resource 的核心服务逻辑",
+      "description": "在 models 中实现 Resource<T> 三态枚举及查询方法",
       "status": "completed",
       "depends_on": [],
       "files": [
-        "services/ResourceService.cj"
+        "models/Resource.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/util/Resource.java"
@@ -54,11 +54,10 @@
     "status": "review_pending"
   },
   "human_issues": [],
-  "status": "review_pending",
+  "status": "completed",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.684144",
-    "started_at": "2026-03-31T17:49:15",
-    "completed_at": null,
-    "review_requested_at": "2026-03-31T17:50:53"
+    "started_at": "2026-03-31T17:49:00.000000",
+    "completed_at": "2026-03-31T17:50:30.000000"
   }
 }
