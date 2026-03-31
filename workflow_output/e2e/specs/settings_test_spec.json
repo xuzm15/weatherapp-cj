@@ -1,0 +1,64 @@
+{
+  "group_id": "settings",
+  "generated_at": "2026-03-31T16:26:58.934113",
+  "feature_ids": [
+    "main_settings_fragment",
+    "settings_fragment"
+  ],
+  "focus_files": [
+    "features/MainSettingsFragmentInteractor.cj",
+    "features/MainSettingsFragmentView.cj",
+    "features/MainSettingsFragmentRouter.cj",
+    "features/SettingsFragmentInteractor.cj",
+    "features/SettingsFragmentView.cj",
+    "features/SettingsFragmentRouter.cj"
+  ],
+  "features": [
+    {
+      "feature_id": "main_settings_fragment",
+      "name": "Main Settings Fragment",
+      "files": [
+        "features/MainSettingsFragmentInteractor.cj",
+        "features/MainSettingsFragmentView.cj",
+        "features/MainSettingsFragmentRouter.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "UI 层通过业务逻辑层完成真实渲染与交互",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainSettingsFragment.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "settings_fragment",
+      "name": "Settings Fragment",
+      "files": [
+        "features/SettingsFragmentInteractor.cj",
+        "features/SettingsFragmentView.cj",
+        "features/SettingsFragmentRouter.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "UI 层通过业务逻辑层完成真实渲染与交互",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/ui/fragment/SettingsFragment.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    }
+  ]
+}

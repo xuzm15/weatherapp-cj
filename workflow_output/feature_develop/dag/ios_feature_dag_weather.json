@@ -1,0 +1,337 @@
+{
+  "analysis_type": "detail",
+  "group": "weather",
+  "module_count": 17,
+  "features": [
+    {
+      "suggested_id": "change_indicator",
+      "module_name": "ChangeIndicator",
+      "ios_classes": [],
+      "total_classes": 1,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "connection_network_provider",
+      "module_name": "ConnectionNetworkProvider",
+      "ios_classes": [
+        "ConnectionNetworkProvider"
+      ],
+      "total_classes": 1,
+      "depends_on_features": [
+        "network_checker"
+      ],
+      "depends_on_modules": [
+        "NetworkChecker"
+      ]
+    },
+    {
+      "suggested_id": "data_module",
+      "module_name": "DataModule",
+      "ios_classes": [],
+      "total_classes": 1,
+      "depends_on_features": [
+        "connection_network_provider",
+        "network_checker",
+        "open_meteo_client",
+        "weather_client",
+        "weather_forecast_repository"
+      ],
+      "depends_on_modules": [
+        "ConnectionNetworkProvider",
+        "NetworkChecker",
+        "OpenMeteoClient",
+        "WeatherClient",
+        "WeatherForecastRepository"
+      ]
+    },
+    {
+      "suggested_id": "data_store_serializer",
+      "module_name": "DataStoreSerializer",
+      "ios_classes": [],
+      "total_classes": 1,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "hourly_temp_forecast_adapter",
+      "module_name": "HourlyTempForecastAdapter",
+      "ios_classes": [],
+      "total_classes": 3,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "line_chart_view",
+      "module_name": "LineChartView",
+      "ios_classes": [],
+      "total_classes": 2,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "list_padding_decoration",
+      "module_name": "ListPaddingDecoration",
+      "ios_classes": [],
+      "total_classes": 2,
+      "depends_on_features": [
+        "unit_converter"
+      ],
+      "depends_on_modules": [
+        "UnitConverter"
+      ]
+    },
+    {
+      "suggested_id": "main_view_model",
+      "module_name": "MainViewModel",
+      "ios_classes": [
+        "MainViewModel"
+      ],
+      "total_classes": 1,
+      "depends_on_features": [
+        "network_checker",
+        "resource",
+        "unit_converter",
+        "weather_forecast_repository"
+      ],
+      "depends_on_modules": [
+        "NetworkChecker",
+        "Resource",
+        "UnitConverter",
+        "WeatherForecastRepository"
+      ]
+    },
+    {
+      "suggested_id": "network_checker",
+      "module_name": "NetworkChecker",
+      "ios_classes": [],
+      "total_classes": 1,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "open_meteo_client",
+      "module_name": "OpenMeteoClient",
+      "ios_classes": [
+        "OpenMeteoClient"
+      ],
+      "total_classes": 1,
+      "depends_on_features": [
+        "change_indicator",
+        "weather_client",
+        "weather_code"
+      ],
+      "depends_on_modules": [
+        "ChangeIndicator",
+        "WeatherClient",
+        "WeatherCode"
+      ]
+    },
+    {
+      "suggested_id": "proto_data_store_repository",
+      "module_name": "ProtoDataStoreRepository",
+      "ios_classes": [
+        "ProtoDataStoreRepository"
+      ],
+      "total_classes": 1,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "resource",
+      "module_name": "Resource",
+      "ios_classes": [],
+      "total_classes": 4,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "today_weather_fragment",
+      "module_name": "TodayWeatherFragment",
+      "ios_classes": [
+        "TodayWeatherFragment"
+      ],
+      "total_classes": 1,
+      "depends_on_features": [
+        "hourly_temp_forecast_adapter",
+        "line_chart_view",
+        "list_padding_decoration",
+        "main_view_model",
+        "unit_converter"
+      ],
+      "depends_on_modules": [
+        "HourlyTempForecastAdapter",
+        "LineChartView",
+        "ListPaddingDecoration",
+        "MainViewModel",
+        "UnitConverter"
+      ]
+    },
+    {
+      "suggested_id": "unit_converter",
+      "module_name": "UnitConverter",
+      "ios_classes": [],
+      "total_classes": 1,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "weather_client",
+      "module_name": "WeatherClient",
+      "ios_classes": [],
+      "total_classes": 1,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "weather_code",
+      "module_name": "WeatherCode",
+      "ios_classes": [],
+      "total_classes": 1,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "weather_forecast_repository",
+      "module_name": "WeatherForecastRepository",
+      "ios_classes": [
+        "WeatherForecastRepository"
+      ],
+      "total_classes": 1,
+      "depends_on_features": [
+        "proto_data_store_repository",
+        "weather_client"
+      ],
+      "depends_on_modules": [
+        "ProtoDataStoreRepository",
+        "WeatherClient"
+      ]
+    }
+  ],
+  "feature_edges": [
+    {
+      "from": "connection_network_provider",
+      "to": "network_checker",
+      "type": "module_import"
+    },
+    {
+      "from": "data_module",
+      "to": "connection_network_provider",
+      "type": "module_import"
+    },
+    {
+      "from": "data_module",
+      "to": "network_checker",
+      "type": "module_import"
+    },
+    {
+      "from": "data_module",
+      "to": "open_meteo_client",
+      "type": "module_import"
+    },
+    {
+      "from": "data_module",
+      "to": "weather_client",
+      "type": "module_import"
+    },
+    {
+      "from": "data_module",
+      "to": "weather_forecast_repository",
+      "type": "module_import"
+    },
+    {
+      "from": "list_padding_decoration",
+      "to": "unit_converter",
+      "type": "module_import"
+    },
+    {
+      "from": "main_view_model",
+      "to": "network_checker",
+      "type": "module_import"
+    },
+    {
+      "from": "main_view_model",
+      "to": "resource",
+      "type": "module_import"
+    },
+    {
+      "from": "main_view_model",
+      "to": "unit_converter",
+      "type": "module_import"
+    },
+    {
+      "from": "main_view_model",
+      "to": "weather_forecast_repository",
+      "type": "module_import"
+    },
+    {
+      "from": "open_meteo_client",
+      "to": "change_indicator",
+      "type": "module_import"
+    },
+    {
+      "from": "open_meteo_client",
+      "to": "weather_client",
+      "type": "module_import"
+    },
+    {
+      "from": "open_meteo_client",
+      "to": "weather_code",
+      "type": "module_import"
+    },
+    {
+      "from": "today_weather_fragment",
+      "to": "hourly_temp_forecast_adapter",
+      "type": "module_import"
+    },
+    {
+      "from": "today_weather_fragment",
+      "to": "line_chart_view",
+      "type": "module_import"
+    },
+    {
+      "from": "today_weather_fragment",
+      "to": "list_padding_decoration",
+      "type": "module_import"
+    },
+    {
+      "from": "today_weather_fragment",
+      "to": "main_view_model",
+      "type": "module_import"
+    },
+    {
+      "from": "today_weather_fragment",
+      "to": "unit_converter",
+      "type": "module_import"
+    },
+    {
+      "from": "weather_forecast_repository",
+      "to": "proto_data_store_repository",
+      "type": "module_import"
+    },
+    {
+      "from": "weather_forecast_repository",
+      "to": "weather_client",
+      "type": "module_import"
+    }
+  ],
+  "class_summary": {
+    "ChangeIndicator": 1,
+    "ConnectionNetworkProvider": 1,
+    "DataModule": 1,
+    "DataStoreSerializer": 1,
+    "HourlyTempForecastAdapter": 3,
+    "LineChartView": 2,
+    "ListPaddingDecoration": 2,
+    "MainViewModel": 1,
+    "NetworkChecker": 1,
+    "OpenMeteoClient": 1,
+    "ProtoDataStoreRepository": 1,
+    "Resource": 4,
+    "TodayWeatherFragment": 1,
+    "UnitConverter": 1,
+    "WeatherClient": 1,
+    "WeatherCode": 1,
+    "WeatherForecastRepository": 1
+  }
+}

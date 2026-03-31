@@ -1,0 +1,60 @@
+{
+  "analysis_type": "detail",
+  "group": "app",
+  "module_count": 3,
+  "features": [
+    {
+      "suggested_id": "app",
+      "module_name": "App",
+      "ios_classes": [],
+      "total_classes": 1,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "main_activity",
+      "module_name": "MainActivity",
+      "ios_classes": [
+        "MainActivity"
+      ],
+      "total_classes": 1,
+      "depends_on_features": [
+        "main_fragment"
+      ],
+      "depends_on_modules": [
+        "MainFragment"
+      ]
+    },
+    {
+      "suggested_id": "main_fragment",
+      "module_name": "MainFragment",
+      "ios_classes": [
+        "MainFragment"
+      ],
+      "total_classes": 1,
+      "depends_on_features": [
+        "main_activity"
+      ],
+      "depends_on_modules": [
+        "MainActivity"
+      ]
+    }
+  ],
+  "feature_edges": [
+    {
+      "from": "main_activity",
+      "to": "main_fragment",
+      "type": "module_import"
+    },
+    {
+      "from": "main_fragment",
+      "to": "main_activity",
+      "type": "module_import"
+    }
+  ],
+  "class_summary": {
+    "App": 1,
+    "MainActivity": 1,
+    "MainFragment": 1
+  }
+}

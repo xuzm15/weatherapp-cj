@@ -1,0 +1,120 @@
+{
+  "group_id": "location",
+  "generated_at": "2026-03-31T16:26:58.933562",
+  "feature_ids": [
+    "fused_location_provider",
+    "geo_location_client",
+    "geo_names_client",
+    "location_provider",
+    "place_info"
+  ],
+  "focus_files": [
+    "services/FusedLocationProviderService.cj",
+    "services/GeoLocationClientService.cj",
+    "services/GeoNamesClientService.cj",
+    "services/LocationProviderService.cj",
+    "services/PlaceInfoService.cj"
+  ],
+  "features": [
+    {
+      "feature_id": "fused_location_provider",
+      "name": "Fused Location Provider",
+      "files": [
+        "services/FusedLocationProviderService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/data/location/FusedLocationProvider.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "geo_location_client",
+      "name": "Geo Location Client",
+      "files": [
+        "services/GeoLocationClientService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/data/api/GeoLocationClient.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "geo_names_client",
+      "name": "Geo Names Client",
+      "files": [
+        "services/GeoNamesClientService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/data/api/GeoNamesClient.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "location_provider",
+      "name": "Location Provider",
+      "files": [
+        "services/LocationProviderService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/data/location/LocationProvider.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "place_info",
+      "name": "Place Info",
+      "files": [
+        "services/PlaceInfoService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/data/model/PlaceInfo.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    }
+  ]
+}

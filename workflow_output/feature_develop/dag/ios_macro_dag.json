@@ -1,0 +1,967 @@
+{
+  "analysis_type": "macro",
+  "ios_root": "input/weatherapp",
+  "total_modules": 30,
+  "infrastructure_modules": [],
+  "feature_module_count": 30,
+  "module_clusters": [
+    {
+      "suggested_group": "app",
+      "ios_modules": [
+        "App",
+        "MainActivity",
+        "MainFragment"
+      ],
+      "module_count": 3,
+      "external_dependencies": []
+    },
+    {
+      "suggested_group": "location",
+      "ios_modules": [
+        "FusedLocationProvider",
+        "GeoLocationClient",
+        "GeoNamesClient",
+        "LocationProvider",
+        "PlaceInfo"
+      ],
+      "module_count": 5,
+      "external_dependencies": []
+    },
+    {
+      "suggested_group": "search",
+      "ios_modules": [
+        "CustomSearchView",
+        "SearchMenuAdapter",
+        "SearchMenuFragment"
+      ],
+      "module_count": 3,
+      "external_dependencies": []
+    },
+    {
+      "suggested_group": "settings",
+      "ios_modules": [
+        "MainSettingsFragment",
+        "SettingsFragment"
+      ],
+      "module_count": 2,
+      "external_dependencies": []
+    },
+    {
+      "suggested_group": "weather",
+      "ios_modules": [
+        "ChangeIndicator",
+        "ConnectionNetworkProvider",
+        "DataModule",
+        "DataStoreSerializer",
+        "HourlyTempForecastAdapter",
+        "LineChartView",
+        "ListPaddingDecoration",
+        "MainViewModel",
+        "NetworkChecker",
+        "OpenMeteoClient",
+        "ProtoDataStoreRepository",
+        "Resource",
+        "TodayWeatherFragment",
+        "UnitConverter",
+        "WeatherClient",
+        "WeatherCode",
+        "WeatherForecastRepository"
+      ],
+      "module_count": 17,
+      "external_dependencies": []
+    }
+  ],
+  "cross_group_edges": [
+    {
+      "from_group": "app",
+      "to_group": "weather",
+      "reason": "App references DataStoreSerializer"
+    },
+    {
+      "from_group": "app",
+      "to_group": "weather",
+      "reason": "App references ProtoDataStoreRepository"
+    },
+    {
+      "from_group": "app",
+      "to_group": "weather",
+      "reason": "MainActivity references MainViewModel"
+    },
+    {
+      "from_group": "app",
+      "to_group": "location",
+      "reason": "MainFragment references FusedLocationProvider"
+    },
+    {
+      "from_group": "app",
+      "to_group": "settings",
+      "reason": "MainFragment references MainSettingsFragment"
+    },
+    {
+      "from_group": "app",
+      "to_group": "weather",
+      "reason": "MainFragment references MainViewModel"
+    },
+    {
+      "from_group": "app",
+      "to_group": "weather",
+      "reason": "MainFragment references Resource"
+    },
+    {
+      "from_group": "app",
+      "to_group": "search",
+      "reason": "MainFragment references SearchMenuFragment"
+    },
+    {
+      "from_group": "app",
+      "to_group": "weather",
+      "reason": "MainFragment references TodayWeatherFragment"
+    },
+    {
+      "from_group": "search",
+      "to_group": "location",
+      "reason": "SearchMenuAdapter references PlaceInfo"
+    },
+    {
+      "from_group": "search",
+      "to_group": "app",
+      "reason": "SearchMenuFragment references MainActivity"
+    },
+    {
+      "from_group": "search",
+      "to_group": "weather",
+      "reason": "SearchMenuFragment references MainViewModel"
+    },
+    {
+      "from_group": "settings",
+      "to_group": "weather",
+      "reason": "MainSettingsFragment references MainViewModel"
+    },
+    {
+      "from_group": "settings",
+      "to_group": "app",
+      "reason": "SettingsFragment references MainActivity"
+    },
+    {
+      "from_group": "settings",
+      "to_group": "weather",
+      "reason": "SettingsFragment references MainViewModel"
+    },
+    {
+      "from_group": "weather",
+      "to_group": "location",
+      "reason": "DataModule references FusedLocationProvider"
+    },
+    {
+      "from_group": "weather",
+      "to_group": "location",
+      "reason": "DataModule references GeoLocationClient"
+    },
+    {
+      "from_group": "weather",
+      "to_group": "location",
+      "reason": "DataModule references GeoNamesClient"
+    },
+    {
+      "from_group": "weather",
+      "to_group": "location",
+      "reason": "DataModule references LocationProvider"
+    },
+    {
+      "from_group": "weather",
+      "to_group": "app",
+      "reason": "LineChartView references MainActivity"
+    },
+    {
+      "from_group": "weather",
+      "to_group": "location",
+      "reason": "MainViewModel references PlaceInfo"
+    },
+    {
+      "from_group": "weather",
+      "to_group": "settings",
+      "reason": "MainViewModel references SettingsFragment"
+    },
+    {
+      "from_group": "weather",
+      "to_group": "app",
+      "reason": "TodayWeatherFragment references MainActivity"
+    },
+    {
+      "from_group": "weather",
+      "to_group": "location",
+      "reason": "WeatherForecastRepository references FusedLocationProvider"
+    },
+    {
+      "from_group": "weather",
+      "to_group": "location",
+      "reason": "WeatherForecastRepository references GeoLocationClient"
+    },
+    {
+      "from_group": "weather",
+      "to_group": "location",
+      "reason": "WeatherForecastRepository references GeoNamesClient"
+    },
+    {
+      "from_group": "weather",
+      "to_group": "location",
+      "reason": "WeatherForecastRepository references LocationProvider"
+    },
+    {
+      "from_group": "weather",
+      "to_group": "location",
+      "reason": "WeatherForecastRepository references PlaceInfo"
+    }
+  ],
+  "telegram_core_expansion": [],
+  "all_modules": {
+    "App": {
+      "build_deps": [
+        "DataStoreSerializer",
+        "ProtoDataStoreRepository"
+      ],
+      "swift_imports": [
+        "DataStoreSerializer",
+        "ProtoDataStoreRepository"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 0,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/App.java",
+      "mapped_group": "app",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/App.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/App.java"
+      ],
+      "class_names": [
+        "App"
+      ]
+    },
+    "ChangeIndicator": {
+      "build_deps": [],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 1,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/util/ChangeIndicator.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/util/ChangeIndicator.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/util/ChangeIndicator.java"
+      ],
+      "class_names": [
+        "ChangeIndicator"
+      ]
+    },
+    "ConnectionNetworkProvider": {
+      "build_deps": [
+        "NetworkChecker"
+      ],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 1,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/network/ConnectionNetworkProvider.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/network/ConnectionNetworkProvider.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/network/ConnectionNetworkProvider.java"
+      ],
+      "class_names": [
+        "ConnectionNetworkProvider"
+      ]
+    },
+    "CustomSearchView": {
+      "build_deps": [],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 0,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/ui/view/CustomSearchView.java",
+      "mapped_group": "search",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/view/CustomSearchView.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/view/CustomSearchView.java"
+      ],
+      "class_names": [
+        "CustomSearchView"
+      ]
+    },
+    "DataModule": {
+      "build_deps": [
+        "ConnectionNetworkProvider",
+        "FusedLocationProvider",
+        "GeoLocationClient",
+        "GeoNamesClient",
+        "LocationProvider",
+        "NetworkChecker",
+        "OpenMeteoClient",
+        "WeatherClient",
+        "WeatherForecastRepository"
+      ],
+      "swift_imports": [
+        "ConnectionNetworkProvider",
+        "FusedLocationProvider",
+        "GeoLocationClient",
+        "GeoNamesClient",
+        "LocationProvider",
+        "NetworkChecker",
+        "OpenMeteoClient",
+        "WeatherClient",
+        "WeatherForecastRepository"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 0,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/di/DataModule.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/di/DataModule.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/di/DataModule.java"
+      ],
+      "class_names": [
+        "DataModule"
+      ]
+    },
+    "DataStoreSerializer": {
+      "build_deps": [],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 1,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/data/store/DataStoreSerializer.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/store/DataStoreSerializer.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/store/DataStoreSerializer.java"
+      ],
+      "class_names": [
+        "DataStoreSerializer"
+      ]
+    },
+    "FusedLocationProvider": {
+      "build_deps": [
+        "LocationProvider"
+      ],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 3,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/data/location/FusedLocationProvider.java",
+      "mapped_group": "location",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/location/FusedLocationProvider.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/location/FusedLocationProvider.java"
+      ],
+      "class_names": [
+        "FusedLocationProvider"
+      ]
+    },
+    "GeoLocationClient": {
+      "build_deps": [
+        "PlaceInfo"
+      ],
+      "swift_imports": [
+        "PlaceInfo"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 3,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/data/api/GeoLocationClient.java",
+      "mapped_group": "location",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/api/GeoLocationClient.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/api/GeoLocationClient.java"
+      ],
+      "class_names": [
+        "GeoLocationClient"
+      ]
+    },
+    "GeoNamesClient": {
+      "build_deps": [
+        "GeoLocationClient",
+        "PlaceInfo"
+      ],
+      "swift_imports": [
+        "PlaceInfo"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 2,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/data/api/GeoNamesClient.java",
+      "mapped_group": "location",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/api/GeoNamesClient.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/api/GeoNamesClient.java"
+      ],
+      "class_names": [
+        "GeoNamesClient"
+      ]
+    },
+    "HourlyTempForecastAdapter": {
+      "build_deps": [],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 1,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/ui/adapter/HourlyTempForecastAdapter.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/adapter/HourlyTempForecastAdapter.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/adapter/HourlyTempForecastAdapter.java"
+      ],
+      "class_names": [
+        "HourlyTempForecastAdapter",
+        "ViewHolder",
+        "Comparator"
+      ]
+    },
+    "LineChartView": {
+      "build_deps": [
+        "MainActivity"
+      ],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 1,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/ui/view/LineChartView.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/view/LineChartView.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/view/LineChartView.java"
+      ],
+      "class_names": [
+        "LineChartView",
+        "CustomMarkerView"
+      ]
+    },
+    "ListPaddingDecoration": {
+      "build_deps": [
+        "UnitConverter"
+      ],
+      "swift_imports": [
+        "UnitConverter"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 1,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/ui/adapter/decoration/ListPaddingDecoration.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/adapter/decoration/ListPaddingDecoration.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/adapter/decoration/ListPaddingDecoration.java"
+      ],
+      "class_names": [
+        "ListPaddingDecoration",
+        "Orientation"
+      ]
+    },
+    "LocationProvider": {
+      "build_deps": [],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 3,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/data/location/LocationProvider.java",
+      "mapped_group": "location",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/location/LocationProvider.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/location/LocationProvider.java"
+      ],
+      "class_names": [
+        "LocationProvider"
+      ]
+    },
+    "MainActivity": {
+      "build_deps": [
+        "MainFragment",
+        "MainViewModel"
+      ],
+      "swift_imports": [
+        "MainFragment",
+        "MainViewModel"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 5,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/ui/MainActivity.java",
+      "mapped_group": "app",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/MainActivity.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/MainActivity.java"
+      ],
+      "class_names": [
+        "MainActivity"
+      ]
+    },
+    "MainFragment": {
+      "build_deps": [
+        "FusedLocationProvider",
+        "MainActivity",
+        "MainSettingsFragment",
+        "MainViewModel",
+        "Resource",
+        "SearchMenuFragment",
+        "TodayWeatherFragment"
+      ],
+      "swift_imports": [
+        "FusedLocationProvider",
+        "MainActivity",
+        "MainViewModel",
+        "Resource"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 1,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainFragment.java",
+      "mapped_group": "app",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainFragment.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainFragment.java"
+      ],
+      "class_names": [
+        "MainFragment"
+      ]
+    },
+    "MainSettingsFragment": {
+      "build_deps": [
+        "MainViewModel",
+        "SettingsFragment"
+      ],
+      "swift_imports": [
+        "MainViewModel"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 1,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainSettingsFragment.java",
+      "mapped_group": "settings",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainSettingsFragment.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainSettingsFragment.java"
+      ],
+      "class_names": [
+        "MainSettingsFragment"
+      ]
+    },
+    "MainViewModel": {
+      "build_deps": [
+        "NetworkChecker",
+        "PlaceInfo",
+        "Resource",
+        "SettingsFragment",
+        "UnitConverter",
+        "WeatherForecastRepository"
+      ],
+      "swift_imports": [
+        "NetworkChecker",
+        "PlaceInfo",
+        "Resource",
+        "SettingsFragment",
+        "UnitConverter",
+        "WeatherForecastRepository"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 6,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/ui/viewmodel/MainViewModel.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/viewmodel/MainViewModel.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/viewmodel/MainViewModel.java"
+      ],
+      "class_names": [
+        "MainViewModel"
+      ]
+    },
+    "NetworkChecker": {
+      "build_deps": [],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 3,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/network/NetworkChecker.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/network/NetworkChecker.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/network/NetworkChecker.java"
+      ],
+      "class_names": [
+        "NetworkChecker"
+      ]
+    },
+    "OpenMeteoClient": {
+      "build_deps": [
+        "ChangeIndicator",
+        "WeatherClient",
+        "WeatherCode"
+      ],
+      "swift_imports": [
+        "ChangeIndicator",
+        "WeatherCode"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 1,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/data/api/OpenMeteoClient.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/api/OpenMeteoClient.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/api/OpenMeteoClient.java"
+      ],
+      "class_names": [
+        "OpenMeteoClient"
+      ]
+    },
+    "PlaceInfo": {
+      "build_deps": [],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 5,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/data/model/PlaceInfo.java",
+      "mapped_group": "location",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/model/PlaceInfo.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/model/PlaceInfo.java"
+      ],
+      "class_names": [
+        "PlaceInfo"
+      ]
+    },
+    "ProtoDataStoreRepository": {
+      "build_deps": [],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 2,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/data/repository/ProtoDataStoreRepository.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/repository/ProtoDataStoreRepository.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/repository/ProtoDataStoreRepository.java"
+      ],
+      "class_names": [
+        "ProtoDataStoreRepository"
+      ]
+    },
+    "Resource": {
+      "build_deps": [],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 2,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/util/Resource.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/util/Resource.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/util/Resource.java"
+      ],
+      "class_names": [
+        "Resource",
+        "Success",
+        "Error",
+        "Loading"
+      ]
+    },
+    "SearchMenuAdapter": {
+      "build_deps": [
+        "PlaceInfo"
+      ],
+      "swift_imports": [
+        "PlaceInfo"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 1,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/ui/adapter/SearchMenuAdapter.java",
+      "mapped_group": "search",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/adapter/SearchMenuAdapter.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/adapter/SearchMenuAdapter.java"
+      ],
+      "class_names": [
+        "SearchMenuAdapter",
+        "ViewHolder",
+        "Comparator",
+        "ItemClickListener",
+        "PayloadType"
+      ]
+    },
+    "SearchMenuFragment": {
+      "build_deps": [
+        "MainActivity",
+        "MainViewModel",
+        "SearchMenuAdapter"
+      ],
+      "swift_imports": [
+        "MainActivity",
+        "MainViewModel",
+        "SearchMenuAdapter"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 1,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/ui/fragment/SearchMenuFragment.java",
+      "mapped_group": "search",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/fragment/SearchMenuFragment.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/fragment/SearchMenuFragment.java"
+      ],
+      "class_names": [
+        "SearchMenuFragment"
+      ]
+    },
+    "SettingsFragment": {
+      "build_deps": [
+        "MainActivity",
+        "MainViewModel"
+      ],
+      "swift_imports": [
+        "MainActivity",
+        "MainViewModel"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 2,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/ui/fragment/SettingsFragment.java",
+      "mapped_group": "settings",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/fragment/SettingsFragment.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/fragment/SettingsFragment.java"
+      ],
+      "class_names": [
+        "SettingsFragment"
+      ]
+    },
+    "TodayWeatherFragment": {
+      "build_deps": [
+        "HourlyTempForecastAdapter",
+        "LineChartView",
+        "ListPaddingDecoration",
+        "MainActivity",
+        "MainViewModel",
+        "UnitConverter"
+      ],
+      "swift_imports": [
+        "HourlyTempForecastAdapter",
+        "LineChartView",
+        "ListPaddingDecoration",
+        "MainActivity",
+        "MainViewModel",
+        "UnitConverter"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 1,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/ui/fragment/TodayWeatherFragment.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/fragment/TodayWeatherFragment.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/fragment/TodayWeatherFragment.java"
+      ],
+      "class_names": [
+        "TodayWeatherFragment"
+      ]
+    },
+    "UnitConverter": {
+      "build_deps": [],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 3,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/util/UnitConverter.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/util/UnitConverter.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/util/UnitConverter.java"
+      ],
+      "class_names": [
+        "UnitConverter"
+      ]
+    },
+    "WeatherClient": {
+      "build_deps": [],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 3,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/data/api/WeatherClient.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/api/WeatherClient.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/api/WeatherClient.java"
+      ],
+      "class_names": [
+        "WeatherClient"
+      ]
+    },
+    "WeatherCode": {
+      "build_deps": [],
+      "swift_imports": [],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 1,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/util/WeatherCode.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/util/WeatherCode.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/util/WeatherCode.java"
+      ],
+      "class_names": [
+        "WeatherCode"
+      ]
+    },
+    "WeatherForecastRepository": {
+      "build_deps": [
+        "FusedLocationProvider",
+        "GeoLocationClient",
+        "GeoNamesClient",
+        "LocationProvider",
+        "PlaceInfo",
+        "ProtoDataStoreRepository",
+        "WeatherClient"
+      ],
+      "swift_imports": [
+        "FusedLocationProvider",
+        "GeoLocationClient",
+        "GeoNamesClient",
+        "LocationProvider",
+        "PlaceInfo",
+        "WeatherClient"
+      ],
+      "source_file_count": 1,
+      "swift_file_count": 1,
+      "depended_by_count": 2,
+      "is_infrastructure": false,
+      "source_path": "app/src/main/java/com/wemaka/weatherapp/data/repository/WeatherForecastRepository.java",
+      "mapped_group": "weather",
+      "origin": "generic_android",
+      "files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/repository/WeatherForecastRepository.java"
+      ],
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/data/repository/WeatherForecastRepository.java"
+      ],
+      "class_names": [
+        "WeatherForecastRepository"
+      ]
+    }
+  }
+}

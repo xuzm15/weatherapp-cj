@@ -1,0 +1,1406 @@
+{
+  "generated_at": "2026-03-31T16:09:19.587269",
+  "source": {
+    "macro_dag": "ios_macro_dag.json",
+    "detail_dags": [
+      "ios_feature_dag_app.json",
+      "ios_feature_dag_location.json",
+      "ios_feature_dag_search.json",
+      "ios_feature_dag_settings.json",
+      "ios_feature_dag_weather.json"
+    ],
+    "llm_dag": "dag_llm.json",
+    "cj_root": "/Users/xuziming/Projects/pandora-core/output/harmony_weatherapp"
+  },
+  "group_level_dag": {
+    "groups": [
+      "app",
+      "core",
+      "location",
+      "search",
+      "settings",
+      "weather"
+    ],
+    "edges": [
+      {
+        "from": "app",
+        "to": "weather",
+        "reason": "App references DataStoreSerializer"
+      },
+      {
+        "from": "app",
+        "to": "weather",
+        "reason": "App references ProtoDataStoreRepository"
+      },
+      {
+        "from": "app",
+        "to": "weather",
+        "reason": "MainActivity references MainViewModel"
+      },
+      {
+        "from": "app",
+        "to": "location",
+        "reason": "MainFragment references FusedLocationProvider"
+      },
+      {
+        "from": "app",
+        "to": "settings",
+        "reason": "MainFragment references MainSettingsFragment"
+      },
+      {
+        "from": "app",
+        "to": "weather",
+        "reason": "MainFragment references MainViewModel"
+      },
+      {
+        "from": "app",
+        "to": "weather",
+        "reason": "MainFragment references Resource"
+      },
+      {
+        "from": "app",
+        "to": "search",
+        "reason": "MainFragment references SearchMenuFragment"
+      },
+      {
+        "from": "app",
+        "to": "weather",
+        "reason": "MainFragment references TodayWeatherFragment"
+      },
+      {
+        "from": "search",
+        "to": "location",
+        "reason": "SearchMenuAdapter references PlaceInfo"
+      },
+      {
+        "from": "search",
+        "to": "app",
+        "reason": "SearchMenuFragment references MainActivity"
+      },
+      {
+        "from": "search",
+        "to": "weather",
+        "reason": "SearchMenuFragment references MainViewModel"
+      },
+      {
+        "from": "settings",
+        "to": "weather",
+        "reason": "MainSettingsFragment references MainViewModel"
+      },
+      {
+        "from": "settings",
+        "to": "app",
+        "reason": "SettingsFragment references MainActivity"
+      },
+      {
+        "from": "settings",
+        "to": "weather",
+        "reason": "SettingsFragment references MainViewModel"
+      },
+      {
+        "from": "weather",
+        "to": "location",
+        "reason": "DataModule references FusedLocationProvider"
+      },
+      {
+        "from": "weather",
+        "to": "location",
+        "reason": "DataModule references GeoLocationClient"
+      },
+      {
+        "from": "weather",
+        "to": "location",
+        "reason": "DataModule references GeoNamesClient"
+      },
+      {
+        "from": "weather",
+        "to": "location",
+        "reason": "DataModule references LocationProvider"
+      },
+      {
+        "from": "weather",
+        "to": "app",
+        "reason": "LineChartView references MainActivity"
+      },
+      {
+        "from": "weather",
+        "to": "location",
+        "reason": "MainViewModel references PlaceInfo"
+      },
+      {
+        "from": "weather",
+        "to": "settings",
+        "reason": "MainViewModel references SettingsFragment"
+      },
+      {
+        "from": "weather",
+        "to": "app",
+        "reason": "TodayWeatherFragment references MainActivity"
+      },
+      {
+        "from": "weather",
+        "to": "location",
+        "reason": "WeatherForecastRepository references FusedLocationProvider"
+      },
+      {
+        "from": "weather",
+        "to": "location",
+        "reason": "WeatherForecastRepository references GeoLocationClient"
+      },
+      {
+        "from": "weather",
+        "to": "location",
+        "reason": "WeatherForecastRepository references GeoNamesClient"
+      },
+      {
+        "from": "weather",
+        "to": "location",
+        "reason": "WeatherForecastRepository references LocationProvider"
+      },
+      {
+        "from": "weather",
+        "to": "location",
+        "reason": "WeatherForecastRepository references PlaceInfo"
+      },
+      {
+        "from": "app",
+        "to": "core",
+        "reason": "all business groups depend on core"
+      },
+      {
+        "from": "location",
+        "to": "core",
+        "reason": "all business groups depend on core"
+      },
+      {
+        "from": "search",
+        "to": "core",
+        "reason": "all business groups depend on core"
+      },
+      {
+        "from": "settings",
+        "to": "core",
+        "reason": "all business groups depend on core"
+      },
+      {
+        "from": "weather",
+        "to": "core",
+        "reason": "all business groups depend on core"
+      }
+    ],
+    "parallel_groups": [
+      {
+        "level": 0,
+        "features": [
+          "core"
+        ]
+      },
+      {
+        "level": 1,
+        "features": [
+          "location"
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          "app",
+          "search",
+          "settings",
+          "weather"
+        ]
+      }
+    ]
+  },
+  "feature_level_dag": {
+    "features": [
+      {
+        "id": "app",
+        "group": "app",
+        "module_name": "App",
+        "depends_on": [],
+        "depended_by": []
+      },
+      {
+        "id": "change_indicator",
+        "group": "weather",
+        "module_name": "ChangeIndicator",
+        "depends_on": [],
+        "depended_by": [
+          "open_meteo_client"
+        ]
+      },
+      {
+        "id": "connection_network_provider",
+        "group": "weather",
+        "module_name": "ConnectionNetworkProvider",
+        "depends_on": [
+          "network_checker"
+        ],
+        "depended_by": [
+          "data_module"
+        ]
+      },
+      {
+        "id": "custom_search_view",
+        "group": "search",
+        "module_name": "CustomSearchView",
+        "depends_on": [],
+        "depended_by": []
+      },
+      {
+        "id": "data_module",
+        "group": "weather",
+        "module_name": "DataModule",
+        "depends_on": [
+          "connection_network_provider",
+          "network_checker",
+          "open_meteo_client",
+          "weather_client",
+          "weather_forecast_repository"
+        ],
+        "depended_by": []
+      },
+      {
+        "id": "data_store_serializer",
+        "group": "weather",
+        "module_name": "DataStoreSerializer",
+        "depends_on": [],
+        "depended_by": []
+      },
+      {
+        "id": "fused_location_provider",
+        "group": "location",
+        "module_name": "FusedLocationProvider",
+        "depends_on": [
+          "location_provider"
+        ],
+        "depended_by": []
+      },
+      {
+        "id": "geo_location_client",
+        "group": "location",
+        "module_name": "GeoLocationClient",
+        "depends_on": [
+          "place_info"
+        ],
+        "depended_by": [
+          "geo_names_client"
+        ]
+      },
+      {
+        "id": "geo_names_client",
+        "group": "location",
+        "module_name": "GeoNamesClient",
+        "depends_on": [
+          "geo_location_client",
+          "place_info"
+        ],
+        "depended_by": []
+      },
+      {
+        "id": "hourly_temp_forecast_adapter",
+        "group": "weather",
+        "module_name": "HourlyTempForecastAdapter",
+        "depends_on": [],
+        "depended_by": [
+          "today_weather_fragment"
+        ]
+      },
+      {
+        "id": "line_chart_view",
+        "group": "weather",
+        "module_name": "LineChartView",
+        "depends_on": [],
+        "depended_by": [
+          "today_weather_fragment"
+        ]
+      },
+      {
+        "id": "list_padding_decoration",
+        "group": "weather",
+        "module_name": "ListPaddingDecoration",
+        "depends_on": [
+          "unit_converter"
+        ],
+        "depended_by": [
+          "today_weather_fragment"
+        ]
+      },
+      {
+        "id": "location_provider",
+        "group": "location",
+        "module_name": "LocationProvider",
+        "depends_on": [],
+        "depended_by": [
+          "fused_location_provider"
+        ]
+      },
+      {
+        "id": "main_activity",
+        "group": "app",
+        "module_name": "MainActivity",
+        "depends_on": [
+          "main_fragment"
+        ],
+        "depended_by": [
+          "main_fragment"
+        ]
+      },
+      {
+        "id": "main_fragment",
+        "group": "app",
+        "module_name": "MainFragment",
+        "depends_on": [
+          "main_activity"
+        ],
+        "depended_by": [
+          "main_activity"
+        ]
+      },
+      {
+        "id": "main_settings_fragment",
+        "group": "settings",
+        "module_name": "MainSettingsFragment",
+        "depends_on": [
+          "settings_fragment"
+        ],
+        "depended_by": []
+      },
+      {
+        "id": "main_view_model",
+        "group": "weather",
+        "module_name": "MainViewModel",
+        "depends_on": [
+          "network_checker",
+          "resource",
+          "unit_converter",
+          "weather_forecast_repository"
+        ],
+        "depended_by": [
+          "today_weather_fragment"
+        ]
+      },
+      {
+        "id": "network_checker",
+        "group": "weather",
+        "module_name": "NetworkChecker",
+        "depends_on": [],
+        "depended_by": [
+          "connection_network_provider",
+          "data_module",
+          "main_view_model"
+        ]
+      },
+      {
+        "id": "open_meteo_client",
+        "group": "weather",
+        "module_name": "OpenMeteoClient",
+        "depends_on": [
+          "change_indicator",
+          "weather_client",
+          "weather_code"
+        ],
+        "depended_by": [
+          "data_module"
+        ]
+      },
+      {
+        "id": "place_info",
+        "group": "location",
+        "module_name": "PlaceInfo",
+        "depends_on": [],
+        "depended_by": [
+          "geo_location_client",
+          "geo_names_client"
+        ]
+      },
+      {
+        "id": "proto_data_store_repository",
+        "group": "weather",
+        "module_name": "ProtoDataStoreRepository",
+        "depends_on": [],
+        "depended_by": [
+          "weather_forecast_repository"
+        ]
+      },
+      {
+        "id": "resource",
+        "group": "weather",
+        "module_name": "Resource",
+        "depends_on": [],
+        "depended_by": [
+          "main_view_model"
+        ]
+      },
+      {
+        "id": "search_menu_adapter",
+        "group": "search",
+        "module_name": "SearchMenuAdapter",
+        "depends_on": [],
+        "depended_by": [
+          "search_menu_fragment"
+        ]
+      },
+      {
+        "id": "search_menu_fragment",
+        "group": "search",
+        "module_name": "SearchMenuFragment",
+        "depends_on": [
+          "search_menu_adapter"
+        ],
+        "depended_by": []
+      },
+      {
+        "id": "settings_fragment",
+        "group": "settings",
+        "module_name": "SettingsFragment",
+        "depends_on": [],
+        "depended_by": [
+          "main_settings_fragment"
+        ]
+      },
+      {
+        "id": "today_weather_fragment",
+        "group": "weather",
+        "module_name": "TodayWeatherFragment",
+        "depends_on": [
+          "hourly_temp_forecast_adapter",
+          "line_chart_view",
+          "list_padding_decoration",
+          "main_view_model",
+          "unit_converter"
+        ],
+        "depended_by": []
+      },
+      {
+        "id": "unit_converter",
+        "group": "weather",
+        "module_name": "UnitConverter",
+        "depends_on": [],
+        "depended_by": [
+          "list_padding_decoration",
+          "main_view_model",
+          "today_weather_fragment"
+        ]
+      },
+      {
+        "id": "weather_client",
+        "group": "weather",
+        "module_name": "WeatherClient",
+        "depends_on": [],
+        "depended_by": [
+          "data_module",
+          "open_meteo_client",
+          "weather_forecast_repository"
+        ]
+      },
+      {
+        "id": "weather_code",
+        "group": "weather",
+        "module_name": "WeatherCode",
+        "depends_on": [],
+        "depended_by": [
+          "open_meteo_client"
+        ]
+      },
+      {
+        "id": "weather_forecast_repository",
+        "group": "weather",
+        "module_name": "WeatherForecastRepository",
+        "depends_on": [
+          "proto_data_store_repository",
+          "weather_client"
+        ],
+        "depended_by": [
+          "data_module",
+          "main_view_model"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "from": "main_activity",
+        "to": "main_fragment",
+        "type": "dependency"
+      },
+      {
+        "from": "main_fragment",
+        "to": "main_activity",
+        "type": "dependency"
+      },
+      {
+        "from": "fused_location_provider",
+        "to": "location_provider",
+        "type": "dependency"
+      },
+      {
+        "from": "geo_location_client",
+        "to": "place_info",
+        "type": "dependency"
+      },
+      {
+        "from": "geo_names_client",
+        "to": "geo_location_client",
+        "type": "dependency"
+      },
+      {
+        "from": "geo_names_client",
+        "to": "place_info",
+        "type": "dependency"
+      },
+      {
+        "from": "search_menu_fragment",
+        "to": "search_menu_adapter",
+        "type": "dependency"
+      },
+      {
+        "from": "main_settings_fragment",
+        "to": "settings_fragment",
+        "type": "dependency"
+      },
+      {
+        "from": "connection_network_provider",
+        "to": "network_checker",
+        "type": "dependency"
+      },
+      {
+        "from": "data_module",
+        "to": "connection_network_provider",
+        "type": "dependency"
+      },
+      {
+        "from": "data_module",
+        "to": "network_checker",
+        "type": "dependency"
+      },
+      {
+        "from": "data_module",
+        "to": "open_meteo_client",
+        "type": "dependency"
+      },
+      {
+        "from": "data_module",
+        "to": "weather_client",
+        "type": "dependency"
+      },
+      {
+        "from": "data_module",
+        "to": "weather_forecast_repository",
+        "type": "dependency"
+      },
+      {
+        "from": "list_padding_decoration",
+        "to": "unit_converter",
+        "type": "dependency"
+      },
+      {
+        "from": "main_view_model",
+        "to": "network_checker",
+        "type": "dependency"
+      },
+      {
+        "from": "main_view_model",
+        "to": "resource",
+        "type": "dependency"
+      },
+      {
+        "from": "main_view_model",
+        "to": "unit_converter",
+        "type": "dependency"
+      },
+      {
+        "from": "main_view_model",
+        "to": "weather_forecast_repository",
+        "type": "dependency"
+      },
+      {
+        "from": "open_meteo_client",
+        "to": "change_indicator",
+        "type": "dependency"
+      },
+      {
+        "from": "open_meteo_client",
+        "to": "weather_client",
+        "type": "dependency"
+      },
+      {
+        "from": "open_meteo_client",
+        "to": "weather_code",
+        "type": "dependency"
+      },
+      {
+        "from": "today_weather_fragment",
+        "to": "hourly_temp_forecast_adapter",
+        "type": "dependency"
+      },
+      {
+        "from": "today_weather_fragment",
+        "to": "line_chart_view",
+        "type": "dependency"
+      },
+      {
+        "from": "today_weather_fragment",
+        "to": "list_padding_decoration",
+        "type": "dependency"
+      },
+      {
+        "from": "today_weather_fragment",
+        "to": "main_view_model",
+        "type": "dependency"
+      },
+      {
+        "from": "today_weather_fragment",
+        "to": "unit_converter",
+        "type": "dependency"
+      },
+      {
+        "from": "weather_forecast_repository",
+        "to": "proto_data_store_repository",
+        "type": "dependency"
+      },
+      {
+        "from": "weather_forecast_repository",
+        "to": "weather_client",
+        "type": "dependency"
+      },
+      {
+        "from": "main_activity",
+        "to": "main_fragment",
+        "type": "module_import"
+      },
+      {
+        "from": "main_fragment",
+        "to": "main_activity",
+        "type": "module_import"
+      },
+      {
+        "from": "fused_location_provider",
+        "to": "location_provider",
+        "type": "module_import"
+      },
+      {
+        "from": "geo_location_client",
+        "to": "place_info",
+        "type": "module_import"
+      },
+      {
+        "from": "geo_names_client",
+        "to": "geo_location_client",
+        "type": "module_import"
+      },
+      {
+        "from": "geo_names_client",
+        "to": "place_info",
+        "type": "module_import"
+      },
+      {
+        "from": "search_menu_fragment",
+        "to": "search_menu_adapter",
+        "type": "module_import"
+      },
+      {
+        "from": "main_settings_fragment",
+        "to": "settings_fragment",
+        "type": "module_import"
+      },
+      {
+        "from": "connection_network_provider",
+        "to": "network_checker",
+        "type": "module_import"
+      },
+      {
+        "from": "data_module",
+        "to": "connection_network_provider",
+        "type": "module_import"
+      },
+      {
+        "from": "data_module",
+        "to": "network_checker",
+        "type": "module_import"
+      },
+      {
+        "from": "data_module",
+        "to": "open_meteo_client",
+        "type": "module_import"
+      },
+      {
+        "from": "data_module",
+        "to": "weather_client",
+        "type": "module_import"
+      },
+      {
+        "from": "data_module",
+        "to": "weather_forecast_repository",
+        "type": "module_import"
+      },
+      {
+        "from": "list_padding_decoration",
+        "to": "unit_converter",
+        "type": "module_import"
+      },
+      {
+        "from": "main_view_model",
+        "to": "network_checker",
+        "type": "module_import"
+      },
+      {
+        "from": "main_view_model",
+        "to": "resource",
+        "type": "module_import"
+      },
+      {
+        "from": "main_view_model",
+        "to": "unit_converter",
+        "type": "module_import"
+      },
+      {
+        "from": "main_view_model",
+        "to": "weather_forecast_repository",
+        "type": "module_import"
+      },
+      {
+        "from": "open_meteo_client",
+        "to": "change_indicator",
+        "type": "module_import"
+      },
+      {
+        "from": "open_meteo_client",
+        "to": "weather_client",
+        "type": "module_import"
+      },
+      {
+        "from": "open_meteo_client",
+        "to": "weather_code",
+        "type": "module_import"
+      },
+      {
+        "from": "today_weather_fragment",
+        "to": "hourly_temp_forecast_adapter",
+        "type": "module_import"
+      },
+      {
+        "from": "today_weather_fragment",
+        "to": "line_chart_view",
+        "type": "module_import"
+      },
+      {
+        "from": "today_weather_fragment",
+        "to": "list_padding_decoration",
+        "type": "module_import"
+      },
+      {
+        "from": "today_weather_fragment",
+        "to": "main_view_model",
+        "type": "module_import"
+      },
+      {
+        "from": "today_weather_fragment",
+        "to": "unit_converter",
+        "type": "module_import"
+      },
+      {
+        "from": "weather_forecast_repository",
+        "to": "proto_data_store_repository",
+        "type": "module_import"
+      },
+      {
+        "from": "weather_forecast_repository",
+        "to": "weather_client",
+        "type": "module_import"
+      }
+    ],
+    "parallel_features": [
+      {
+        "level": 0,
+        "features": [
+          "app",
+          "change_indicator",
+          "custom_search_view",
+          "data_store_serializer",
+          "hourly_temp_forecast_adapter",
+          "line_chart_view",
+          "location_provider",
+          "network_checker",
+          "place_info",
+          "proto_data_store_repository",
+          "resource",
+          "search_menu_adapter",
+          "settings_fragment",
+          "unit_converter",
+          "weather_client",
+          "weather_code"
+        ]
+      },
+      {
+        "level": 1,
+        "features": [
+          "connection_network_provider",
+          "fused_location_provider",
+          "geo_location_client",
+          "list_padding_decoration",
+          "main_settings_fragment",
+          "open_meteo_client",
+          "search_menu_fragment",
+          "weather_forecast_repository"
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          "data_module",
+          "geo_names_client",
+          "main_view_model"
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          "today_weather_fragment"
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          "main_activity",
+          "main_fragment"
+        ]
+      }
+    ],
+    "intra_group_levels": {
+      "app": [
+        {
+          "level": 0,
+          "features": [
+            "app"
+          ]
+        },
+        {
+          "level": 1,
+          "features": [
+            "main_activity",
+            "main_fragment"
+          ]
+        }
+      ],
+      "weather": [
+        {
+          "level": 0,
+          "features": [
+            "change_indicator",
+            "data_store_serializer",
+            "hourly_temp_forecast_adapter",
+            "line_chart_view",
+            "network_checker",
+            "proto_data_store_repository",
+            "resource",
+            "unit_converter",
+            "weather_client",
+            "weather_code"
+          ]
+        },
+        {
+          "level": 1,
+          "features": [
+            "connection_network_provider",
+            "list_padding_decoration",
+            "open_meteo_client",
+            "weather_forecast_repository"
+          ]
+        },
+        {
+          "level": 2,
+          "features": [
+            "data_module",
+            "main_view_model"
+          ]
+        },
+        {
+          "level": 3,
+          "features": [
+            "today_weather_fragment"
+          ]
+        }
+      ],
+      "search": [
+        {
+          "level": 0,
+          "features": [
+            "custom_search_view",
+            "search_menu_adapter"
+          ]
+        },
+        {
+          "level": 1,
+          "features": [
+            "search_menu_fragment"
+          ]
+        }
+      ],
+      "location": [
+        {
+          "level": 0,
+          "features": [
+            "location_provider",
+            "place_info"
+          ]
+        },
+        {
+          "level": 1,
+          "features": [
+            "fused_location_provider",
+            "geo_location_client"
+          ]
+        },
+        {
+          "level": 2,
+          "features": [
+            "geo_names_client"
+          ]
+        }
+      ],
+      "settings": [
+        {
+          "level": 0,
+          "features": [
+            "settings_fragment"
+          ]
+        },
+        {
+          "level": 1,
+          "features": [
+            "main_settings_fragment"
+          ]
+        }
+      ]
+    },
+    "id_collisions": [],
+    "merged_id_collisions": []
+  },
+  "merge_warnings": [
+    {
+      "features": [
+        "app",
+        "custom_search_view"
+      ],
+      "shared_cj_files": [
+        "index.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "app 先合并，custom_search_view 后合并时 rebase"
+    },
+    {
+      "features": [
+        "app",
+        "line_chart_view"
+      ],
+      "shared_cj_files": [
+        "index.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "app 先合并，line_chart_view 后合并时 rebase"
+    },
+    {
+      "features": [
+        "app",
+        "main_activity"
+      ],
+      "shared_cj_files": [
+        "ability_mainability_entry.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "app 先合并，main_activity 后合并时 rebase"
+    },
+    {
+      "features": [
+        "app",
+        "main_fragment"
+      ],
+      "shared_cj_files": [
+        "ability_mainability_entry.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "app 先合并，main_fragment 后合并时 rebase"
+    },
+    {
+      "features": [
+        "app",
+        "main_settings_fragment"
+      ],
+      "shared_cj_files": [
+        "ability_mainability_entry.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "app 先合并，main_settings_fragment 后合并时 rebase"
+    },
+    {
+      "features": [
+        "app",
+        "main_view_model"
+      ],
+      "shared_cj_files": [
+        "ability_mainability_entry.cj",
+        "index.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "high",
+      "merge_suggestion": "app 先合并，main_view_model 后合并时 rebase"
+    },
+    {
+      "features": [
+        "app",
+        "place_info"
+      ],
+      "shared_cj_files": [
+        "ability_stage.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "app 先合并，place_info 后合并时 rebase"
+    },
+    {
+      "features": [
+        "app",
+        "unit_converter"
+      ],
+      "shared_cj_files": [
+        "ability_stage.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "app 先合并，unit_converter 后合并时 rebase"
+    },
+    {
+      "features": [
+        "custom_search_view",
+        "line_chart_view"
+      ],
+      "shared_cj_files": [
+        "index.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "custom_search_view 先合并，line_chart_view 后合并时 rebase"
+    },
+    {
+      "features": [
+        "custom_search_view",
+        "main_activity"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "custom_search_view 先合并，main_activity 后合并时 rebase"
+    },
+    {
+      "features": [
+        "custom_search_view",
+        "main_fragment"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "custom_search_view 先合并，main_fragment 后合并时 rebase"
+    },
+    {
+      "features": [
+        "custom_search_view",
+        "main_settings_fragment"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "custom_search_view 先合并，main_settings_fragment 后合并时 rebase"
+    },
+    {
+      "features": [
+        "custom_search_view",
+        "main_view_model"
+      ],
+      "shared_cj_files": [
+        "index.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "custom_search_view 先合并，main_view_model 后合并时 rebase"
+    },
+    {
+      "features": [
+        "custom_search_view",
+        "place_info"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "custom_search_view 先合并，place_info 后合并时 rebase"
+    },
+    {
+      "features": [
+        "custom_search_view",
+        "unit_converter"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "custom_search_view 先合并，unit_converter 后合并时 rebase"
+    },
+    {
+      "features": [
+        "line_chart_view",
+        "main_activity"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "line_chart_view 先合并，main_activity 后合并时 rebase"
+    },
+    {
+      "features": [
+        "line_chart_view",
+        "main_fragment"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "line_chart_view 先合并，main_fragment 后合并时 rebase"
+    },
+    {
+      "features": [
+        "line_chart_view",
+        "main_settings_fragment"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "line_chart_view 先合并，main_settings_fragment 后合并时 rebase"
+    },
+    {
+      "features": [
+        "line_chart_view",
+        "main_view_model"
+      ],
+      "shared_cj_files": [
+        "index.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "line_chart_view 先合并，main_view_model 后合并时 rebase"
+    },
+    {
+      "features": [
+        "line_chart_view",
+        "place_info"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "line_chart_view 先合并，place_info 后合并时 rebase"
+    },
+    {
+      "features": [
+        "line_chart_view",
+        "unit_converter"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "line_chart_view 先合并，unit_converter 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_activity",
+        "main_fragment"
+      ],
+      "shared_cj_files": [
+        "ability_mainability_entry.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_activity 先合并，main_fragment 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_activity",
+        "main_settings_fragment"
+      ],
+      "shared_cj_files": [
+        "ability_mainability_entry.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_activity 先合并，main_settings_fragment 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_activity",
+        "main_view_model"
+      ],
+      "shared_cj_files": [
+        "ability_mainability_entry.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_activity 先合并，main_view_model 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_activity",
+        "place_info"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_activity 先合并，place_info 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_activity",
+        "unit_converter"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_activity 先合并，unit_converter 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_fragment",
+        "main_settings_fragment"
+      ],
+      "shared_cj_files": [
+        "ability_mainability_entry.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_fragment 先合并，main_settings_fragment 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_fragment",
+        "main_view_model"
+      ],
+      "shared_cj_files": [
+        "ability_mainability_entry.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_fragment 先合并，main_view_model 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_fragment",
+        "place_info"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_fragment 先合并，place_info 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_fragment",
+        "unit_converter"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_fragment 先合并，unit_converter 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_settings_fragment",
+        "main_view_model"
+      ],
+      "shared_cj_files": [
+        "ability_mainability_entry.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_settings_fragment 先合并，main_view_model 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_settings_fragment",
+        "place_info"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_settings_fragment 先合并，place_info 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_settings_fragment",
+        "unit_converter"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_settings_fragment 先合并，unit_converter 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_view_model",
+        "place_info"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_view_model 先合并，place_info 后合并时 rebase"
+    },
+    {
+      "features": [
+        "main_view_model",
+        "unit_converter"
+      ],
+      "shared_cj_files": [
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "main_view_model 先合并，unit_converter 后合并时 rebase"
+    },
+    {
+      "features": [
+        "place_info",
+        "unit_converter"
+      ],
+      "shared_cj_files": [
+        "ability_stage.cj",
+        "main_ability.cj"
+      ],
+      "conflict_likelihood": "low",
+      "merge_suggestion": "place_info 先合并，unit_converter 后合并时 rebase"
+    }
+  ],
+  "stats": {
+    "total_groups": 6,
+    "total_features": 30,
+    "total_group_edges": 33,
+    "total_feature_edges": 58,
+    "feature_id_collisions": 0,
+    "merged_feature_id_collisions": 0,
+    "total_merge_warnings": 36
+  }
+}

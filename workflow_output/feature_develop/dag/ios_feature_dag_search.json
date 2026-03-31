@@ -1,0 +1,49 @@
+{
+  "analysis_type": "detail",
+  "group": "search",
+  "module_count": 3,
+  "features": [
+    {
+      "suggested_id": "custom_search_view",
+      "module_name": "CustomSearchView",
+      "ios_classes": [],
+      "total_classes": 1,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "search_menu_adapter",
+      "module_name": "SearchMenuAdapter",
+      "ios_classes": [],
+      "total_classes": 5,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "search_menu_fragment",
+      "module_name": "SearchMenuFragment",
+      "ios_classes": [
+        "SearchMenuFragment"
+      ],
+      "total_classes": 1,
+      "depends_on_features": [
+        "search_menu_adapter"
+      ],
+      "depends_on_modules": [
+        "SearchMenuAdapter"
+      ]
+    }
+  ],
+  "feature_edges": [
+    {
+      "from": "search_menu_fragment",
+      "to": "search_menu_adapter",
+      "type": "module_import"
+    }
+  ],
+  "class_summary": {
+    "CustomSearchView": 1,
+    "SearchMenuAdapter": 5,
+    "SearchMenuFragment": 1
+  }
+}

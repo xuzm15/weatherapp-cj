@@ -1,0 +1,224 @@
+{
+  "feature_groups": [
+    {
+      "id": "location",
+      "name": "location",
+      "level": 1,
+      "features": [
+        "fused_location_provider",
+        "geo_location_client",
+        "geo_names_client",
+        "location_provider",
+        "place_info"
+      ],
+      "development_order": [
+        {
+          "level": 0,
+          "features": [
+            "location_provider",
+            "place_info"
+          ]
+        },
+        {
+          "level": 1,
+          "features": [
+            "fused_location_provider",
+            "geo_location_client"
+          ]
+        },
+        {
+          "level": 2,
+          "features": [
+            "geo_names_client"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "app",
+      "name": "app",
+      "level": 2,
+      "features": [
+        "app",
+        "main_activity",
+        "main_fragment"
+      ],
+      "development_order": [
+        {
+          "level": 0,
+          "features": [
+            "app"
+          ]
+        },
+        {
+          "level": 1,
+          "features": [
+            "main_activity",
+            "main_fragment"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "search",
+      "name": "search",
+      "level": 2,
+      "features": [
+        "custom_search_view",
+        "search_menu_adapter",
+        "search_menu_fragment"
+      ],
+      "development_order": [
+        {
+          "level": 0,
+          "features": [
+            "custom_search_view",
+            "search_menu_adapter"
+          ]
+        },
+        {
+          "level": 1,
+          "features": [
+            "search_menu_fragment"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "name": "settings",
+      "level": 2,
+      "features": [
+        "main_settings_fragment",
+        "settings_fragment"
+      ],
+      "development_order": [
+        {
+          "level": 0,
+          "features": [
+            "settings_fragment"
+          ]
+        },
+        {
+          "level": 1,
+          "features": [
+            "main_settings_fragment"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "weather",
+      "name": "weather",
+      "level": 2,
+      "features": [
+        "change_indicator",
+        "connection_network_provider",
+        "data_module",
+        "data_store_serializer",
+        "hourly_temp_forecast_adapter",
+        "line_chart_view",
+        "list_padding_decoration",
+        "main_view_model",
+        "network_checker",
+        "open_meteo_client",
+        "proto_data_store_repository",
+        "resource",
+        "today_weather_fragment",
+        "unit_converter",
+        "weather_client",
+        "weather_code",
+        "weather_forecast_repository"
+      ],
+      "development_order": [
+        {
+          "level": 0,
+          "features": [
+            "change_indicator",
+            "data_store_serializer",
+            "hourly_temp_forecast_adapter",
+            "line_chart_view",
+            "network_checker",
+            "proto_data_store_repository",
+            "resource",
+            "unit_converter",
+            "weather_client",
+            "weather_code"
+          ]
+        },
+        {
+          "level": 1,
+          "features": [
+            "connection_network_provider",
+            "list_padding_decoration",
+            "open_meteo_client",
+            "weather_forecast_repository"
+          ]
+        },
+        {
+          "level": 2,
+          "features": [
+            "data_module",
+            "main_view_model"
+          ]
+        },
+        {
+          "level": 3,
+          "features": [
+            "today_weather_fragment"
+          ]
+        }
+      ]
+    }
+  ],
+  "execution_policy": {
+    "core_bootstrap": {
+      "enabled": true,
+      "mode": "milestone",
+      "group_id": "core",
+      "required_features": []
+    }
+  },
+  "features": {
+    "app": "features/app/app/app.json",
+    "change_indicator": "features/weather/change_indicator/change_indicator.json",
+    "connection_network_provider": "features/weather/connection_network_provider/connection_network_provider.json",
+    "custom_search_view": "features/search/custom_search_view/custom_search_view.json",
+    "data_module": "features/weather/data_module/data_module.json",
+    "data_store_serializer": "features/weather/data_store_serializer/data_store_serializer.json",
+    "fused_location_provider": "features/location/fused_location_provider/fused_location_provider.json",
+    "geo_location_client": "features/location/geo_location_client/geo_location_client.json",
+    "geo_names_client": "features/location/geo_names_client/geo_names_client.json",
+    "hourly_temp_forecast_adapter": "features/weather/hourly_temp_forecast_adapter/hourly_temp_forecast_adapter.json",
+    "line_chart_view": "features/weather/line_chart_view/line_chart_view.json",
+    "list_padding_decoration": "features/weather/list_padding_decoration/list_padding_decoration.json",
+    "location_provider": "features/location/location_provider/location_provider.json",
+    "main_activity": "features/app/main_activity/main_activity.json",
+    "main_fragment": "features/app/main_fragment/main_fragment.json",
+    "main_settings_fragment": "features/settings/main_settings_fragment/main_settings_fragment.json",
+    "main_view_model": "features/weather/main_view_model/main_view_model.json",
+    "network_checker": "features/weather/network_checker/network_checker.json",
+    "open_meteo_client": "features/weather/open_meteo_client/open_meteo_client.json",
+    "place_info": "features/location/place_info/place_info.json",
+    "proto_data_store_repository": "features/weather/proto_data_store_repository/proto_data_store_repository.json",
+    "resource": "features/weather/resource/resource.json",
+    "search_menu_adapter": "features/search/search_menu_adapter/search_menu_adapter.json",
+    "search_menu_fragment": "features/search/search_menu_fragment/search_menu_fragment.json",
+    "settings_fragment": "features/settings/settings_fragment/settings_fragment.json",
+    "today_weather_fragment": "features/weather/today_weather_fragment/today_weather_fragment.json",
+    "unit_converter": "features/weather/unit_converter/unit_converter.json",
+    "weather_client": "features/weather/weather_client/weather_client.json",
+    "weather_code": "features/weather/weather_code/weather_code.json",
+    "weather_forecast_repository": "features/weather/weather_forecast_repository/weather_forecast_repository.json"
+  },
+  "dag_ref": "dag/dag_final.json",
+  "feature_states": {},
+  "stats": {
+    "total": 30,
+    "completed": 0,
+    "in_progress": 0,
+    "pending": 30,
+    "review_pending": 0,
+    "failed": 0
+  }
+}

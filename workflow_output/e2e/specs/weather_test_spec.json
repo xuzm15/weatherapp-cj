@@ -1,0 +1,389 @@
+{
+  "group_id": "weather",
+  "generated_at": "2026-03-31T16:26:58.934861",
+  "feature_ids": [
+    "change_indicator",
+    "connection_network_provider",
+    "data_module",
+    "data_store_serializer",
+    "hourly_temp_forecast_adapter",
+    "line_chart_view",
+    "list_padding_decoration",
+    "main_view_model",
+    "network_checker",
+    "open_meteo_client",
+    "proto_data_store_repository",
+    "resource",
+    "today_weather_fragment",
+    "unit_converter",
+    "weather_client",
+    "weather_code",
+    "weather_forecast_repository"
+  ],
+  "focus_files": [
+    "services/ChangeIndicatorService.cj",
+    "services/ConnectionNetworkProviderService.cj",
+    "foundation/DataModule.cj",
+    "services/DataStoreSerializerService.cj",
+    "components/HourlyTempForecastAdapterComponent.cj",
+    "components/LineChartViewComponent.cj",
+    "services/ListPaddingDecorationService.cj",
+    "services/MainViewModelService.cj",
+    "services/NetworkCheckerService.cj",
+    "services/OpenMeteoClientService.cj",
+    "services/ProtoDataStoreRepositoryService.cj",
+    "services/ResourceService.cj",
+    "features/TodayWeatherFragmentInteractor.cj",
+    "features/TodayWeatherFragmentView.cj",
+    "features/TodayWeatherFragmentRouter.cj",
+    "services/UnitConverterService.cj",
+    "services/WeatherClientService.cj",
+    "services/WeatherCodeService.cj",
+    "services/WeatherForecastRepositoryService.cj"
+  ],
+  "features": [
+    {
+      "feature_id": "change_indicator",
+      "name": "Change Indicator",
+      "files": [
+        "services/ChangeIndicatorService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/util/ChangeIndicator.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "connection_network_provider",
+      "name": "Connection Network Provider",
+      "files": [
+        "services/ConnectionNetworkProviderService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/network/ConnectionNetworkProvider.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "data_module",
+      "name": "Data Module",
+      "files": [
+        "foundation/DataModule.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/di/DataModule.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "data_store_serializer",
+      "name": "Data Store Serializer",
+      "files": [
+        "services/DataStoreSerializerService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/data/store/DataStoreSerializer.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "hourly_temp_forecast_adapter",
+      "name": "Hourly Temp Forecast Adapter",
+      "files": [
+        "components/HourlyTempForecastAdapterComponent.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/ui/adapter/HourlyTempForecastAdapter.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "line_chart_view",
+      "name": "Line Chart View",
+      "files": [
+        "components/LineChartViewComponent.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/ui/view/LineChartView.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "list_padding_decoration",
+      "name": "List Padding Decoration",
+      "files": [
+        "services/ListPaddingDecorationService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/ui/adapter/decoration/ListPaddingDecoration.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "main_view_model",
+      "name": "Main View Model",
+      "files": [
+        "services/MainViewModelService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/ui/viewmodel/MainViewModel.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "network_checker",
+      "name": "Network Checker",
+      "files": [
+        "services/NetworkCheckerService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/network/NetworkChecker.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "open_meteo_client",
+      "name": "Open Meteo Client",
+      "files": [
+        "services/OpenMeteoClientService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/data/api/OpenMeteoClient.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "proto_data_store_repository",
+      "name": "Proto Data Store Repository",
+      "files": [
+        "services/ProtoDataStoreRepositoryService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/data/repository/ProtoDataStoreRepository.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "resource",
+      "name": "Resource",
+      "files": [
+        "services/ResourceService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/util/Resource.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "today_weather_fragment",
+      "name": "Today Weather Fragment",
+      "files": [
+        "features/TodayWeatherFragmentInteractor.cj",
+        "features/TodayWeatherFragmentView.cj",
+        "features/TodayWeatherFragmentRouter.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "UI 层通过业务逻辑层完成真实渲染与交互",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/ui/fragment/TodayWeatherFragment.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "unit_converter",
+      "name": "Unit Converter",
+      "files": [
+        "services/UnitConverterService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/util/UnitConverter.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "weather_client",
+      "name": "Weather Client",
+      "files": [
+        "services/WeatherClientService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/data/api/WeatherClient.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "weather_code",
+      "name": "Weather Code",
+      "files": [
+        "services/WeatherCodeService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/util/WeatherCode.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "weather_forecast_repository",
+      "name": "Weather Forecast Repository",
+      "files": [
+        "services/WeatherForecastRepositoryService.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/data/repository/WeatherForecastRepository.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    }
+  ]
+}

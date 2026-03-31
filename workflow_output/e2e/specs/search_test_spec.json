@@ -1,0 +1,81 @@
+{
+  "group_id": "search",
+  "generated_at": "2026-03-31T16:26:58.933967",
+  "feature_ids": [
+    "custom_search_view",
+    "search_menu_adapter",
+    "search_menu_fragment"
+  ],
+  "focus_files": [
+    "components/CustomSearchViewComponent.cj",
+    "components/SearchMenuAdapterComponent.cj",
+    "features/SearchMenuFragmentInteractor.cj",
+    "features/SearchMenuFragmentView.cj",
+    "features/SearchMenuFragmentRouter.cj"
+  ],
+  "features": [
+    {
+      "feature_id": "custom_search_view",
+      "name": "Custom Search View",
+      "files": [
+        "components/CustomSearchViewComponent.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/ui/view/CustomSearchView.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "search_menu_adapter",
+      "name": "Search Menu Adapter",
+      "files": [
+        "components/SearchMenuAdapterComponent.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/ui/adapter/SearchMenuAdapter.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "search_menu_fragment",
+      "name": "Search Menu Fragment",
+      "files": [
+        "features/SearchMenuFragmentInteractor.cj",
+        "features/SearchMenuFragmentView.cj",
+        "features/SearchMenuFragmentRouter.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "UI 层通过业务逻辑层完成真实渲染与交互",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/ui/fragment/SearchMenuFragment.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    }
+  ]
+}

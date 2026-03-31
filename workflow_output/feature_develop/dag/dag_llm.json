@@ -1,0 +1,34 @@
+{
+  "review_type": "dag_review",
+  "reviewed_at": "2026-03-31T08:02:51Z",
+  "group_adjustments": [
+    {
+      "action": "split",
+      "groups": [
+        "app",
+        "weather"
+      ],
+      "new_name": "weather_dashboard",
+      "reason": "MainFragment is the real weather dashboard container and is semantically closer to the weather flow than to pure app bootstrap. Keep App and MainActivity as app entry wiring, and treat MainFragment as weather-facing UI in later feature refinement."
+    }
+  ],
+  "semantic_edges": [
+    {
+      "from": "search",
+      "to": "weather",
+      "reason": "SearchMenuFragment updates location and triggers the main weather refresh flow through MainViewModel."
+    },
+    {
+      "from": "settings",
+      "to": "weather",
+      "reason": "Settings changes update units and locale, then refresh weather-related presentation and fetched place/weather data."
+    },
+    {
+      "from": "weather",
+      "to": "location",
+      "reason": "Weather forecast requests and nearest-place resolution both rely on the location and geocoding layer."
+    }
+  ],
+  "sub_feature_decomposition": {},
+  "notes": "Current generic_android v1 decomposition already separates the source into app, weather, search, settings, and location groups. No module exceeds the decomposition threshold because the Android fallback currently treats each Java source file as a module. Prefer validating the first dag_final.json before introducing deeper Android-specific sub-feature splitting."
+}

@@ -1,0 +1,86 @@
+{
+  "group_id": "app",
+  "generated_at": "2026-03-31T16:26:58.933778",
+  "feature_ids": [
+    "app",
+    "main_activity",
+    "main_fragment"
+  ],
+  "focus_files": [
+    "foundation/App.cj",
+    "features/MainActivityInteractor.cj",
+    "features/MainActivityView.cj",
+    "features/MainActivityRouter.cj",
+    "features/MainFragmentInteractor.cj",
+    "features/MainFragmentView.cj",
+    "features/MainFragmentRouter.cj"
+  ],
+  "features": [
+    {
+      "feature_id": "app",
+      "name": "App",
+      "files": [
+        "foundation/App.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/App.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "main_activity",
+      "name": "Main Activity",
+      "files": [
+        "features/MainActivityInteractor.cj",
+        "features/MainActivityView.cj",
+        "features/MainActivityRouter.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "UI 层通过业务逻辑层完成真实渲染与交互",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/ui/MainActivity.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    },
+    {
+      "feature_id": "main_fragment",
+      "name": "Main Fragment",
+      "files": [
+        "features/MainFragmentInteractor.cj",
+        "features/MainFragmentView.cj",
+        "features/MainFragmentRouter.cj"
+      ],
+      "code_acceptance": [
+        "核心实现层提供真实的业务逻辑，非 mock/stub",
+        "UI 层通过业务逻辑层完成真实渲染与交互",
+        "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+        "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+        "对照源文件中的核心功能，实现覆盖率 >= 80%"
+      ],
+      "source_reference": {
+        "source_files": [
+          "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainFragment.java"
+        ],
+        "tl_methods": [],
+        "cangjie_patterns": []
+      }
+    }
+  ]
+}

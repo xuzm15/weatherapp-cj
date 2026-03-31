@@ -1,0 +1,42 @@
+{
+  "analysis_type": "detail",
+  "group": "settings",
+  "module_count": 2,
+  "features": [
+    {
+      "suggested_id": "main_settings_fragment",
+      "module_name": "MainSettingsFragment",
+      "ios_classes": [
+        "MainSettingsFragment"
+      ],
+      "total_classes": 1,
+      "depends_on_features": [
+        "settings_fragment"
+      ],
+      "depends_on_modules": [
+        "SettingsFragment"
+      ]
+    },
+    {
+      "suggested_id": "settings_fragment",
+      "module_name": "SettingsFragment",
+      "ios_classes": [
+        "SettingsFragment"
+      ],
+      "total_classes": 1,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    }
+  ],
+  "feature_edges": [
+    {
+      "from": "main_settings_fragment",
+      "to": "settings_fragment",
+      "type": "module_import"
+    }
+  ],
+  "class_summary": {
+    "MainSettingsFragment": 1,
+    "SettingsFragment": 1
+  }
+}

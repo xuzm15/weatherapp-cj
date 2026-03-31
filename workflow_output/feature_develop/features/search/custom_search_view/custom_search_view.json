@@ -1,0 +1,62 @@
+{
+  "id": "custom_search_view",
+  "name": "Custom Search View",
+  "group": "search",
+  "module": "CustomSearchView",
+  "implementation_kind": "local_state",
+  "conversion": {
+    "mode": "llm-only"
+  },
+  "context": {
+    "current_state": "unknown",
+    "problem": "",
+    "target": "",
+    "source_reference": {
+      "source_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/view/CustomSearchView.java"
+      ],
+      "tl_methods": [],
+      "cangjie_patterns": []
+    }
+  },
+  "depends_on": [],
+  "gap_analysis": {
+    "matched_files": [],
+    "related_file_list": []
+  },
+  "tasks": [
+    {
+      "id": "CSV-IMPL-1",
+      "name": "Custom Search View 组件实现",
+      "type": "implementation",
+      "description": "实现 CustomSearchView UI 组件",
+      "status": "pending",
+      "depends_on": [],
+      "files": [
+        "components/CustomSearchViewComponent.cj"
+      ],
+      "reference_files": [
+        "app/src/main/java/com/wemaka/weatherapp/ui/view/CustomSearchView.java"
+      ]
+    }
+  ],
+  "code_acceptance": [
+    "核心实现层提供真实的业务逻辑，非 mock/stub",
+    "所有 onClick/onChange 回调有实际逻辑，非空 {} 或仅 print",
+    "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
+    "对照源文件中的核心功能，实现覆盖率 >= 80%"
+  ],
+  "api_backfill": [],
+  "review": {
+    "issues": [],
+    "passed_checks": [],
+    "reviewed_at": null
+  },
+  "human_issues": [],
+  "status": "pending",
+  "timestamps": {
+    "created_at": "2026-03-31T16:09:19.630166",
+    "started_at": null,
+    "completed_at": null
+  }
+}

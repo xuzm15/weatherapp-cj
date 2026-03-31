@@ -1,0 +1,94 @@
+{
+  "analysis_type": "detail",
+  "group": "location",
+  "module_count": 5,
+  "features": [
+    {
+      "suggested_id": "fused_location_provider",
+      "module_name": "FusedLocationProvider",
+      "ios_classes": [
+        "FusedLocationProvider"
+      ],
+      "total_classes": 1,
+      "depends_on_features": [
+        "location_provider"
+      ],
+      "depends_on_modules": [
+        "LocationProvider"
+      ]
+    },
+    {
+      "suggested_id": "geo_location_client",
+      "module_name": "GeoLocationClient",
+      "ios_classes": [],
+      "total_classes": 1,
+      "depends_on_features": [
+        "place_info"
+      ],
+      "depends_on_modules": [
+        "PlaceInfo"
+      ]
+    },
+    {
+      "suggested_id": "geo_names_client",
+      "module_name": "GeoNamesClient",
+      "ios_classes": [
+        "GeoNamesClient"
+      ],
+      "total_classes": 1,
+      "depends_on_features": [
+        "geo_location_client",
+        "place_info"
+      ],
+      "depends_on_modules": [
+        "GeoLocationClient",
+        "PlaceInfo"
+      ]
+    },
+    {
+      "suggested_id": "location_provider",
+      "module_name": "LocationProvider",
+      "ios_classes": [],
+      "total_classes": 1,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    },
+    {
+      "suggested_id": "place_info",
+      "module_name": "PlaceInfo",
+      "ios_classes": [],
+      "total_classes": 1,
+      "depends_on_features": [],
+      "depends_on_modules": []
+    }
+  ],
+  "feature_edges": [
+    {
+      "from": "fused_location_provider",
+      "to": "location_provider",
+      "type": "module_import"
+    },
+    {
+      "from": "geo_location_client",
+      "to": "place_info",
+      "type": "module_import"
+    },
+    {
+      "from": "geo_names_client",
+      "to": "geo_location_client",
+      "type": "module_import"
+    },
+    {
+      "from": "geo_names_client",
+      "to": "place_info",
+      "type": "module_import"
+    }
+  ],
+  "class_summary": {
+    "FusedLocationProvider": 1,
+    "GeoLocationClient": 1,
+    "GeoNamesClient": 1,
+    "LocationProvider": 1,
+    "PlaceInfo": 1
+  }
+}
