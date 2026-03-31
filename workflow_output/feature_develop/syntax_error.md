@@ -35,3 +35,9 @@
 - **错误信息**: `non-exhaustive patterns` / `_ is not covered`
 - **修复方式**: 增加 `case _ => ...` 处理 SDK 中 `HttpData` 的 `| ...` 扩展变体
 - **发现于**: geo_location_client, 2026-03-31
+
+## 字符串下标 `body[pos]` 为 UInt8，不可与字符字面量直接比较
+- **触发条件**: `body[pos] == ']'`、`c == '{'` 等写法（`body[pos]` 类型为 `UInt8`）
+- **错误信息**: `invalid binary operator '==' on type 'UInt8' and 'Struct-String'`
+- **修复方式**: 使用 `Int64(body[pos]) == 93`（`]`）、`123`（`{`）、`125`（`}`）等与整数码点比较
+- **发现于**: geo_names_client, 2026-03-31
