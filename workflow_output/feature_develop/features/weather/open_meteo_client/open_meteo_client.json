@@ -8,9 +8,9 @@
     "mode": "llm-only"
   },
   "context": {
-    "current_state": "unknown",
+    "current_state": "OpenMeteoWeatherClient 已按 Android OpenMeteoClient 增强：URL 参数、minutely/hourly/daily 解析、24h 变化箭头、UV、逐时降水与昼夜高低温。",
     "problem": "",
-    "target": "",
+    "target": "真实 HTTP + JSON 解析，无 mock；与 Android 字段与索引策略对齐。",
     "source_reference": {
       "source_files": [
         "app/src/main/java/com/wemaka/weatherapp/data/api/OpenMeteoClient.java"
@@ -37,7 +37,7 @@
       "status": "completed",
       "depends_on": [],
       "files": [
-        "services/OpenMeteoClientService.cj"
+        "services/WeatherClient.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/data/api/OpenMeteoClient.java"
@@ -58,11 +58,11 @@
     "status": "review_pending"
   },
   "human_issues": [],
-  "status": "review_pending",
+  "status": "completed",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.674897",
-    "started_at": "2026-03-31T18:03:03",
-    "completed_at": null,
+    "started_at": "2026-03-31T18:03:00.000000",
+    "completed_at": "2026-03-31T18:06:00.000000",
     "review_requested_at": "2026-03-31T18:06:07"
   }
 }
