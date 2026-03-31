@@ -549,13 +549,26 @@
         "base_branch": "main",
         "base_branch_merged": true
       }
+    },
+    "connection_network_provider": {
+      "status": "in_progress",
+      "started_at": "2026-03-31T17:56:41",
+      "lease": {
+        "worker_id": "worker-20260331175641-01",
+        "claim_id": "6356b11a-e77f-460d-bf5b-3085eab258ec",
+        "claimed_at": "2026-03-31T17:56:41",
+        "lease_seconds": 1800,
+        "expires_at": "2026-03-31T18:26:41"
+      },
+      "current_worker": "worker-20260331175641-01",
+      "claim_id": "6356b11a-e77f-460d-bf5b-3085eab258ec"
     }
   },
   "stats": {
     "total": 30,
     "completed": 22,
-    "in_progress": 0,
-    "pending": 7,
+    "in_progress": 1,
+    "pending": 6,
     "review_pending": 0,
     "failed": 1
   }
