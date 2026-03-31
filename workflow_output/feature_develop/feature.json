@@ -244,24 +244,42 @@
       }
     },
     "fused_location_provider": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T16:47:34",
-      "claim_id": "9ed9d9bc-d065-4772-951c-59127b557fd3",
-      "review_requested_at": "2026-03-31T16:53:53"
+      "review_requested_at": "2026-03-31T16:53:53",
+      "completed_at": "2026-03-31T16:55:36",
+      "merge_evidence": {
+        "worker_branch": "feature/fused_location_provider",
+        "worker_commit": "15c9baae31c00a5552cc37eacaacc49b600ce1e1",
+        "integration_branch": "integrate/location-batch-2",
+        "integration_merge_commit": "4a3249796a9759f0d1e611a575032a00338cd4f0",
+        "output_merge_commit": "8910f7edd14b58db7ddf11728d63b419442e8f75",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     },
     "geo_location_client": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T16:47:34",
-      "claim_id": "eaa34b10-e352-4917-8613-3349e4c3c02e",
-      "review_requested_at": "2026-03-31T16:53:53"
+      "review_requested_at": "2026-03-31T16:53:53",
+      "completed_at": "2026-03-31T16:55:36",
+      "merge_evidence": {
+        "worker_branch": "feature/geo_location_client",
+        "worker_commit": "f6ec8e3783cc94b42a090df3f795883cc1d531a2",
+        "integration_branch": "integrate/location-batch-2",
+        "integration_merge_commit": "f2157b2aeb68ab63a753f1b0f40cd019f6f2cc41",
+        "output_merge_commit": "8910f7edd14b58db7ddf11728d63b419442e8f75",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     }
   },
   "stats": {
     "total": 30,
-    "completed": 2,
+    "completed": 4,
     "in_progress": 0,
     "pending": 26,
-    "review_pending": 2,
+    "review_pending": 0,
     "failed": 0
   }
 }
