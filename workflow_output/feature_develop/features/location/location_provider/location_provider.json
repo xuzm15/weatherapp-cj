@@ -30,10 +30,11 @@
       "name": "Location Provider 服务实现",
       "type": "implementation",
       "description": "实现 LocationProvider 的核心服务逻辑",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [],
       "files": [
-        "services/LocationProviderService.cj"
+        "services/LocationProviderService.cj",
+        "models/LocationCoord.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/data/location/LocationProvider.java"
@@ -53,10 +54,10 @@
     "reviewed_at": null
   },
   "human_issues": [],
-  "status": "pending",
+  "status": "completed",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.656201",
-    "started_at": null,
-    "completed_at": null
+    "started_at": "2026-03-31T16:39:00.000000",
+    "completed_at": "2026-03-31T16:41:00.000000"
   }
 }
