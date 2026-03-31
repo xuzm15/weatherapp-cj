@@ -48,10 +48,49 @@
   ],
   "api_backfill": [],
   "review": {
+    "status": "approved",
+    "batch_id": "weather-batch-4",
+    "round": 1,
+    "checker": "review_check.py",
+    "automated_result": {
+      "feature_id": "unit_converter",
+      "files_checked": ["models/UnitConverter.cj"],
+      "passed_checks": [
+        "feature_contract",
+        "residual_keywords",
+        "empty_callbacks",
+        "import_completeness",
+        "task_conversion_contract"
+      ],
+      "failed_checks": [],
+      "warnings": [
+        {
+          "check": "api_verification",
+          "message": "No MTProto/API calls detected; expected for local_state when real local/lifecycle/entry wiring exists"
+        },
+        {
+          "check": "feature_contract_warnings",
+          "issues": [
+            {"code": "empty_gap_analysis", "message": "gap_analysis.related_file_list is empty"},
+            {"code": "thin_context", "message": "context.current_state is too short", "field": "current_state"},
+            {"code": "thin_context", "message": "context.problem is too short", "field": "problem"}
+          ]
+        }
+      ]
+    },
+    "llm_notes": "逻辑正确性: pass — TemperatureUnit/SpeedUnit/PressureUnit 与 convertTemperature/convertSpeed/convertPressure 实现与注释中对齐 Android 的换算关系。\n边界处理: pass — 纯数值转换，无 UI 回调。\n语义验收: 核心实现非 mock；无空回调；无 TODO 残留；温/风速/气压单位转换覆盖参考源核心能力。\n真实调用链完整性: N/A — implementation_kind 为 local_state，模型位于 models 层；无 MTProto 为预期。\n分层规范: pass — 仅 models/UnitConverter.cj，无越层。",
     "issues": [],
-    "passed_checks": [],
-    "reviewed_at": null,
-    "status": "review_pending"
+    "deferred_items": [],
+    "deferred_count": 0,
+    "merge_evidence": {
+      "worker_branch": "feature/unit_converter",
+      "worker_commit": "c2b901cb2dceb9f0cc13de5642d76f9218dcfcc8",
+      "integration_branch": "integrate/weather-batch-4",
+      "integration_merge_commit": "8430303df6f6210a04775fdb1c8484eb3230ba65",
+      "output_merge_commit": null,
+      "base_branch": "main",
+      "base_branch_merged": false
+    }
   },
   "human_issues": [],
   "status": "completed",
