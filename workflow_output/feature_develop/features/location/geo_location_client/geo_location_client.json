@@ -55,10 +55,17 @@
     "reviewed_at": null
   },
   "human_issues": [],
-  "status": "pending",
+  "status": "in_progress",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.642372",
-    "started_at": null,
+    "started_at": "2026-03-31T16:47:34",
     "completed_at": null
+  },
+  "lease": {
+    "worker_id": "worker-20260331164734-02",
+    "claim_id": "eaa34b10-e352-4917-8613-3349e4c3c02e",
+    "claimed_at": "2026-03-31T16:47:34",
+    "lease_seconds": 1800,
+    "expires_at": "2026-03-31T17:17:34"
   }
 }
