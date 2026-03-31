@@ -87,10 +87,73 @@
   ],
   "api_backfill": [],
   "review": {
+    "status": "approved",
+    "batch_id": "settings-batch-2",
+    "round": 1,
+    "checker": "review_check.py",
+    "automated_result": {
+      "feature_id": "main_settings_fragment",
+      "files_checked": [
+        "components/MainSettingsFragment.cj",
+        "components/SettingsFragment.cj",
+        "components/MainFragment.cj"
+      ],
+      "passed_checks": [
+        "residual_keywords",
+        "empty_callbacks",
+        "import_completeness",
+        "task_conversion_contract"
+      ],
+      "failed_checks": [
+        {
+          "check": "feature_contract",
+          "issues": [
+            {
+              "code": "missing_entry_target",
+              "message": "entry_wiring feature must touch entry/page/host/router files"
+            }
+          ]
+        }
+      ],
+      "warnings": [
+        {
+          "check": "api_verification",
+          "message": "No MTProto/API calls detected; expected for entry_wiring when real local/lifecycle/entry wiring exists"
+        },
+        {
+          "check": "feature_contract_warnings",
+          "issues": [
+            {
+              "code": "empty_gap_analysis",
+              "message": "gap_analysis.related_file_list is empty"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.current_state is too short",
+              "field": "current_state"
+            },
+            {
+              "code": "thin_context",
+              "message": "context.problem is too short",
+              "field": "problem"
+            }
+          ]
+        }
+      ]
+    },
+    "llm_notes": "逻辑正确性: pass — MainFragment 通过 Stack 叠层与 openSettingsWithMotion/closeSettingsWithMotion 控制设置全屏层；MainSettingsFragment 内嵌 SettingsFragment 并透传语言/单位回调，与 Android 深色全屏 Toolbar + 内嵌设置列表语义一致。\n边界处理: pass — 设置叠层打开时与 Refresh 的 motionSwipeEnabled 在 onStateChange 中联动；返回时 slideExitVp 动画后触发 onBack。\n语义验收: 「核心实现」— MainSettingsFragment/SettingsFragment 为真实 UI 与回调，非 stub；「UI 经业务层」— 偏好变更经 MainFragment 的 onSettings* 方法写回状态；「回调非空」— Toolbar 返回、SettingsFragment 选项均有逻辑；「无占位关键词」— 抽查未见 TODO/FIXME/placeholder；「覆盖率」— 结构对齐源文件主路径，未做行级 diff 统计。\n真实调用链完整性: pass — entry_wiring：pages/MainPage.cj（@Entry）挂载 MainFragment，MainFragment.uiSettingsOverlay 实例化 MainSettingsFragment，构成入口→宿主→叠层完整链路；自动化 missing_entry_target 因 feature 任务 files 未列出 MainPage.cj 触发，代码侧已满足接线。\n分层规范: pass — 页面在 pages、组件在 components，未见 UI 直接调用网络底层。",
     "issues": [],
-    "passed_checks": [],
-    "reviewed_at": null,
-    "status": "review_pending"
+    "deferred_items": [],
+    "deferred_count": 0,
+    "merge_evidence": {
+      "worker_branch": "feature/main_settings_fragment",
+      "worker_commit": "0420c8b3e75509e9c24d9c30d6671465ecc00351",
+      "integration_branch": "integrate/settings-batch-2",
+      "integration_merge_commit": "abff6b831b5676b4453c18ba35f976661963e43f",
+      "output_merge_commit": null,
+      "base_branch": "main",
+      "base_branch_merged": false
+    }
   },
   "human_issues": [],
   "status": "completed",
