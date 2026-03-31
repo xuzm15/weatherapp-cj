@@ -587,14 +587,26 @@
         "base_branch": "main",
         "base_branch_merged": true
       }
+    },
+    "open_meteo_client": {
+      "status": "review_pending",
+      "started_at": "2026-03-31T18:03:03",
+      "claim_id": "59d76822-fa3e-470f-ba86-8aa47965e1a5",
+      "review_requested_at": "2026-03-31T18:06:07"
+    },
+    "weather_forecast_repository": {
+      "status": "review_pending",
+      "started_at": "2026-03-31T18:03:03",
+      "claim_id": "3cd8cb74-b038-4536-b6bb-a6a55f3d4cbd",
+      "review_requested_at": "2026-03-31T18:06:07"
     }
   },
   "stats": {
     "total": 30,
     "completed": 25,
     "in_progress": 0,
-    "pending": 5,
-    "review_pending": 0,
+    "pending": 3,
+    "review_pending": 2,
     "failed": 0
   }
 }
