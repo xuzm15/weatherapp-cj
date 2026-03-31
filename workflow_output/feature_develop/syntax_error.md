@@ -71,3 +71,9 @@
 - **错误信息**: `invalid binary operator '==' on type 'UInt8' and 'Struct-String'`
 - **修复方式**: 使用 `Int64(body[pos]) == 93`（`]`）、`123`（`{`）、`125`（`}`）等与整数码点比较
 - **发现于**: geo_names_client, 2026-03-31
+
+## `@Component` 子组件含 `CanvasRenderingContext2D` 或仅用 `@Prop` 时构造函数参数与调用不匹配
+- **触发条件**: 新建 `@Component` 子组件，字段含 `CanvasRenderingContext2D` / `RenderingContextSettings`，或宏展开后 `LineChartViewComponent(dataPoints:labels:)` 仅传两个命名参数却报缺省 parent / LocalStorage
+- **错误信息**: `missing arguments for parameter list '(Enum-Option<Class-CustomView>, ... Class-ObservedProperty<...>, Enum-Option<Class-LocalStorage>)' in call` / `expected 4 arguments, found 2`
+- **修复方式**: 将 Canvas 绘制逻辑拆为 `components/LineChartViewComponent.cj` 中的纯函数（`lineChartPaint` / `lineChartHandleTouchDown` 等）与文件级上下文单例；在宿主 `MainFragment` 的 `@Builder`（如 `lineChartSection`）中声明 `Stack { Canvas(...) }` 并调用上述函数，避免子组件宏生成不兼容的构造函数
+- **发现于**: line_chart_view, 2026-03-31
