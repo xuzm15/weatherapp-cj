@@ -32,7 +32,7 @@
       "name": "Main Activity 核心逻辑",
       "type": "implementation",
       "description": "实现 MainActivity 的业务逻辑（Interactor、Model、数据处理）",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [],
       "files": [
         "features/MainActivityInteractor.cj"
@@ -46,7 +46,7 @@
       "name": "Main Activity UI",
       "type": "ui",
       "description": "实现 MainActivity 的 UI 页面（View + ViewModel）",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "MA-IMPL-1"
       ],
@@ -65,7 +65,7 @@
       "name": "Main Activity 集成与路由",
       "type": "integration",
       "description": "实现 MainActivity 的路由注册与 DI 装配",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "MA-UI-1"
       ],
@@ -88,20 +88,15 @@
   "review": {
     "issues": [],
     "passed_checks": [],
-    "reviewed_at": null
+    "reviewed_at": null,
+    "status": "review_pending"
   },
   "human_issues": [],
-  "status": "in_progress",
+  "status": "review_pending",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.658741",
     "started_at": "2026-03-31T17:05:13",
-    "completed_at": null
-  },
-  "lease": {
-    "worker_id": "worker-20260331170513-01",
-    "claim_id": "d6cd2f0f-d13a-42bd-b91d-d81bfc90ae13",
-    "claimed_at": "2026-03-31T17:05:13",
-    "lease_seconds": 1800,
-    "expires_at": "2026-03-31T17:35:13"
+    "completed_at": null,
+    "review_requested_at": "2026-03-31T17:10:45"
   }
 }
