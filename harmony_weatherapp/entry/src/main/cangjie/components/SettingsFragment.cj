@@ -110,6 +110,8 @@ public class SettingsFragment {
     public var onTemperatureChange: (String) -> Unit = defaultStringHandler
     public var onWindSpeedChange: (String) -> Unit = defaultStringHandler
     public var onPressureChange: (String) -> Unit = defaultStringHandler
+    /** 为 `false` 时不渲染顶部「Settings」标题（由 `MainSettingsFragment` 等外层工具栏展示时使用）。 */
+    public var showHeader: Bool = true
 
     protected override func aboutToAppear(): Unit {
         match (AppConfig.settingsPreferences) {
@@ -266,7 +268,9 @@ public class SettingsFragment {
     public func build() {
         Scroll() {
             Column(space: 16) {
-                this.uiTitle()
+                if (this.showHeader) {
+                    this.uiTitle()
+                }
                 this.rowLanguage()
                 this.rowTemperature()
                 this.rowWind()
