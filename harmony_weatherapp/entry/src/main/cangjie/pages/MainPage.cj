@@ -1,16 +1,9 @@
 package ohos_app_cangjie_entry.pages
 
-import kit.ArkUI.Column
-import kit.ArkUI.CustomView
-import kit.ArkUI.CJEntry
-import kit.ArkUI.FontWeight
-import kit.ArkUI.LengthProp
-import kit.ArkUI.LocalStorage
-import kit.ArkUI.ObservedProperty
-import kit.ArkUI.SubscriberManager
-import kit.ArkUI.Text
-import kit.ArkUI.loadNativeView
+import ohos_app_cangjie_entry.components.MainFragment
+import kit.ArkUI.*
 import kit.PerformanceAnalysisKit.Hilog
+import ohos.arkui.state_management.*
 import ohos.arkui.state_macro_manage.Component
 import ohos.arkui.state_macro_manage.Entry
 import ohos.arkui.state_macro_manage.State
@@ -34,17 +27,14 @@ class MainPage {
 
     func build() {
         Column {
-            Column {
-                Text(this.model.screenTitle)
-                    .fontSize(24)
-                    .fontWeight(FontWeight.Bold)
-                    .onClick({
-                        _ =>
-                        Hilog.info(1, "MainPage", "Main page content tapped.")
-                    })
-            }
-            .width(100.percent)
-            .height(100.percent)
+            Text(this.model.screenTitle)
+                .fontSize(24)
+                .fontWeight(FontWeight.Bold)
+                .onClick({
+                    _ =>
+                    Hilog.info(1, "MainPage", "Main page content tapped.")
+                })
+            MainFragment()
         }
         .width(100.percent)
         .height(100.percent)

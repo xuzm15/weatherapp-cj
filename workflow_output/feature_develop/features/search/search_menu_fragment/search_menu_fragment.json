@@ -35,7 +35,8 @@
       "status": "completed",
       "depends_on": [],
       "files": [
-        "features/SearchMenuFragmentInteractor.cj"
+        "components/SearchMenuFragment.cj",
+        "components/MainFragment.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/fragment/SearchMenuFragment.java"
@@ -51,7 +52,7 @@
         "SMF-IMPL-1"
       ],
       "files": [
-        "features/SearchMenuFragmentView.cj"
+        "components/SearchMenuFragment.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/fragment/SearchMenuFragment.java"
@@ -70,7 +71,8 @@
         "SMF-UI-1"
       ],
       "files": [
-        "features/SearchMenuFragmentRouter.cj"
+        "pages/MainPage.cj",
+        "components/MainFragment.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/fragment/SearchMenuFragment.java"
@@ -96,7 +98,7 @@
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.690577",
     "started_at": "2026-03-31T17:17:17",
-    "completed_at": null,
+    "completed_at": "2026-03-31T17:21:14",
     "review_requested_at": "2026-03-31T17:22:07"
   }
 }

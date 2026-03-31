@@ -54,6 +54,12 @@
 - **修复方式**: 统一为浮点运算与字面量，例如 `x: 0.0.vp`、`y: (0.0 - this.headerCollapsedVp).vp`
 - **发现于**: main_fragment, 2026-03-31
 
+## `Column` / `Stack` 上无 `backgroundBlurStyle` 修饰符
+- **触发条件**: 在 `kit.ArkUI` 的 `Column` 或 `Stack` 上链式调用 `.backgroundBlurStyle(BlurStyle.Thin)` 等
+- **错误信息**: `'backgroundBlurStyle' is not a member of class 'Column'` / `'...' is not a member of class 'Stack'`
+- **修复方式**: 改用半透明 `backgroundColor`（如 `0xE6FFFFFF`），或仅在支持该 API 的组件上使用（需查当前 SDK 绑定）；勿假定与 OpenHarmony TS 文档一致
+- **发现于**: search_menu_fragment, 2026-03-31
+
 ## 字符串下标 `body[pos]` 为 UInt8，不可与字符字面量直接比较
 - **触发条件**: `body[pos] == ']'`、`c == '{'` 等写法（`body[pos]` 类型为 `UInt8`）
 - **错误信息**: `invalid binary operator '==' on type 'UInt8' and 'Struct-String'`
