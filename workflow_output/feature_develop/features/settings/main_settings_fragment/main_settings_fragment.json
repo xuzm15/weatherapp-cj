@@ -32,7 +32,7 @@
       "name": "Main Settings Fragment 核心逻辑",
       "type": "implementation",
       "description": "实现 MainSettingsFragment 的业务逻辑（Interactor、Model、数据处理）",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [],
       "files": [
         "features/MainSettingsFragmentInteractor.cj"
@@ -46,7 +46,7 @@
       "name": "Main Settings Fragment UI",
       "type": "ui",
       "description": "实现 MainSettingsFragment 的 UI 页面（View + ViewModel）",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "MSF-IMPL-1"
       ],
@@ -65,7 +65,7 @@
       "name": "Main Settings Fragment 集成与路由",
       "type": "integration",
       "description": "实现 MainSettingsFragment 的路由注册与 DI 装配",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "MSF-UI-1"
       ],
@@ -88,13 +88,15 @@
   "review": {
     "issues": [],
     "passed_checks": [],
-    "reviewed_at": null
+    "reviewed_at": null,
+    "status": "review_pending"
   },
   "human_issues": [],
-  "status": "pending",
+  "status": "review_pending",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.664864",
-    "started_at": null,
-    "completed_at": null
+    "started_at": "2026-03-31T17:28:25",
+    "completed_at": null,
+    "review_requested_at": "2026-03-31T17:31:25"
   }
 }
