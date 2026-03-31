@@ -529,10 +529,19 @@
       }
     },
     "weather_client": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T17:58:22",
-      "claim_id": "dddbde90-5ac6-4bc0-9f4f-c6fc5f4b15a9",
-      "review_requested_at": "2026-03-31T18:00:53"
+      "review_requested_at": "2026-03-31T18:00:53",
+      "completed_at": "2026-03-31T18:02:55",
+      "merge_evidence": {
+        "worker_branch": "feature/weather_client",
+        "worker_commit": "19c155f791f43aa6f0dec7ec7101f285c8c8a0d4",
+        "integration_branch": "integrate/weather-batch-6",
+        "integration_merge_commit": "57e1c17c3c1f2cc279b8576b6e158a7496ef7220",
+        "output_merge_commit": "0335b79c6d2b4884cf44305c6f486a64b792047a",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     },
     "weather_code": {
       "status": "completed",
@@ -550,24 +559,42 @@
       }
     },
     "connection_network_provider": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T17:56:41",
-      "claim_id": "6356b11a-e77f-460d-bf5b-3085eab258ec",
-      "review_requested_at": "2026-03-31T18:00:53"
+      "review_requested_at": "2026-03-31T18:00:53",
+      "completed_at": "2026-03-31T18:02:55",
+      "merge_evidence": {
+        "worker_branch": "feature/connection_network_provider",
+        "worker_commit": "a4006dd6b27f109d14b55317ebfc0eacde063837",
+        "integration_branch": "integrate/weather-batch-6",
+        "integration_merge_commit": "8e950ff595f9f5629fb52863494ebb4fa980c98f",
+        "output_merge_commit": "0335b79c6d2b4884cf44305c6f486a64b792047a",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     },
     "list_padding_decoration": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T17:57:02",
-      "claim_id": "ae1e19a9-3ac1-40c0-9930-8770a659230e",
-      "review_requested_at": "2026-03-31T18:00:53"
+      "review_requested_at": "2026-03-31T18:00:53",
+      "completed_at": "2026-03-31T18:02:55",
+      "merge_evidence": {
+        "worker_branch": "feature/list_padding_decoration",
+        "worker_commit": "7f9df9dc3e5f9fddbed242a36fd1f23c43e8259e",
+        "integration_branch": "integrate/weather-batch-6",
+        "integration_merge_commit": "396cd5df0b3f94539efcb7c0b6f1531c5a534536",
+        "output_merge_commit": "0335b79c6d2b4884cf44305c6f486a64b792047a",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     }
   },
   "stats": {
     "total": 30,
-    "completed": 22,
+    "completed": 25,
     "in_progress": 0,
     "pending": 5,
-    "review_pending": 3,
+    "review_pending": 0,
     "failed": 0
   }
 }
