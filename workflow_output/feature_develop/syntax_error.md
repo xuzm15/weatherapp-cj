@@ -54,6 +54,18 @@
 - **修复方式**: 改写为不含 `*/` 的表述（如「models 目录」）
 - **发现于**: main_activity, 2026-03-31
 
+## `@Component` 的 `build()` 根节点不可为自定义 `@Builder` 调用
+- **触发条件**: `build()` 内仅写 `this.someBuilderRoot()`，由 `@Builder` 返回 `List`/`Column` 等作为整棵 UI 根
+- **错误信息**: `The build method can only have one root node and can only be a container component and cannot be a custom component`
+- **修复方式**: 在 `build()` 中直接以容器组件（如 `List { ... }`）为根，可将子块拆成 `@Builder` 仅作子树，或全部内联
+- **发现于**: hourly_temp_forecast_adapter, 2026-03-31
+
+## `ForEach`/`@Builder` 闭包内访问数据模型 `let` 主构造字段失败
+- **触发条件**: 模型类用主构造 `let field` 声明字段，在 `ForEach` 的 `ListItem` 内或嵌套 `@Builder` 中写 `item.field`
+- **错误信息**: `can not access field 'field'`（宏展开后 `item` 与 `ObservedProperty` 包装相关）
+- **修复方式**: 模型改为 `public var` + 显式 `init`（与 `LocationCoord` 一致），或仅通过无捕获歧义的 `private func` 从 `item` 取值再传入 `Text(...)`
+- **发现于**: hourly_temp_forecast_adapter, 2026-03-31
+
 ## `.translate` 中整型与 Float64 混用导致 Length 推断失败
 - **触发条件**: 使用 `(0 - this.someVp).vp`，其中 `0` 为整型字面量、`someVp` 为 `Float64`（如 `@State` 动画偏移）
 - **错误信息**: 类型不匹配或无法为 `translate` 推断合法 `Length`
@@ -71,3 +83,9 @@
 - **错误信息**: `invalid binary operator '==' on type 'UInt8' and 'Struct-String'`
 - **修复方式**: 使用 `Int64(body[pos]) == 93`（`]`）、`123`（`{`）、`125`（`}`）等与整数码点比较
 - **发现于**: geo_names_client, 2026-03-31
+
+## `@Component` 子组件含 `CanvasRenderingContext2D` 或仅用 `@Prop` 时构造函数参数与调用不匹配
+- **触发条件**: 新建 `@Component` 子组件，字段含 `CanvasRenderingContext2D` / `RenderingContextSettings`，或宏展开后 `LineChartViewComponent(dataPoints:labels:)` 仅传两个命名参数却报缺省 parent / LocalStorage
+- **错误信息**: `missing arguments for parameter list '(Enum-Option<Class-CustomView>, ... Class-ObservedProperty<...>, Enum-Option<Class-LocalStorage>)' in call` / `expected 4 arguments, found 2`
+- **修复方式**: 将 Canvas 绘制逻辑拆为 `components/LineChartViewComponent.cj` 中的纯函数（`lineChartPaint` / `lineChartHandleTouchDown` 等）与文件级上下文单例；在宿主 `MainFragment` 的 `@Builder`（如 `lineChartSection`）中声明 `Stack { Canvas(...) }` 并调用上述函数，避免子组件宏生成不兼容的构造函数
+- **发现于**: line_chart_view, 2026-03-31
