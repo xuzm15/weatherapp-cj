@@ -394,18 +394,27 @@
       }
     },
     "main_settings_fragment": {
-      "status": "review_pending",
+      "status": "completed",
       "started_at": "2026-03-31T17:28:25",
-      "claim_id": "c40f8ce7-d927-4a95-9c9a-860bb5f641e6",
-      "review_requested_at": "2026-03-31T17:31:25"
+      "review_requested_at": "2026-03-31T17:31:25",
+      "completed_at": "2026-03-31T17:32:38",
+      "merge_evidence": {
+        "worker_branch": "feature/main_settings_fragment",
+        "worker_commit": "0420c8b3e75509e9c24d9c30d6671465ecc00351",
+        "integration_branch": "integrate/settings-batch-2",
+        "integration_merge_commit": "abff6b831b5676b4453c18ba35f976661963e43f",
+        "output_merge_commit": "4a340c49fc24f44cfe8fdd712b53323a311d7490",
+        "base_branch": "main",
+        "base_branch_merged": true
+      }
     }
   },
   "stats": {
     "total": 30,
-    "completed": 12,
+    "completed": 13,
     "in_progress": 0,
     "pending": 17,
-    "review_pending": 1,
+    "review_pending": 0,
     "failed": 0
   }
 }
