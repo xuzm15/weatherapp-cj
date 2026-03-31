@@ -47,84 +47,6 @@
     "对照源文件中的核心功能，实现覆盖率 >= 80%"
   ],
   "api_backfill": [],
-  "review": {
-    "status": "rejected",
-    "batch_id": "weather-batch-5",
-    "round": 1,
-    "checker": "review_check.py",
-    "reviewed_at": "2026-03-31T17:55:00+08:00",
-    "automated_result": {
-      "feature_id": "weather_client",
-      "files_checked": [
-        "services/WeatherClient.cj"
-      ],
-      "passed_checks": [
-        "residual_keywords",
-        "empty_callbacks",
-        "import_completeness",
-        "task_conversion_contract"
-      ],
-      "failed_checks": [
-        {
-          "check": "feature_contract",
-          "issues": [
-            {
-              "code": "missing_api_task",
-              "message": "Network feature must include at least one api task"
-            }
-          ]
-        }
-      ],
-      "warnings": [
-        {
-          "check": "api_verification",
-          "message": "No MTProto/API calls detected for network feature"
-        },
-        {
-          "check": "feature_contract_warnings",
-          "issues": [
-            {
-              "code": "empty_gap_analysis",
-              "message": "gap_analysis.related_file_list is empty"
-            },
-            {
-              "code": "thin_context",
-              "message": "context.problem is too short",
-              "field": "problem"
-            }
-          ]
-        }
-      ]
-    },
-    "llm_notes": "逻辑正确性: fail — 交付物仅为 `WeatherClient` 接口与惰性包装类型声明，未包含与 Android 源文件对等的真实预报拉取/持久化实现。\n边界处理: N/A — 无运行时逻辑可评。\n语义验收: 「核心实现层真实业务逻辑」未满足（无 Service/HTTP 实现）；「无 TODO 残留」在接口层满足；覆盖率与回调项对纯接口不适用。\n真实调用链完整性: fail — `implementation_kind` 为 network，但无到达网络客户端/MTProto 或等价 HTTP 层的实现；`review_check` 报 `missing_api_task` 与无 API 调用一致。\n分层规范: pass — 接口定义位于 services 包，未见 UI 越层。",
-    "issues": [
-      {
-        "id": "RI-weather_client-001",
-        "file": "workflow_output/feature_develop/features/weather/weather_client/weather_client.json",
-        "line": null,
-        "description": "network 类 feature 的 tasks 中缺少 `type: api` 的任务项，`feature_contract` 校验失败（missing_api_task）。",
-        "suggestion": "在 feature 元数据中补充 api 类 task，或在后续 MR 中合并含真实网络调用的 WeatherClientService 实现后再审。"
-      },
-      {
-        "id": "RI-weather_client-002",
-        "file": "services/WeatherClient.cj",
-        "line": null,
-        "description": "当前仅包含接口与 GeoSingle 契约，无 `fetchWeatherForecast` 的实际网络/序列化实现，不满足本批次对 network 功能的调用链要求。",
-        "suggestion": "在 WeatherClientService（或等价实现类）中完成与 OpenMeteo/Android 参考一致的数据获取，并保证可编译接入后再提交审核。"
-      }
-    ],
-    "deferred_items": [],
-    "deferred_count": 0,
-    "merge_evidence": {
-      "worker_branch": "feature/weather_client",
-      "worker_commit": "ad50e42a036cca56b82cd331d0f6131a333d12c8",
-      "integration_branch": "integrate/weather-batch-5",
-      "integration_merge_commit": "af28b8fda19d08f25abc7d4d01ebdb294967ecc3",
-      "output_merge_commit": "2ba52a928d872da3d7ab05bb28e14a56ef63b012",
-      "base_branch": "main",
-      "base_branch_merged": true
-    }
-  },
   "human_issues": [],
   "status": "pending",
   "timestamps": {
@@ -132,6 +54,5 @@
     "started_at": "2026-03-31T17:52:24",
     "completed_at": null,
     "review_requested_at": "2026-03-31T17:54:31"
-  },
-  "fail_reason": "review rejected: missing HTTP implementation"
+  }
 }
