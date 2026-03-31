@@ -1,5 +1,6 @@
 package ohos_app_cangjie_entry
 
+import ohos_app_cangjie_entry.foundation.AppConfig
 import kit.PerformanceAnalysisKit.Hilog
 import kit.AbilityKit.Want
 import kit.AbilityKit.UIAbility
@@ -15,6 +16,7 @@ class MainAbility <: UIAbility {
 
     public override func onCreate(want: Want, launchParam: LaunchParam): Unit {
         Hilog.info(1, "Cangjie", "MainAbility OnCreated.${want.abilityName}")
+        AppConfig.ensureSettingsStore(this.context)
         match (launchParam.launchReason) {
             case LaunchReason.StartAbility => Hilog.info(1, "Cangjie", "START_ABILITY")
             case _ => ()
