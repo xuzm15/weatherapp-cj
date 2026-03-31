@@ -32,10 +32,10 @@
       "name": "Main Fragment 核心逻辑",
       "type": "implementation",
       "description": "实现 MainFragment 的业务逻辑（Interactor、Model、数据处理）",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [],
       "files": [
-        "features/MainFragmentInteractor.cj"
+        "components/MainFragment.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainFragment.java"
@@ -46,12 +46,12 @@
       "name": "Main Fragment UI",
       "type": "ui",
       "description": "实现 MainFragment 的 UI 页面（View + ViewModel）",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "MF-IMPL-1"
       ],
       "files": [
-        "features/MainFragmentView.cj"
+        "components/MainFragment.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainFragment.java"
@@ -65,12 +65,12 @@
       "name": "Main Fragment 集成与路由",
       "type": "integration",
       "description": "实现 MainFragment 的路由注册与 DI 装配",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "MF-UI-1"
       ],
       "files": [
-        "features/MainFragmentRouter.cj"
+        "components/MainFragment.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/fragment/MainFragment.java"
@@ -91,10 +91,10 @@
     "reviewed_at": null
   },
   "human_issues": [],
-  "status": "pending",
+  "status": "completed",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.662095",
-    "started_at": null,
-    "completed_at": null
+    "started_at": "2026-03-31T17:07:00.000000",
+    "completed_at": "2026-03-31T17:10:00.000000"
   }
 }
