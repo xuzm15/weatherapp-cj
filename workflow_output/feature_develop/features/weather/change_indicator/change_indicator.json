@@ -97,9 +97,9 @@
       "worker_commit": "8147f93841604dec4dd1c96514cd109f4dc49bd5",
       "integration_branch": "integrate/weather-batch-1",
       "integration_merge_commit": "c0b68f35d0d75d3a4774cab725691e0dd53af4f6",
-      "output_merge_commit": null,
+      "output_merge_commit": "943ba23154e33c485d639d902b822852ec409ebc",
       "base_branch": "main",
-      "base_branch_merged": false
+      "base_branch_merged": true
     },
     "reviewed_at": "2026-03-31T17:37:00.000000"
   },
