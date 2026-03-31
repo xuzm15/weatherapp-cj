@@ -36,6 +36,8 @@ public class MainViewModel {
     public var onDaysForecastChanged: (UiResource<DaysForecastProto>) -> Unit = { _ => () }
     /** 地名状态变更时调用。 */
     public var onPlaceNameChanged: (UiResource<String>) -> Unit = { _ => () }
+    /** 每次 `notifyDays` 之后调用，供下拉刷新等场景复位 `Refresh` 状态。 */
+    public var onForecastNotifyComplete: () -> Unit = { => () }
 
     public init(repository: WeatherForecastRepository, networkChecker: NetworkChecker) {
         this.repository = repository
@@ -57,6 +59,7 @@ public class MainViewModel {
     private func notifyDays(r: UiResource<DaysForecastProto>): Unit {
         this.daysForecastState = r
         this.onDaysForecastChanged(r)
+        this.onForecastNotifyComplete()
     }
 
     private func notifyPlace(r: UiResource<String>): Unit {
