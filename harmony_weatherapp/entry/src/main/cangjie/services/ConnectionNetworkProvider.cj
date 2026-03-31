@@ -12,6 +12,7 @@ import ohos.business_exception.BusinessException
  */
 public class ConnectionNetworkProvider <: NetworkChecker {
     private static let TAG: String = "ConnectionNetworkProvider"
+    private static let INTERNET_PROBE_HOST: String = "api.open-meteo.com"
 
     public init() {}
 
@@ -30,8 +31,14 @@ public class ConnectionNetworkProvider <: NetworkChecker {
             }
             return false
         } catch (e: BusinessException) {
+            if (e.code == 201) {
+                // 某些设备上 NetworkKit 的连接状态查询会因权限实现差异持续返回 201。
+                // 这里改为放行真实 HTTP 请求，由后续请求结果决定是否真正离线。
+                Hilog.info(1, ConnectionNetworkProvider.TAG, "hasInternetConnection unavailable, allow real request fallback: ${e.code} ${e.message}")
+                return true
+            }
             Hilog.error(1, ConnectionNetworkProvider.TAG, "hasInternetConnection: ${e.code} ${e.message}")
-            return false
+            return this.probeInternetByDns()
         }
     }
 
@@ -57,6 +64,23 @@ public class ConnectionNetworkProvider <: NetworkChecker {
                 case _ => ()
             }
             j += 1
+        }
+        return false
+    }
+
+    private func probeInternetByDns(): Bool {
+        try {
+            let addresses = getAddressesByName(ConnectionNetworkProvider.INTERNET_PROBE_HOST)
+            if (addresses.size > 0) {
+                Hilog.info(1, ConnectionNetworkProvider.TAG, "fallback DNS probe ok")
+                return true
+            }
+        } catch (e: BusinessException) {
+            if (e.code == 201) {
+                Hilog.info(1, ConnectionNetworkProvider.TAG, "probeInternetByDns unavailable, allow real request fallback: ${e.code} ${e.message}")
+                return true
+            }
+            Hilog.error(1, ConnectionNetworkProvider.TAG, "probeInternetByDns: ${e.code} ${e.message}")
         }
         return false
     }

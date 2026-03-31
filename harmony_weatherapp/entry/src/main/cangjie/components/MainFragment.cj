@@ -189,12 +189,20 @@ public class MainFragment {
             this.toast("请输入城市或地址")
             return
         }
-        let single = this.geo.searchLocation(t)
-        let arr = single.get()
-        this.searchPlaceResults = arr
-        if (arr.size == 0) {
-            this.toast("未找到结果")
-        }
+        this.vm.searchLocation(t, { result: UiResource<Array<PlaceInfo>> =>
+            match (result) {
+                case Success(arr) =>
+                    this.searchPlaceResults = arr
+                    if (arr.size == 0) {
+                        this.toast("未找到结果")
+                    }
+                case Error(msg) =>
+                    this.searchPlaceResults = Array<PlaceInfo>()
+                    this.toast(msg)
+                case Loading =>
+                    this.searchPlaceResults = Array<PlaceInfo>()
+            }
+        })
     }
 
     private func applyPlaceFromSearch(pi: PlaceInfo): Unit {

@@ -16,6 +16,7 @@ import ohos_app_cangjie_entry.models.WindSpeedProto
 import ohos_app_cangjie_entry.models.convertPressure
 import ohos_app_cangjie_entry.models.convertSpeed
 import ohos_app_cangjie_entry.models.convertTemperature
+import ohos.base.UIThread
 import std.collection.ArrayList
 
 /**
@@ -56,15 +57,27 @@ public class MainViewModel {
     /** 对齐 Android `onCleared`：当前无 Rx 订阅，仅占位。 */
     public func dispose(): Unit {}
 
+    private func dispatchUi(task: () -> Unit): Unit {
+        spawn(UIThread) {
+            task()
+        }
+    }
+
     private func notifyDays(r: UiResource<DaysForecastProto>): Unit {
         this.daysForecastState = r
-        this.onDaysForecastChanged(r)
-        this.onForecastNotifyComplete()
+        this.dispatchUi({
+            =>
+            this.onDaysForecastChanged(r)
+            this.onForecastNotifyComplete()
+        })
     }
 
     private func notifyPlace(r: UiResource<String>): Unit {
         this.placeNameState = r
-        this.onPlaceNameChanged(r)
+        this.dispatchUi({
+            =>
+            this.onPlaceNameChanged(r)
+        })
     }
 
     private func initData(): Unit {
@@ -82,7 +95,7 @@ public class MainViewModel {
                 case None => ()
             }
         }
-        this.repository.requestLocationAsync({ loc => this.fetchWeatherAndPlace(loc) })
+        this.fetchCurrentWeatherAndPlace()
     }
 
     private func applyUnitsFromPrefs(): Unit {
@@ -140,12 +153,20 @@ public class MainViewModel {
 
     /** 从持久化读取坐标（对齐 `getSavedLocationCoord` LiveData 语义）。 */
     public func getSavedLocationCoord(onResult: (LocationCoord) -> Unit): Unit {
-        onResult(ProtoDataStoreRepository.INSTANCE.getLocationCoord())
+        let coord = ProtoDataStoreRepository.INSTANCE.getLocationCoord()
+        this.dispatchUi({
+            =>
+            onResult(coord)
+        })
     }
 
     /** 设置 JSON 字符串（对齐 `getSavedSettings`）。 */
     public func getSavedSettings(onResult: (String) -> Unit): Unit {
-        onResult(this.repository.getSettings())
+        let settings = this.repository.getSettings()
+        this.dispatchUi({
+            =>
+            onResult(settings)
+        })
     }
 
     /** 若本地有缓存预报 JSON 且可解析则回调，否则不调用。 */
@@ -155,38 +176,67 @@ public class MainViewModel {
             return ()
         }
         match (this.repository.parseForecastJson(raw)) {
-            case Some(d) => onResult(this.formatDaysForecast(d))
+            case Some(d) =>
+                let formatted = this.formatDaysForecast(d)
+                this.dispatchUi({
+                    =>
+                    onResult(formatted)
+                })
             case None => ()
         }
     }
 
     public func fetchCurrentWeatherAndPlace(): Unit {
-        this.repository.requestLocationAsync({ loc => this.fetchWeatherAndPlace(loc) })
+        spawn {
+            this.repository.requestLocationAsync({ loc => this.fetchWeatherAndPlace(loc) })
+        }
     }
 
     public func fetchWeatherAndPlace(location: LocationCoord): Unit {
-        this.safeFetchWeatherForecast(location.latitude, location.longitude)
-        this.safeFetchNearestPlaceInfo(location.latitude, location.longitude)
+        spawn {
+            this.safeFetchWeatherForecast(location.latitude, location.longitude)
+            this.safeFetchNearestPlaceInfo(location.latitude, location.longitude)
+        }
     }
 
     public func fetchNearestPlaceInfo(locale: GeoLocale): Unit {
-        this.repository.setLocale(locale)
-        let loc = this.repository.getLocation()
-        this.safeFetchNearestPlaceInfo(loc.latitude, loc.longitude)
+        spawn {
+            this.repository.setLocale(locale)
+            let loc = this.repository.getLocation()
+            this.safeFetchNearestPlaceInfo(loc.latitude, loc.longitude)
+        }
     }
 
     /**
      * 搜索地点（对齐 `searchLocation` LiveData）：先 `Loading`，再 `Success`/`Error`。
      */
     public func searchLocation(query: String, onResult: (UiResource<Array<PlaceInfo>>) -> Unit): Unit {
-        onResult(UiResource.Loading)
-        if (!this.networkChecker.hasInternetConnection()) {
-            onResult(UiResource.Error(MainViewModel.ERR_NO_NET))
-            return ()
+        this.dispatchUi({
+            =>
+            onResult(UiResource.Loading)
+        })
+        spawn {
+            if (!this.networkChecker.hasInternetConnection()) {
+                this.dispatchUi({
+                    =>
+                    onResult(UiResource.Error(MainViewModel.ERR_NO_NET))
+                })
+                return ()
+            }
+            try {
+                let single = this.repository.searchLocation(query)
+                let response = single.get()
+                this.dispatchUi({
+                    =>
+                    onResult(UiResource.Success(response))
+                })
+            } catch (e: Exception) {
+                this.dispatchUi({
+                    =>
+                    onResult(UiResource.Error("Couldn't get the name of the area"))
+                })
+            }
         }
-        let single = this.repository.searchLocation(query)
-        let response = single.get()
-        onResult(UiResource.Success(response))
     }
 
     public func changeTemperatureUnit(unit: TemperatureUnit): Unit {
@@ -228,10 +278,14 @@ public class MainViewModel {
             this.notifyDays(UiResource.Error(MainViewModel.ERR_NO_NET))
             return ()
         }
-        let single = this.repository.fetchWeatherForecast(latitude, longitude)
-        let forecast = single.get()
-        let formatted = this.formatDaysForecast(forecast)
-        this.notifyDays(UiResource.Success(formatted))
+        try {
+            let single = this.repository.fetchWeatherForecast(latitude, longitude)
+            let forecast = single.get()
+            let formatted = this.formatDaysForecast(forecast)
+            this.notifyDays(UiResource.Success(formatted))
+        } catch (e: Exception) {
+            this.notifyDays(UiResource.Error("Couldn't get the weather forecast"))
+        }
     }
 
     private func safeFetchNearestPlaceInfo(latitude: Float64, longitude: Float64): Unit {
@@ -240,9 +294,13 @@ public class MainViewModel {
             this.notifyPlace(UiResource.Error(MainViewModel.ERR_NO_NET))
             return ()
         }
-        let single = this.repository.fetchNearestPlaceInfo(latitude, longitude)
-        let place = single.get()
-        this.notifyPlace(UiResource.Success(placeToponymFromModel(place)))
+        try {
+            let single = this.repository.fetchNearestPlaceInfo(latitude, longitude)
+            let place = single.get()
+            this.notifyPlace(UiResource.Success(placeToponymFromModel(place)))
+        } catch (e: Exception) {
+            this.notifyPlace(UiResource.Error("Couldn't get the name of the area"))
+        }
     }
 
     private func formatDaysForecast(orig: DaysForecastProto): DaysForecastProto {
