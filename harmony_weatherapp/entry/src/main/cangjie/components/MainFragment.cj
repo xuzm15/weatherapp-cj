@@ -550,22 +550,13 @@ public class MainFragment {
     @Builder
     func uiSettingsOverlay(): Unit {
         if (this.showSettingsOverlay) {
-            Column(space: 12) {
-                SettingsFragment(
-                    onLanguageChange: { v: String => this.onSettingsLanguageChanged(v) },
-                    onTemperatureChange: { v: String => this.onSettingsTemperatureChanged(v) },
-                    onWindSpeedChange: { v: String => this.onSettingsWindSpeedChanged(v) },
-                    onPressureChange: { v: String => this.onSettingsPressureChanged(v) }
-                )
-                Button("返回")
-                    .onClick({ _ =>
-                        this.closeSettingsWithMotion()
-                    })
-            }
-            .width(100.percent)
-            .height(100.percent)
-            .padding(20)
-            .backgroundColor(0xFFF5F5F5)
+            MainSettingsFragment(
+                onBack: { => this.closeSettingsWithMotion() },
+                onLanguageChange: { v: String => this.onSettingsLanguageChanged(v) },
+                onTemperatureChange: { v: String => this.onSettingsTemperatureChanged(v) },
+                onWindSpeedChange: { v: String => this.onSettingsWindSpeedChanged(v) },
+                onPressureChange: { v: String => this.onSettingsPressureChanged(v) }
+            )
         }
     }
 
