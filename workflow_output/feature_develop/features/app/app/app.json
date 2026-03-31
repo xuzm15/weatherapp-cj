@@ -55,17 +55,42 @@
     "reviewed_at": "2026-03-31T17:03:00Z",
     "automated_result": {
       "feature_id": "app",
-      "files_checked": ["foundation/AppConfig.cj"],
-      "passed_checks": ["residual_keywords", "empty_callbacks", "import_completeness", "task_conversion_contract"],
+      "files_checked": [
+        "foundation/AppConfig.cj"
+      ],
+      "passed_checks": [
+        "residual_keywords",
+        "empty_callbacks",
+        "import_completeness",
+        "task_conversion_contract"
+      ],
       "failed_checks": [
         {
           "check": "feature_contract",
-          "issues": [{"code": "missing_entry_target", "message": "entry_wiring feature must touch entry/page/host/router files"}]
+          "issues": [
+            {
+              "code": "missing_entry_target",
+              "message": "entry_wiring feature must touch entry/page/host/router files"
+            }
+          ]
         }
       ],
       "warnings": [
-        {"check": "api_verification", "message": "No MTProto/API calls detected; expected for entry_wiring when real local/lifecycle/entry wiring exists"},
-        {"check": "feature_contract_warnings", "issues": [{"code": "empty_gap_analysis"}, {"code": "thin_context"}]}
+        {
+          "check": "api_verification",
+          "message": "No MTProto/API calls detected; expected for entry_wiring when real local/lifecycle/entry wiring exists"
+        },
+        {
+          "check": "feature_contract_warnings",
+          "issues": [
+            {
+              "code": "empty_gap_analysis"
+            },
+            {
+              "code": "thin_context"
+            }
+          ]
+        }
       ],
       "manual_override_note": "feature_contract 因 tasks[].files 仅含 AppConfig.cj 触发；仓库内 ability_stage.cj / main_ability.cj 已实际调用 AppConfig，调用链完整。"
     },
@@ -93,7 +118,7 @@
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.621600",
     "started_at": "2026-03-31T17:00:00.000000",
-    "completed_at": "2026-03-31T17:02:00.000000",
+    "completed_at": "2026-03-31T17:03:03",
     "review_requested_at": "2026-03-31T17:01:52"
   }
 }
