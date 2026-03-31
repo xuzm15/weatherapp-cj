@@ -23,3 +23,15 @@
 - **错误信息**: `missing argument for parameter list '(UInt32, Struct-String, Struct-String, Struct-Array<...>)' in call`
 - **修复方式**: 对该 SDK 版本改用 `Hilog.error`/`Hilog.info` 等与现有工程一致的三参数形式，或按编译器提示补全四参数重载
 - **发现于**: fused_location_provider, 2026-03-31
+
+## 异步回调中修改外层 var / waitUntil 捕获可变变量
+- **触发条件**: `HttpRequest.request` 的回调里对函数作用域内的 `var`（如 `body`、`done`）赋值；或对 `cond.waitUntil({ => done })` 使用外层可变 `done`
+- **错误信息**: `lambda capturing mutable variables needs to be called directly`
+- **修复方式**: 将状态放入引用类型（如私有 `class HttpSyncBox { var body: String; var done: Bool; ... }`），在回调内修改字段；等待循环使用 `while (!box.done) { cond.wait() }`，避免在谓词闭包中捕获可变标量
+- **发现于**: geo_location_client, 2026-03-31
+
+## HttpData 枚举匹配需覆盖开放变体
+- **触发条件**: `match (r.result)` 仅列出 `StringData` / `ArrayData`
+- **错误信息**: `non-exhaustive patterns` / `_ is not covered`
+- **修复方式**: 增加 `case _ => ...` 处理 SDK 中 `HttpData` 的 `| ...` 扩展变体
+- **发现于**: geo_location_client, 2026-03-31
