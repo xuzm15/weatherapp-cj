@@ -74,9 +74,9 @@
       "worker_commit": "8e3949644595f7c2af4a8adb5566909601e8cae5",
       "integration_branch": "integrate/search-batch-1",
       "integration_merge_commit": "3d120664c2ef78e5bfd8ee5010af2346bbd58603",
-      "output_merge_commit": null,
+      "output_merge_commit": "ce190f3b8c40998a6518a8c5df3d9a0b1b4cd7fc",
       "base_branch": "main",
-      "base_branch_merged": false
+      "base_branch_merged": true
     }
   },
   "human_issues": [],
