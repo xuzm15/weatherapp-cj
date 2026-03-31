@@ -1,5 +1,11 @@
 # 仓颉编译陷阱记录
 
+## `Resource` 与 `std.core.Resource` 名称冲突
+- **触发条件**: 在 `services` 等包中使用 `models.Resource<T>` 三态枚举，同时写 `Resource<DaysForecastProto>` 或 `Resource.Loading`
+- **错误信息**: `ambiguous use of 'Resource'`（`std.core` 与 `ohos_app_cangjie_entry.models` 均存在候选）
+- **修复方式**: 使用 `import ohos_app_cangjie_entry.models.Resource as UiResource`（或等价别名），代码中统一用 `UiResource<T>` / `UiResource.Success` 等
+- **发现于**: main_view_model, 2026-03-31
+
 ## `@Builder` 需引入 `state_macro_manage` 通配或 `Builder` 宏
 - **触发条件**: 自定义 `@Component` 内使用 `@Builder`，但仅 `import ohos.arkui.state_macro_manage.Component` / `State` 等单项，未引入 `Builder` 宏
 - **错误信息**: `undeclared identifier 'Builder'`（宏展开后）
@@ -89,3 +95,9 @@
 - **错误信息**: `missing arguments for parameter list '(Enum-Option<Class-CustomView>, ... Class-ObservedProperty<...>, Enum-Option<Class-LocalStorage>)' in call` / `expected 4 arguments, found 2`
 - **修复方式**: 将 Canvas 绘制逻辑拆为 `components/LineChartViewComponent.cj` 中的纯函数（`lineChartPaint` / `lineChartHandleTouchDown` 等）与文件级上下文单例；在宿主 `MainFragment` 的 `@Builder`（如 `lineChartSection`）中声明 `Stack { Canvas(...) }` 并调用上述函数，避免子组件宏生成不兼容的构造函数
 - **发现于**: line_chart_view, 2026-03-31
+
+## 部分 `public init` 仅支持按位置传参
+- **触发条件**: 调用如 `WeatherForecastRepository(locationProvider: lp, weatherClient: wc, geoLocationClient: gc)`，尽管 `init` 形参带标签
+- **错误信息**: `invalid named arguments prefix 'locationProvider:', target is not a named parameter`
+- **修复方式**: 改为按声明顺序位置调用，例如 `WeatherForecastRepository(lp, wc, gc)`
+- **发现于**: data_module, 2026-03-31

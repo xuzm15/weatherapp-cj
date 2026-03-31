@@ -24,6 +24,8 @@ public interface WeatherClient {
     func setTemperatureUnit(unit: TemperatureUnit): Unit
     func setSpeedUnit(unit: SpeedUnit): Unit
     func setPressureUnit(unit: PressureUnit): Unit
+    /** 将已持久化的 Open-Meteo JSON 解析为 `DaysForecastProto`（与 `fetchWeatherForecast` 同源解析）。 */
+    func parseForecastJson(body: String): Option<DaysForecastProto>
 }
 
 /**
@@ -58,6 +60,10 @@ public class OpenMeteoWeatherClient <: WeatherClient {
 
     public func setPressureUnit(unit: PressureUnit): Unit {
         this.pressureUnit = unit
+    }
+
+    public func parseForecastJson(body: String): Option<DaysForecastProto> {
+        parseOpenMeteoJson(body, this.temperatureUnit, this.speedUnit, this.pressureUnit)
     }
 
     public func fetchWeatherForecast(latitude: Float64, longitude: Float64): GeoSingle<DaysForecastProto> {
