@@ -1,5 +1,11 @@
 # 仓颉编译陷阱记录
 
+## `@Builder` 需引入 `state_macro_manage` 通配或 `Builder` 宏
+- **触发条件**: 自定义 `@Component` 内使用 `@Builder`，但仅 `import ohos.arkui.state_macro_manage.Component` / `State` 等单项，未引入 `Builder` 宏
+- **错误信息**: `undeclared identifier 'Builder'`（宏展开后）
+- **修复方式**: 使用 `import ohos.arkui.state_macro_manage.*`（与同目录 `MainFragment` 一致），或显式 `import ohos.arkui.state_macro_manage.Builder`
+- **发现于**: settings_fragment, 2026-03-31
+
 ## `@Component` 中使用 `@Prop` 需显式引入宏
 - **触发条件**: 在自定义组件字段上使用 `@Prop`，但未 `import ohos.arkui.state_macro_manage.Prop`（或工程未启用该宏路径）
 - **错误信息**: `undeclared identifier 'Prop'`（宏展开后）

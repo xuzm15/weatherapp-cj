@@ -441,6 +441,34 @@ public class MainFragment {
         })
     }
 
+    private func localeTagFromLanguageCode(code: String): String {
+        let c = code.trimAscii().toAsciiLower()
+        if (c == "ru") {
+            return "ru-RU"
+        }
+        return "en-US"
+    }
+
+    private func onSettingsLanguageChanged(code: String): Unit {
+        let tag = this.localeTagFromLanguageCode(code)
+        this.geo.setLocale(GeoLocale(tag))
+        let single = this.geo.fetchNearestPlaceInfo(this.lastLat, this.lastLon)
+        let p = single.get()
+        this.placeLine = placeLineFromPlaceInfoModel(p)
+    }
+
+    private func onSettingsTemperatureChanged(code: String): Unit {
+        this.toast("温度单位已更新为 " + code)
+    }
+
+    private func onSettingsWindSpeedChanged(code: String): Unit {
+        this.toast("风速单位已更新为 " + code)
+    }
+
+    private func onSettingsPressureChanged(code: String): Unit {
+        this.toast("气压单位已更新为 " + code)
+    }
+
     protected override func aboutToAppear(): Unit {
         this.geo.setLocale(GeoLocale("zh-CN"))
         this.runFetchPipeline()
@@ -523,11 +551,12 @@ public class MainFragment {
     func uiSettingsOverlay(): Unit {
         if (this.showSettingsOverlay) {
             Column(space: 12) {
-                Text("设置")
-                    .fontSize(22)
-                    .fontWeight(FontWeight.Medium)
-                Text("单位、通知等与 Android MainSettingsFragment 对齐的能力在后续 Feature 中接入。")
-                    .fontSize(14)
+                SettingsFragment(
+                    onLanguageChange: { v: String => this.onSettingsLanguageChanged(v) },
+                    onTemperatureChange: { v: String => this.onSettingsTemperatureChanged(v) },
+                    onWindSpeedChange: { v: String => this.onSettingsWindSpeedChanged(v) },
+                    onPressureChange: { v: String => this.onSettingsPressureChanged(v) }
+                )
                 Button("返回")
                     .onClick({ _ =>
                         this.closeSettingsWithMotion()
