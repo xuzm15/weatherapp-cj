@@ -20,7 +20,7 @@
     }
   },
   "depends_on": [
-    "main_fragment"
+    "app"
   ],
   "gap_analysis": {
     "matched_files": [],
