@@ -6,6 +6,7 @@ import kit.AbilityKit.Want
 import kit.AbilityKit.UIAbility
 import kit.AbilityKit.LaunchParam
 import kit.AbilityKit.LaunchReason
+import kit.ArkUI.Window
 import kit.ArkUI.WindowStage
 
 class MainAbility <: UIAbility {
@@ -25,6 +26,8 @@ class MainAbility <: UIAbility {
 
     public override func onWindowStageCreate(windowStage: WindowStage): Unit {
         Hilog.info(1, "Cangjie", "MainAbility onWindowStageCreate.")
-        windowStage.loadContent("EntryView")
+        let mainWindow: Window = windowStage.getMainWindow()
+        mainWindow.setWindowLayoutFullScreen(true)
+        windowStage.loadContent("MainPage")
     }
 }

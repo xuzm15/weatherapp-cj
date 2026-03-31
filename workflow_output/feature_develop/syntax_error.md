@@ -36,6 +36,12 @@
 - **修复方式**: 增加 `case _ => ...` 处理 SDK 中 `HttpData` 的 `| ...` 扩展变体
 - **发现于**: geo_location_client, 2026-03-31
 
+## 块注释内出现 `*/` 子串导致注释提前结束
+- **触发条件**: 在 `/** ... */` 中书写含 `*/` 的文本（例如 `models/*`）
+- **错误信息**: `unterminated block comment`
+- **修复方式**: 改写为不含 `*/` 的表述（如「models 目录」）
+- **发现于**: main_activity, 2026-03-31
+
 ## 字符串下标 `body[pos]` 为 UInt8，不可与字符字面量直接比较
 - **触发条件**: `body[pos] == ']'`、`c == '{'` 等写法（`body[pos]` 类型为 `UInt8`）
 - **错误信息**: `invalid binary operator '==' on type 'UInt8' and 'Struct-String'`
