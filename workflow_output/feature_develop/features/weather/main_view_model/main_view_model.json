@@ -8,7 +8,7 @@
     "mode": "llm-only"
   },
   "context": {
-    "current_state": "unknown",
+    "current_state": "implemented",
     "problem": "",
     "target": "",
     "source_reference": {
@@ -38,7 +38,7 @@
       "status": "completed",
       "depends_on": [],
       "files": [
-        "services/MainViewModelService.cj"
+        "services/MainViewModel.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/ui/viewmodel/MainViewModel.java"
@@ -51,7 +51,18 @@
     "无 TODO/FIXME/placeholder/mock/dummy/hardcoded 残留",
     "对照源文件中的核心功能，实现覆盖率 >= 80%"
   ],
-  "api_backfill": [],
+  "api_backfill": [
+    {
+      "method": "WeatherClient.parseForecastJson(body: String)",
+      "reason": "MainViewModel.initData 需将持久化 Open-Meteo JSON 解析为 DaysForecastProto，与网络拉取同源解析链",
+      "added_at": "2026-03-31T18:11:00Z"
+    },
+    {
+      "method": "WeatherForecastRepository.parseForecastJson(body: String)",
+      "reason": "向 ViewModel 暴露仓库层解析入口",
+      "added_at": "2026-03-31T18:11:00Z"
+    }
+  ],
   "review": {
     "issues": [],
     "passed_checks": [],
@@ -59,11 +70,11 @@
     "status": "review_pending"
   },
   "human_issues": [],
-  "status": "review_pending",
+  "status": "completed",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.668477",
-    "started_at": "2026-03-31T18:07:50",
-    "completed_at": null,
+    "started_at": "2026-03-31T18:10:00.000000",
+    "completed_at": "2026-03-31T18:11:00.000000",
     "review_requested_at": "2026-03-31T18:11:28"
   }
 }

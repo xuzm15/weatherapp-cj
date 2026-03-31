@@ -37,6 +37,10 @@ public class WeatherForecastRepository {
         this.weatherClient.getPressureUnit()
     }
 
+    public func parseForecastJson(body: String): Option<DaysForecastProto> {
+        this.weatherClient.parseForecastJson(body)
+    }
+
     public func setTemperatureUnit(unit: TemperatureUnit): Unit {
         this.weatherClient.setTemperatureUnit(unit)
     }
