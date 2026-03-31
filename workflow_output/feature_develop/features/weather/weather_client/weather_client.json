@@ -8,15 +8,17 @@
     "mode": "llm-only"
   },
   "context": {
-    "current_state": "unknown",
+    "current_state": "interface WeatherClient 已定义于 services/WeatherClient.cj，单位枚举复用 models/UnitConverter.cj。",
     "problem": "",
-    "target": "",
+    "target": "上层通过 WeatherClient 获取预报 JSON 与读写展示单位；具体 HTTP/Proto 实现在后续 WeatherClientService 中完成。",
     "source_reference": {
       "source_files": [
         "app/src/main/java/com/wemaka/weatherapp/data/api/WeatherClient.java"
       ],
       "tl_methods": [],
-      "cangjie_patterns": []
+      "cangjie_patterns": [
+        "GeoSingle<String> 对应 RxJava Single<DaysForecastProto> 的惰性获取；JSON 字符串与 ProtoDataStoreRepository 中 forecast 持久化形态一致。"
+      ]
     }
   },
   "depends_on": [],
@@ -29,11 +31,11 @@
       "id": "WC-IMPL-1",
       "name": "Weather Client 服务实现",
       "type": "implementation",
-      "description": "实现 WeatherClient 的核心服务逻辑",
-      "status": "pending",
+      "description": "定义 WeatherClient 接口契约（与 Android WeatherClient 方法对齐）；实现类可置于 WeatherClientService.cj。",
+      "status": "completed",
       "depends_on": [],
       "files": [
-        "services/WeatherClientService.cj"
+        "services/WeatherClient.cj"
       ],
       "reference_files": [
         "app/src/main/java/com/wemaka/weatherapp/data/api/WeatherClient.java"
@@ -53,10 +55,10 @@
     "reviewed_at": null
   },
   "human_issues": [],
-  "status": "pending",
+  "status": "completed",
   "timestamps": {
     "created_at": "2026-03-31T16:09:19.703113",
-    "started_at": null,
-    "completed_at": null
+    "started_at": "2026-03-31T17:52:00.000000",
+    "completed_at": "2026-03-31T17:54:00.000000"
   }
 }
